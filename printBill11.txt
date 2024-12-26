@@ -1,0 +1,7 @@
+Order by: Klea Faqolli
+Date Tue Jan 16 19:27:27 CET 2024
+TotalPrice: 18350.0
+Greek Mythology, copies: 2, price: 2400.0
+Annihilation, copies: 3, price: 2550.0
+Tregtar Flamujsh, copies: 1, price: 900.0
+Book5, copies: 5, price: 12500.0

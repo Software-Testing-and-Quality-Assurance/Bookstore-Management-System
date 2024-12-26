@@ -1,0 +1,5 @@
+Order by: Lib Rarian
+Date Thu Jan 18 15:31:21 CET 2024
+TotalPrice: 10900.0
+Book2, copies: 1, price: 900.0
+100 Vjet Vetmi, copies: 10, price: 10000.0

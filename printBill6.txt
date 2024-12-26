@@ -1,0 +1,5 @@
+Order by: Judy Trudy
+Date Mon Jan 15 00:54:58 CET 2024
+TotalPrice: 28000.0
+Percy, copies: 2, price: 3000.0
+Book5, copies: 10, price: 25000.0

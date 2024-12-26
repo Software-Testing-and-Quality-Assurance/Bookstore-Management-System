@@ -1,0 +1,7 @@
+Order by: Judy Trudy
+Date Mon Jan 15 20:50:26 CET 2024
+TotalPrice: 25450.0
+Book4, copies: 4, price: 4800.0
+Percy, copies: 6, price: 9000.0
+Greek Mythology, copies: 9, price: 10800.0
+Annihilation, copies: 1, price: 850.0

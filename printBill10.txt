@@ -1,0 +1,6 @@
+Order by: Klea Faqolli
+Date Tue Jan 16 19:24:54 CET 2024
+TotalPrice: 43500.0
+Book1, copies: 15, price: 12000.0
+Book4, copies: 15, price: 18000.0
+Book2, copies: 15, price: 13500.0

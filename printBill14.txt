@@ -1,0 +1,4 @@
+Order by: Ana Zhibaj
+Date Tue Jan 16 22:16:16 CET 2024
+TotalPrice: 1000.0
+100 Vjet Vetmi, copies: 1, price: 1000.0

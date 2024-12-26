@@ -1,0 +1,6 @@
+Order by: Lib Rarian
+Date Mon Jan 15 00:39:43 CET 2024
+TotalPrice: 4850.0
+Book3, copies: 3, price: 2250.0
+Book2, copies: 2, price: 1800.0
+Book1, copies: 1, price: 800.0

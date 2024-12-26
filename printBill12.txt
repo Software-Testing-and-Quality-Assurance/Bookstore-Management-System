@@ -1,0 +1,5 @@
+Order by: Nora Ora
+Date Tue Jan 16 21:23:14 CET 2024
+TotalPrice: 5250.0
+Percy, copies: 2, price: 3000.0
+Book3, copies: 3, price: 2250.0
