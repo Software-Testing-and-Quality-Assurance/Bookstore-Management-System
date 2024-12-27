@@ -1,17 +1,11 @@
 package controller;
 
-import java.io.FileOutputStream;
-
 import java.time.temporal.ChronoUnit;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import main.Main;
@@ -19,9 +13,7 @@ import model.Access;
 import model.Book;
 import model.Role;
 import model.TotalBill;
-import model.User;
 import model.Employee;
-import model.LibStat;
 public class AdminController {
 	public EmployeeController ec = new EmployeeController();
 	
@@ -79,8 +71,6 @@ public class AdminController {
 				if(!end.before(ofBill) && !beginning.after(ofBill)) {
 					
 					totalIncome+=a.getTotalOrderAmount();
-					
-					//totalCost+=a.getTotalPurchaseAmount();
 				}
 			}
 		}
@@ -103,14 +93,13 @@ public class AdminController {
 	    		System.out.println("Cost per employee "+em.getSalary()*monthsBetween); 
 	    	}
 	    }
-	    
-	    
+
 		rev[0] = totalIncome;
 		rev[1] = totalCost;
 	    return rev;
 	}
 	
-	public boolean updateEmployee(String username, double salary,Role role, Access createBill, Access addBook, Access checkBook, Access checkLib) {
+	public void updateEmployee(String username, double salary, Role role, Access createBill, Access addBook, Access checkBook, Access checkLib) {
 	    try {
 	        if (!ec.employeeFound(username)) {
 	            throw new Exception("This username does not exist");
@@ -124,14 +113,12 @@ public class AdminController {
 
 	                updateAccessPermissions(employee);
 	                ec.updateAll();
-	                return true;
-	            } catch (Exception e) {
+		} catch (Exception e) {
 	            	Alert errorAlert = new Alert(AlertType.ERROR);
 	            	errorAlert.setHeaderText("Error Updating Role");
 	            	errorAlert.setContentText(e.getMessage());
 	            	errorAlert.showAndWait();
-	            	return false;
-	            }
+		}
 	}
 
 	private void updateAccessPermissions(Employee employee) {
@@ -147,6 +134,4 @@ public class AdminController {
 	        employee.setCheckBooks(Access.YES);
 	    }
 	}
-
-
 }
