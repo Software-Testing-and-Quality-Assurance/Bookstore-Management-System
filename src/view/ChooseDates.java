@@ -1,21 +1,16 @@
 package view;
-
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import controller.AdminController;
 import controller.BookBoughtController;
 import controller.LibrarianStatController;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.Main;
 
