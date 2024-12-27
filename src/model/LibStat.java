@@ -4,14 +4,12 @@ import javafx.beans.property.*;
 
 public class LibStat {
 
-    private StringProperty name;
-    private StringProperty surname;
-    private IntegerProperty nrOfBills;
-    private IntegerProperty nrOfBooks;
-    private DoubleProperty amount;
-  
-        
-
+    private final StringProperty name;
+    private final StringProperty surname;
+    private final IntegerProperty nrOfBills;
+    private final IntegerProperty nrOfBooks;
+    private final DoubleProperty amount;
+    
 	public LibStat(String name, String surname, int nrOfBills, Integer nrOfBooks,double amount) {
         
         this.name = new SimpleStringProperty(name);
@@ -20,34 +18,9 @@ public class LibStat {
         this.nrOfBooks = new SimpleIntegerProperty(nrOfBooks);
         this.amount = new SimpleDoubleProperty(amount);
     }
-	
-	
-	public StringProperty nameProperty() {
-	    return name;
-	}
 
-	public StringProperty surnameProperty() {
-	    return surname;
-	}
-
-	public IntegerProperty nrOfBillsProperty() {
-	    return nrOfBills;
-	}
-
-	public IntegerProperty nrOfBooksProperty() {
-	    return nrOfBooks;
-	}
-
-	public DoubleProperty amountProperty() {
-	    return amount;
-	}
-	
 	public String name() {
         return name.get();
-    }
-
-    public String surname() {
-        return surname.get();
     }
 
     public int nrOfBills() {
@@ -56,9 +29,5 @@ public class LibStat {
 
     public int nrOfBooks() {
         return nrOfBooks.get();
-    }
-
-    public double amount() {
-        return amount.get();
     }
 }
