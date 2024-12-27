@@ -1,6 +1,4 @@
 package model;
-import java.io.FileNotFoundException;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,16 +7,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Scanner;
 
-import controller.BookController;
 
 public class TotalBill implements Serializable{
-
+	@Serial
 	private static final long serialVersionUID = -5906827024116395864L;
-		private String librarianUser;
-	    private Date orderDate;
+		private final String librarianUser;
+	    private final Date orderDate;
 	    private transient Map<Book,Integer> soldBooks = new HashMap<Book, Integer>();
 
 	    public TotalBill(String librarianUser) {
