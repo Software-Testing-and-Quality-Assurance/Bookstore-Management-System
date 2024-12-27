@@ -14,7 +14,7 @@ public class TotalBill implements Serializable{
 	private static final long serialVersionUID = -5906827024116395864L;
 		private final String librarianUser;
 	    private final Date orderDate;
-	    private transient Map<Book,Integer> soldBooks = new HashMap<Book, Integer>();
+	    private transient Map<Book,Integer> soldBooks;
 
 	    public TotalBill(String librarianUser) {
 	        this.librarianUser = librarianUser;
@@ -46,7 +46,7 @@ public class TotalBill implements Serializable{
 	    public double getTotalOrderAmount() {
 	        double totalAmount = 0;
 	        for (Map.Entry<Book,Integer> m : soldBooks.entrySet()) {
-	            totalAmount += ((Book) m.getKey()).getSellingPrice()*(Integer)m.getValue();
+	            totalAmount += (m.getKey()).getSellingPrice()*m.getValue();
 	        }
 	        return totalAmount;
 	    }
@@ -54,7 +54,7 @@ public class TotalBill implements Serializable{
 	    public double getTotalPurchaseAmount() {
 	        double totalAmount = 0;
 	        for (Map.Entry<Book,Integer> m : soldBooks.entrySet()) {
-	            totalAmount += ((Book) m.getKey()).getPurchasePrice()*(Integer)m.getValue();
+	            totalAmount += (m.getKey()).getPurchasePrice()*m.getValue();
 	        }
 	        return totalAmount;
 	    }
@@ -78,8 +78,8 @@ public class TotalBill implements Serializable{
 	        outputStream.defaultWriteObject();
 	        outputStream.writeInt(soldBooks.size());
 	        for(Map.Entry<Book, Integer> entry: soldBooks.entrySet()) {
-	        	outputStream.writeObject((Book)entry.getKey());
-	        	outputStream.writeInt((int)entry.getValue());
+	        	outputStream.writeObject(entry.getKey());
+	        	outputStream.writeInt(entry.getValue());
 	        }
 
 	    }
