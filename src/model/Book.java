@@ -20,7 +20,7 @@ public class Book implements Serializable{
 	private Map<Date, Integer> boughtPerDate = new HashMap<>();
 	
 	public Book(String isbn, String title, String supplier, String category, double sellingPrice, double purchasePrice, Author author, int stock) {
-		if(isbn.isEmpty() || title.isEmpty() || category.toString().isBlank() || author.toString().isBlank())
+		if(isbn.isEmpty() || title.isEmpty() || category.isBlank() || author.toString().isBlank())
 			throw new IllegalArgumentException("These fields should not be empty.");
 		this.setIsbn(isbn);
 		this.setTitle(title);
@@ -45,9 +45,6 @@ public class Book implements Serializable{
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getSupplier() {
-		return supplier;
 	}
 	public void setSupplier(String supplier) {
 		this.supplier = supplier;
@@ -82,10 +79,7 @@ public class Book implements Serializable{
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
-
-
-
+	
 	@Override
 	public boolean equals(Object o) {
 		if(!(o instanceof Book))
@@ -116,13 +110,5 @@ public class Book implements Serializable{
 	public Map<Date, Integer> getBoughtPerDate() {
 		return boughtPerDate;
 	}
-
-
-	public void setBoughtPerDate(Map<Date, Integer> boughtPerDate) {
-		this.boughtPerDate = boughtPerDate;
-	}
-
-
-	
 
 }

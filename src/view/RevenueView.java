@@ -1,6 +1,5 @@
 package view;
 
-import controller.AdminController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

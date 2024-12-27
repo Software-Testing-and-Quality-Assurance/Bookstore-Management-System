@@ -38,7 +38,7 @@ public class EmployeeController {
 	            writer = new HeaderlessObjectOutputStream(outputStream);
 	        else
 	            writer = new ObjectOutputStream(outputStream);
-	        System.out.println(employee.getDateTerminated());;
+	        System.out.println(employee.getDateTerminated());
 	        writer.writeObject(employee);
 	       Main. employeesAll.add(employee);
 	        return true;

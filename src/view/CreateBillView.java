@@ -69,7 +69,6 @@ public class CreateBillView {
     			Main.invalidAlert(st);
                 System.out.println("Invalid quantity format. Please enter a valid integer.");
             }
-            ;
             st.setScene(multiCheckout(st, bill));
 
         });
