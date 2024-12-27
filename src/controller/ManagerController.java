@@ -3,10 +3,6 @@ package controller;
 import java.util.Date;
 
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import main.Main;
-import model.Access;
 import model.Author;
 import model.Book;
 

@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -144,8 +142,7 @@ public class AdminView {
 		st.setWidth(550);
 	    st.setHeight(600);
 	    st.setResizable(false);
-		Scene sc = new Scene(gd);
-		return sc;
+		return new Scene(gd);
 	}
 	
 	
@@ -155,9 +152,9 @@ public class AdminView {
 	    rem.setVgap(10);
 	    rem.setPadding(new Insets(10, 10, 10, 10));
 	    rem.setAlignment(Pos.CENTER);
-	    Label credent = new Label("Enter the required information:");
-	    credent.setStyle("-fx-font-size: 16; -fx-text-fill: white;");
-	    rem.add(credent, 0, 0);
+	    Label credentials = new Label("Enter the required information:");
+	    credentials.setStyle("-fx-font-size: 16; -fx-text-fill: white;");
+	    rem.add(credentials, 0, 0);
 	    rem.setStyle("-fx-background-color: #614840;");
 	    String commonStyleL = " -fx-text-fill: white; -fx-font-size: 14px;";
 
@@ -232,8 +229,6 @@ public class AdminView {
 	    });
 	    return sc;
 	}
-
-	
 	
 	public void addExistBook(Stage st) {
 	    GridPane g = new GridPane();
@@ -280,7 +275,7 @@ public class AdminView {
 	        try {
 	            String isbn = isbnF.getText();
 	            int stock = Integer.parseInt(stockF.getText());
-	            if (isbn.equals("")) {
+	            if (isbn.isEmpty()) {
 	                throw new IllegalArgumentException();
 	            }
 	            if (m.addExist(isbn, stock)) {
