@@ -6,9 +6,6 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import controller.AdminController;
-import controller.EmployeeController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -136,8 +133,8 @@ public class RegisterView {
         });
 		
 		button.setOnAction(e->  {
-			 if(firstNameField.getText().equals("") || surnameField.getText().equals("") || userField.getText().equals("") || passF.getText().equals("")
-					 || phoneF.getText().equals("") || vpassF.getText().equals("") || birthdayDatePicker.getValue()==null) {
+			 if(firstNameField.getText().isEmpty() || surnameField.getText().isEmpty() || userField.getText().isEmpty() || passF.getText().isEmpty()
+					 || phoneF.getText().isEmpty() || vpassF.getText().isEmpty() || birthdayDatePicker.getValue()==null) {
 				 Main.emptyAlert();
 				 return;
 			 }
