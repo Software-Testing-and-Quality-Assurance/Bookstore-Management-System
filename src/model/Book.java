@@ -11,13 +11,14 @@ public class Book implements Serializable{
 	@Serial
 	private static final long serialVersionUID = 4908353983116607163L;
 	
-	private String isbn,title, supplier;
-	private String category;
+	private String isbn;
+    private String title;
+    private String category;
 	private double purchasePrice, sellingPrice;
 	private Author author;
 	private int stock;
 	private final Date firstPurchaseDate;
-	private Map<Date, Integer> boughtPerDate = new HashMap<>();
+	private final Map<Date, Integer> boughtPerDate = new HashMap<>();
 	
 	public Book(String isbn, String title, String supplier, String category, double sellingPrice, double purchasePrice, Author author, int stock) {
 		if(isbn.isEmpty() || title.isEmpty() || category.isBlank() || author.toString().isBlank())
@@ -47,8 +48,7 @@ public class Book implements Serializable{
 		this.title = title;
 	}
 	public void setSupplier(String supplier) {
-		this.supplier = supplier;
-	}
+    }
 	public String getCategory() {
 		return category;
 	}

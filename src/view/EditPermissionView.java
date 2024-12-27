@@ -17,7 +17,7 @@ public class EditPermissionView {
     private final CheckBox addBooksBox = new CheckBox("Add Books");
     private final CheckBox checkBooksBox = new CheckBox("Check Books");
     private final CheckBox checkLibrarianBox = new CheckBox("Check Librarian");
-    private Scene previousScene; 
+    private final Scene previousScene;
 
     public EditPermissionView(Stage parentStage, AdminController ac, String username, Scene previousScene) {
         this.previousScene = previousScene;
@@ -78,13 +78,13 @@ public class EditPermissionView {
             employee.setCheckBooks(checkBooksBox.isSelected() ? Access.YES : Access.NO);
             employee.setCheckLibrarian(checkLibrarianBox.isSelected() ? Access.YES : Access.NO);
             ac.ec.updateAll(); 
-            showSuccessAlert("Permissions Updated", "Permissions for " + employee.getName() + " have been updated.");
+            showSuccessAlert("Permissions for " + employee.getName() + " have been updated.");
         }
     }
 
-    private void showSuccessAlert(String header, String content) {
+    private void showSuccessAlert(String content) {
         Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-        successAlert.setHeaderText(header);
+        successAlert.setHeaderText("Permissions Updated");
         successAlert.setContentText(content);
 
 

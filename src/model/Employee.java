@@ -19,10 +19,9 @@ public class Employee extends User implements Serializable{
     private double salary;
     private Role role;
     private Access createBill, addBooks, checkLibrarian, checkBooks;
-	private Date dateEmployed;
+	private final Date dateEmployed;
 	private Date dateTerminated;
-	private Date birthDate;
-	private transient StringProperty status;
+    private transient StringProperty status;
 		
     public Employee(String username, String password, String name, String surname, String email, Role role, String phone, double salary,
     		Access createBill, Access addBooks, Access checkLibrarian, Access checkBooks,Date birthDate) {
@@ -92,14 +91,9 @@ public class Employee extends User implements Serializable{
 	public Date getDateEmployed() {
 		return dateEmployed;
 	}
-	
-	public Date getBirthDate() {
-		return birthDate;
-	}
 
 	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
+    }
 	
     
     @Override
@@ -114,11 +108,6 @@ public class Employee extends User implements Serializable{
 
 	public void setDateTerminated(Date dateTerminated) {
 		this.dateTerminated = dateTerminated;
-	}
-
-
-	public String getStatus() {
-		return status.get();
 	}
 
 

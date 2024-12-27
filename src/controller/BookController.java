@@ -78,6 +78,7 @@ public class BookController {
                 outputStream.writeObject(b);
             }
 		} catch (IOException ex) {
+			//log
 		}
     }
 	
