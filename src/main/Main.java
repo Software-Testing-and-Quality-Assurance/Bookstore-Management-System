@@ -25,10 +25,9 @@ import view.*;
 public class Main extends Application{
 	public static ObservableList<Employee> employeesAll = FXCollections.observableArrayList();
 	public static ObservableList<Book> bookStock = FXCollections.observableArrayList();
-	public static ObservableList<TotalBill> allbills= FXCollections.observableArrayList();
+	public static ObservableList<TotalBill> allBills = FXCollections.observableArrayList();
 
     public static Map<String, ArrayList<TotalBill>> billsPerLibrarian;
-    public static boolean firstManagerLogin;
 	public static Employee currentUser;
 	public static int billId;
 	
@@ -65,20 +64,19 @@ public class Main extends Application{
         try (PrintWriter writer = new PrintWriter(id)) {
             writer.println(billId);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //log
         }
    	}
 	
 	public static void readLastAssignedId() {
         try (Scanner in = new Scanner(id)) {
-            billId= (int)in.nextInt();
+            billId= in.nextInt();
         } catch(Exception ex) {
         	System.out.println(ex.getMessage());
         }
    	}
 	public static void main(String[] args) {
 		launch(args);
-
 	}
 	
 	public static void accessAlert() {
@@ -86,13 +84,11 @@ public class Main extends Application{
 		a.setContentText("You do not have access to this action!");
 		a.setHeaderText("User info");
 		a.showAndWait();
-		return;
 	}
 	public static void doneAlert() {
 		Alert successA = new Alert(AlertType.INFORMATION);
 		successA.setHeaderText("Done");
 		successA.showAndWait();
-		return;
 	}
 	
 	public static void emptyAlert() {
@@ -100,7 +96,6 @@ public class Main extends Application{
 		a.setContentText("Empty Fields!");
 		a.setHeaderText("You cannot leave any field empty");
 		a.showAndWait();
-		return;
 	}
 	
 	public static void incorrectAlert() {
@@ -141,7 +136,7 @@ public class Main extends Application{
                     outputStream.writeObject(e);
                 }
             } catch (IOException ex) {
-                // log
+				//log
             }
         }
 	}

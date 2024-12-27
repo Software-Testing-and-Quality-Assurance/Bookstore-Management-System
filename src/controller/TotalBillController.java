@@ -22,14 +22,14 @@ public class TotalBillController {
 			while (true) {
 				try {
 					TotalBill tb = (TotalBill) in.readObject();
-					Main.allbills.add(tb);
+					Main.allBills.add(tb);
 					Main.billsPerLibrarian.computeIfAbsent(tb.getLibrarianUser(), key -> new ArrayList<>()).add(tb);
 					System.out.println("add one");
 				} catch (EOFException e) {
 					break;
 				}
 			}
-			for (TotalBill t : Main.allbills) {
+			for (TotalBill t : Main.allBills) {
 				System.out.println(t.getLibrarianUser() + t.getOrderDate());
 				for (Map.Entry<Book, Integer> me : t.getBooks().entrySet()) {
 					System.out.println(me.getKey().getTitle() + " " + me.getValue());
@@ -41,7 +41,7 @@ public class TotalBillController {
 				System.out.println(me.getKey() + " " + me.getValue().size());
 			}
 
-			System.out.println("Data loaded from file! " + Main.allbills.size());
+			System.out.println("Data loaded from file! " + Main.allBills.size());
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found: " + e.getMessage());
 		} catch (ClassNotFoundException e) {
@@ -79,7 +79,7 @@ public class TotalBillController {
 			else
 				writer = new ObjectOutputStream(outputStream);
 			writer.writeObject(totalBill);
-			Main. allbills.add(totalBill);
+			Main.allBills.add(totalBill);
 			Main.billsPerLibrarian.computeIfAbsent(totalBill.getLibrarianUser(), add -> new ArrayList<>()).add(totalBill);
 
 		} catch (NullPointerException ex) {
