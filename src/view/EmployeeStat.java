@@ -10,7 +10,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.util.converter.DoubleStringConverter;
 import main.Main;
 import model.Access;
 import model.Employee;

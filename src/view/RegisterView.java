@@ -148,7 +148,7 @@ public class RegisterView {
 			 LocalDate lD1 = birthdayDatePicker.getValue();
 			 Instant instant1 = Instant.from(lD1.atStartOfDay(ZoneId.systemDefault()));
 			 Date birthday = Date.from(instant1);
-			 Role role=null;
+			 Role role;
 			if (!password.equals(verifyPassword)) {
 				    Alert pAlert = new Alert(AlertType.ERROR);
 				    pAlert.setHeaderText("Password Mismatch");
@@ -172,9 +172,7 @@ public class RegisterView {
 				System.out.println("Role: " + role);
 				boolean addE = ac.addEmployee(username, password, firstName, lastName, email, phone, role==Role.LIBRARIAN?60000.0:80000.0, role, birthday);
 				if (addE) {
-					Alert successA = new Alert(AlertType.INFORMATION);
-					successA.setHeaderText("Done");
-					successA.showAndWait();
+					Main.doneAlert();
 					firstNameField.clear();
 					surnameField.clear();
 					emailField.clear();
