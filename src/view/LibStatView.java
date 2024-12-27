@@ -1,7 +1,5 @@
 package view;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
@@ -20,38 +18,33 @@ import model.LibStat;
 public class LibStatView extends BorderPane {
 	
     private final TableView<LibStat> librarianStatistics = new TableView<>();
-    private final TableColumn<LibStat, String> nameColumn;
-    private final TableColumn<LibStat, String> surnameColumn;
-    private final TableColumn<LibStat, Integer> nrOfBillsColumn;
-    private final TableColumn<LibStat, Integer> nrOfBooksColumn;
-    private final TableColumn<LibStat, Double> amountPropertyColumn;
     private final Button goBackButton = new Button("Previous");
 
     public LibStatView() {
         librarianStatistics.setEditable(true);
         librarianStatistics.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        nameColumn = new TableColumn<>("Name");
+        TableColumn<LibStat, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setMinWidth(100);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        surnameColumn = new TableColumn<>("Surname");
+        TableColumn<LibStat, String> surnameColumn = new TableColumn<>("Surname");
         surnameColumn.setMinWidth(100);
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         surnameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        nrOfBillsColumn = new TableColumn<>("Nr of bills");
+        TableColumn<LibStat, Integer> nrOfBillsColumn = new TableColumn<>("Nr of bills");
         nrOfBillsColumn.setMinWidth(100);
         nrOfBillsColumn.setCellValueFactory(new PropertyValueFactory<>("nrOfBills"));
         nrOfBillsColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-        nrOfBooksColumn = new TableColumn<>("Nr of books");
+        TableColumn<LibStat, Integer> nrOfBooksColumn = new TableColumn<>("Nr of books");
         nrOfBooksColumn.setMinWidth(100);
         nrOfBooksColumn.setCellValueFactory(new PropertyValueFactory<>("nrOfBooks"));
         nrOfBooksColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-        amountPropertyColumn = new TableColumn<>("Total Amount");
+        TableColumn<LibStat, Double> amountPropertyColumn = new TableColumn<>("Total Amount");
         amountPropertyColumn.setMinWidth(100);
         amountPropertyColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
         amountPropertyColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
