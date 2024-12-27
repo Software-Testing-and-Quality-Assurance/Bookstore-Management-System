@@ -1,15 +1,9 @@
 package controller;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.Main;
 import model.Book;
-import model.LibStat;
-import model.TotalBill;
 
 public class BookBoughtController {
 	public ObservableList<Book> filterDate(Date date1, Date date2) {
