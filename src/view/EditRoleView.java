@@ -18,7 +18,7 @@ public class EditRoleView {
     private final RadioButton librarianRadioButton = new RadioButton("Librarian");
     private final RadioButton managerRadioButton = new RadioButton("Manager");
     private final AdminController adminController;
-    private Scene previousScene;
+    private final Scene previousScene;
 
     public EditRoleView(Stage parentStage, AdminController adminController, String username, Scene previousScene) {
         this.adminController = adminController;

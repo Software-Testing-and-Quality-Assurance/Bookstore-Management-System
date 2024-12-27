@@ -60,7 +60,7 @@ public class BookBought extends BorderPane{
         
         firstPurchaseDate.setMinWidth(180);
         firstPurchaseDate.setCellValueFactory(new PropertyValueFactory<Book, Date>("firstPurchaseDate"));
-
+        //noinspection unchecked
         tableView.getColumns().addAll(isbnColumn, titleColumn, authorColumn, stockOfBook,sellingPrice, purchasePrice, firstPurchaseDate);
         tableView.setStyle("-fx-control-inner-background: #C9E8A3;");
 

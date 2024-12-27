@@ -48,6 +48,7 @@ public class LibStatView extends BorderPane {
         amountPropertyColumn.setMinWidth(100);
         amountPropertyColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
         amountPropertyColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        //noinspection unchecked
         librarianStatistics.getColumns().addAll(nameColumn, surnameColumn, nrOfBillsColumn, nrOfBooksColumn, amountPropertyColumn);
 
 

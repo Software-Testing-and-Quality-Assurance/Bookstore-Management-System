@@ -72,7 +72,7 @@ public class EmployeeStat {
         statusColumn.setMinWidth(100);
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         statusColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
+        //noinspection unchecked
         tableView.getColumns().addAll(nameColumn, surnameColumn, usernameColumn, emailColumn, phoneColumn, roleColumn, salaryColumn,
         createBillColumn, addBooksColumn, checkBooksColumn, checkLibrarianColumn, statusColumn);
         

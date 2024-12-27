@@ -127,7 +127,7 @@ public class ManagerView {
             try {
                 String isbn = isbnF.getText();
                 int stock = Integer.parseInt(stockF.getText());
-                if (isbn.equals("")) {
+                if (isbn.isEmpty()) {
                     throw new IllegalArgumentException();
                 }
                 if (m.addExist(isbn, stock)) {
