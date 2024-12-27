@@ -5,11 +5,10 @@ import java.io.Serializable;
 public abstract class User implements Serializable{
 	
 	private String username;
-	private String password;
+	private final String password;
 	private String name;
-	private String surname;
-	private String email;
-	private String phone;
+	private final String surname;
+	private final String email;
 
     protected User(String username, String password, String name, String surname, String email, String phone ){
     	
@@ -32,7 +31,6 @@ public abstract class User implements Serializable{
         this.name=name;
         this.surname=surname;
         this.email=email;
-        this.phone=phone;
 
     }
 
