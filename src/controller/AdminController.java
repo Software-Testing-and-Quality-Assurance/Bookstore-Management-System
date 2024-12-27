@@ -24,14 +24,15 @@ public class AdminController {
 	        }
 	        
 	        System.out.println("in Role: " + role);
-	        if (role==Role.LIBRARIAN ) {
-			    System.out.println("Values extracted: " + name + ", " + surname + ", "+ username+" "+phone+" "+" "+password+" "+ salary);
+			String x = "Values extracted: " + name + ", " + surname + ", " + username + " " + phone + " " + " " + password + " " + salary;
+			if (role==Role.LIBRARIAN ) {
+			    System.out.println(x);
 
 	        	Employee newE = new Employee(username, password, name, surname, email, Role.LIBRARIAN, phone, salary, Access.YES, Access.NO, Access.NO, Access.NO,birthday );
 	            ec.create(newE);
 	            return true;
 	        } else if (role==Role.MANAGER) {
-			    System.out.println("Values extracted: " + name + ", " + surname + ", "+ username+" "+phone+" "+" "+password+" "+ salary);
+			    System.out.println(x);
 
 	        	Employee newE = new Employee(username, password, name, surname, email, Role.MANAGER, phone, salary,Access.NO, Access.YES, Access.YES, Access.YES,birthday);
 	            ec.create(newE);
