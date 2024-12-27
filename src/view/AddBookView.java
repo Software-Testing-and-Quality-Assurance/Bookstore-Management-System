@@ -101,9 +101,9 @@ public class AddBookView {
 			});
 		    
 		    addB.setOnAction(e-> {
-		    	if(isbnF.getText().equals("") || titleF.getText().equals("") || supplierF.getText().equals("") || categoryF.getText().equals("")
-						 || sellingPF.getText().equals("") || originalPF.getText().equals("") || authorNameF.getText().equals("") || 
-						 authorSurnameF.getText().equals("")) {
+		    	if(isbnF.getText().isEmpty() || titleF.getText().isEmpty() || supplierF.getText().isEmpty() || categoryF.getText().isEmpty()
+						 || sellingPF.getText().isEmpty() || originalPF.getText().isEmpty() || authorNameF.getText().isEmpty() ||
+                        authorSurnameF.getText().isEmpty()) {
 					 Main.emptyAlert();
 					 return;
 				 }
