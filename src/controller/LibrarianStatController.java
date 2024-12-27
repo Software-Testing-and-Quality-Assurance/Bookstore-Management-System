@@ -1,13 +1,8 @@
 package controller;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.Main;
@@ -19,7 +14,7 @@ public class LibrarianStatController {
 		EmployeeController ec = new EmployeeController();
 		 String username;
 	     int nrOfBills;
-	     Integer nrOfBooks;
+	     int nrOfBooks;
 	     double amount;
 	     ObservableList<LibStat> filter = FXCollections.observableArrayList();
 	     

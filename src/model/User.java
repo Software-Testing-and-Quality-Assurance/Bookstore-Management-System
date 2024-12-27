@@ -35,15 +35,14 @@ public abstract class User implements Serializable{
         this.phone=phone;
 
     }
-    
+
     @Override
     public boolean equals(Object o) {
-    	
-   	 if (((User)o).getUsername().equals(this.getUsername())&&((User)o).getPassword().equals(this.getPassword()))
-   		 return true;
-   	 return false;
+		if(this == o)return true;
+		if (o == null || getClass() != o.getClass()) return false;
+        return ((User) o).getUsername().equals(this.getUsername()) && ((User) o).getPassword().equals(this.getPassword());
     }
-    
+
     public String getUsername() {
         return this.username;
     }
@@ -55,39 +54,19 @@ public abstract class User implements Serializable{
         return this.password;
         }
 
-    public void setPassword(String password) {
-        this.password=password;
-    }
-   
 	public String getName() {
 		return this.name;
 	}
 
 	public void setName(String name) {
-		this.name=name;;
+		this.name=name;
 	}
 
 	public String getSurname() {
 		return surname;
 	}
-
-	public void setSurname(String surname) {
-		this.surname=surname;;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhone() {
-		return this.phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 }
