@@ -3,31 +3,23 @@ package view;
 import java.util.Date;
 
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-
-import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.util.converter.IntegerStringConverter;
 import main.Main;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 
 import javafx.stage.Stage;
-import javafx.util.converter.DoubleStringConverter;
 import model.*;
 
 public class BookBought extends BorderPane{
 
 	private final TableView<Book> tableView = new TableView<>();
-    private final TableColumn<Book, String> isbnColumn= new TableColumn<>("ISBN");;
+    private final TableColumn<Book, String> isbnColumn= new TableColumn<>("ISBN");
     private final TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
     private final TableColumn<Book, Author> authorColumn = new TableColumn<>("Author");
     private final TableColumn<Book, Integer> stockOfBook = new TableColumn<>("Stock");
