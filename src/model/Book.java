@@ -1,16 +1,14 @@
 package model;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serial;
 import java.io.Serializable;
-import java.lang.instrument.IllegalClassFormatException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Book implements Serializable{
+	@Serial
 	private static final long serialVersionUID = 4908353983116607163L;
 	
 	private String isbn,title, supplier;
@@ -18,7 +16,7 @@ public class Book implements Serializable{
 	private double purchasePrice, sellingPrice;
 	private Author author;
 	private int stock;
-	private Date firstPurchaseDate;
+	private final Date firstPurchaseDate;
 	private Map<Date, Integer> boughtPerDate = new HashMap<>();
 	
 	public Book(String isbn, String title, String supplier, String category, double sellingPrice, double purchasePrice, Author author, int stock) {
@@ -99,7 +97,7 @@ public class Book implements Serializable{
 	}
 	
 	public boolean isOutOfStock() {
-			return(stock==0?true:false);
+			return(stock==0);
 	}
 		
 	public void restock(int newStock) {
@@ -108,7 +106,6 @@ public class Book implements Serializable{
 			return;
 		}
 		this.stock+=newStock;
-		return;
 		}
 	
 	public Date getFirstPurchaseDate() {
