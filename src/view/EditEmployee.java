@@ -9,12 +9,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import main.Main;
-import model.*;
 
 public class EditEmployee {
-
-    private Scene previousScene;
-
     public Scene showView(Stage st, AdminController ac) {
         String commonStyleL = " -fx-text-fill: white; -fx-font-size: 14px;";
         GridPane editEmployeeGridPane = new GridPane();
@@ -70,18 +66,17 @@ public class EditEmployee {
 
         editRoleButton.setOnAction(e -> {
             String username = userField.getText();
-            if(firstNameField.getText().equals("") || lastNameField.getText().equals("") || userField.getText().equals("")) {
+            if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || userField.getText().isEmpty()) {
                 Main.emptyAlert();
                 return;
             }
-            Scene previousScene = sc;  
-            EditRoleView erv = new EditRoleView(st, ac, username, previousScene);
+            EditRoleView erv = new EditRoleView(st, ac, username, sc);
             Scene ers = erv.showView(st, username);
             st.setScene(ers);
         });
 
         editPermissionButton.setOnAction(e -> {
-            if(firstNameField.getText().equals("") || lastNameField.getText().equals("") || userField.getText().equals("")) {
+            if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || userField.getText().isEmpty()) {
                 Main.emptyAlert();
                 return;
             }
