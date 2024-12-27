@@ -49,7 +49,7 @@ public class TotalBillController {
 		} catch (IOException e) {
 			System.out.println("I/O error: " + e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			//log
 		}
 	}
 
@@ -64,7 +64,7 @@ public class TotalBillController {
             pw.println("Date "+ tb.getOrderDate());
     		pw.println("TotalPrice: "+ tb.getTotalOrderAmount());
             for(Map.Entry<Book,Integer> bi: tb.getBooks().entrySet()) {
-               	pw.println(bi.getKey().getTitle()+", copies: "+bi.getValue()+", price: "+(bi.getKey()).getSellingPrice()*(Integer)bi.getValue());
+               	pw.println(bi.getKey().getTitle()+", copies: "+bi.getValue()+", price: "+(bi.getKey()).getSellingPrice()*bi.getValue());
             }
 		} catch (IOException ex) {
         	System.out.println(ex.getMessage());
