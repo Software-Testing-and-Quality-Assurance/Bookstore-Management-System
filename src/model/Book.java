@@ -89,24 +89,9 @@ public class Book implements Serializable{
 			
 		
 	}
-	
-	public boolean isOutOfStock() {
-			return(stock==0);
-	}
-		
-	public void restock(int newStock) {
-		if(isOutOfStock()) {
-			this.stock = newStock;
-			return;
-		}
-		this.stock+=newStock;
-		}
-	
 	public Date getFirstPurchaseDate() {
 		return firstPurchaseDate;
 	}
-
-
 	public Map<Date, Integer> getBoughtPerDate() {
 		return boughtPerDate;
 	}

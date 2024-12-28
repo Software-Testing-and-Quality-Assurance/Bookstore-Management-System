@@ -25,7 +25,7 @@ public class ManagerController {
     	Book existing = bc.searchBook(isbn);
     	if (existing==null)
     		return false;
-        existing.restock(quantity);
+        bc.restock(quantity,isbn);
         existing.getBoughtPerDate().put(new Date(), quantity);
         bc.updateAll();
         System.out.println("Updated stock for existing book: " + existing.getTitle() + " - New stock: " + existing.getStock());

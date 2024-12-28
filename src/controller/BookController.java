@@ -67,6 +67,17 @@ public class BookController {
 		return !Main.bookStock.isEmpty() && searchBook(isbn) != null;
 	}
 
+	public boolean isOutOfStock(String isbn) {
+		return (searchBook(isbn).getStock()==0);
+	}
+
+	public void restock(int newStock,String isbn) {
+		if(isOutOfStock(isbn)) {
+			this.searchBook(isbn).setStock(newStock);
+			return;
+		}
+		this.searchBook(isbn).setStock(newStock+searchBook(isbn).getStock());
+	}
 
 	public void updateAll() {
         try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Main.BOOK_FILE))) {
