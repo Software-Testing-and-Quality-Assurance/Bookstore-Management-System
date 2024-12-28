@@ -25,29 +25,19 @@ public class LibStatView extends BorderPane {
         librarianStatistics.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         TableColumn<LibStat, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setMinWidth(100);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         TableColumn<LibStat, String> surnameColumn = new TableColumn<>("Surname");
-        surnameColumn.setMinWidth(100);
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        surnameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         TableColumn<LibStat, Integer> nrOfBillsColumn = new TableColumn<>("Nr of bills");
-        nrOfBillsColumn.setMinWidth(100);
         nrOfBillsColumn.setCellValueFactory(new PropertyValueFactory<>("nrOfBills"));
-        nrOfBillsColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
         TableColumn<LibStat, Integer> nrOfBooksColumn = new TableColumn<>("Nr of books");
-        nrOfBooksColumn.setMinWidth(100);
         nrOfBooksColumn.setCellValueFactory(new PropertyValueFactory<>("nrOfBooks"));
-        nrOfBooksColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
         TableColumn<LibStat, Double> amountPropertyColumn = new TableColumn<>("Total Amount");
-        amountPropertyColumn.setMinWidth(100);
         amountPropertyColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        amountPropertyColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         //noinspection unchecked
         librarianStatistics.getColumns().addAll(nameColumn, surnameColumn, nrOfBillsColumn, nrOfBooksColumn, amountPropertyColumn);
 

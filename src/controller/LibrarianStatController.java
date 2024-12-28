@@ -37,7 +37,7 @@ public class LibrarianStatController {
 		}
 		
 		for(LibStat a: filter) {
-			System.out.println(a.name()+" "+ a.nrOfBills()+" "+a.nrOfBooks());
+			System.out.println(a.getName()+" "+ a.getNrOfBills()+" "+a.getNrOfBooks());
 		}
 		return filter;
 	}
