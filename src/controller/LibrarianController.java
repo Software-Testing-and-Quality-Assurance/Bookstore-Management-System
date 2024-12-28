@@ -15,7 +15,7 @@ public class LibrarianController {
         	if (book.getStock()>=quantity) {
         		book.setStock(book.getStock() - quantity);
         		bc.updateAll();
-        		tb.addBook(book, quantity);
+        		tbc.addBook(tb, book, quantity);
         		return true;
         	}else {
         	Alert al = new Alert(AlertType.ERROR);
@@ -28,7 +28,7 @@ public class LibrarianController {
         	al.setHeaderText("No book found!");
         	al.setContentText("This isbn doesn't belong to any existing book!");
         	al.showAndWait();
-        	
+
         }
         return false;
     }

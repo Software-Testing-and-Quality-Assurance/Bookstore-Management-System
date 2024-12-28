@@ -53,8 +53,15 @@ public class TotalBillController {
 		}
 	}
 
-
-
+	public boolean addBook(TotalBill bill, Book book, Integer quantity) {
+		if (bill == null || book == null || quantity == null)
+			return false;
+		else if (quantity > book.getStock() || quantity<0)
+			return false;
+		else
+			bill.getBooks().put(book, quantity);
+		return true;
+	}
 
 	public void printTheBill(TotalBill tb) {
 		File PRINT_BILL_FILE= new File("printBill"+Main.billId+".txt");
