@@ -14,6 +14,11 @@ public class TotalBill implements Serializable{
 	private static final long serialVersionUID = -5906827024116395864L;
 	private final String librarianUser;
 	private final Date orderDate;
+
+	public Map<Book, Integer> getSoldBooks() {
+		return soldBooks;
+	}
+
 	private transient Map<Book,Integer> soldBooks;
 
 	public TotalBill(String librarianUser) {
@@ -30,13 +35,7 @@ public class TotalBill implements Serializable{
 		return orderDate;
 	}
 
-	public int getTotalNrOfBooks() {
-		int sum=0;
-		for(Map.Entry<Book,Integer> book: soldBooks.entrySet()) {
-			sum+=book.getValue();
-		}
-		return sum;
-	}
+
 
 	public double getTotalOrderAmount() {
 		double totalAmount = 0;

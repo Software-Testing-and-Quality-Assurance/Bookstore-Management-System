@@ -63,6 +63,14 @@ public class TotalBillController {
 		return true;
 	}
 
+
+	public int getTotalNrOfBooks(TotalBill bill) {
+		int sum=0;
+		for(Map.Entry<Book,Integer> book: bill.getSoldBooks().entrySet()) {
+			sum+=book.getValue();
+		}
+		return sum;
+	}
 	public void printTheBill(TotalBill tb) {
 		File PRINT_BILL_FILE= new File("printBill"+Main.billId+".txt");
     	try(PrintWriter pw = new PrintWriter(PRINT_BILL_FILE)) {

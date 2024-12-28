@@ -12,6 +12,7 @@ public class LibrarianStatController {
 	
 	public ObservableList<LibStat> filterDate(Date date1, Date date2) {
 		EmployeeController ec = new EmployeeController();
+		TotalBillController tbc = new TotalBillController();
 		 String username;
 	     int nrOfBills;
 	     int nrOfBooks;
@@ -29,7 +30,7 @@ public class LibrarianStatController {
 				if(!(date2.before(dateA)) && !(date1.after(dateA))) {
 
 					nrOfBills++;
-					nrOfBooks+=a.getTotalNrOfBooks();
+					nrOfBooks+=tbc.getTotalNrOfBooks(a);
 					amount+=a.getTotalOrderAmount();
 				}
 			}
