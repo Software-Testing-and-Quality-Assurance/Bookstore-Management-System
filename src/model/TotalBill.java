@@ -26,7 +26,6 @@ public class TotalBill implements Serializable{
 	            soldBooks.put(book, quantity);   
 	    }
 
-
 	    public String getLibrarianUser() {
 	        return librarianUser;
 	    }
@@ -50,16 +49,7 @@ public class TotalBill implements Serializable{
 	        }
 	        return totalAmount;
 	    }
-	    
-	    public double getTotalPurchaseAmount() {
-	        double totalAmount = 0;
-	        for (Map.Entry<Book,Integer> m : soldBooks.entrySet()) {
-	            totalAmount += (m.getKey()).getPurchasePrice()*m.getValue();
-	        }
-	        return totalAmount;
-	    }
-	    
-	    
+
 	    @Override
 	    public String toString(){
 	    	return librarianUser+" "+getTotalOrderAmount();
