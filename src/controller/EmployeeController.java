@@ -60,9 +60,10 @@ public class EmployeeController {
 	}
 	
 	public boolean employeeFound(String username) {
-		if(Main.employeesAll.isEmpty())
+		if(Main.employeesAll.isEmpty() || searchEmployee(username) == null)
 			return false;
-        return searchEmployee(username) != null;
+		else
+        return true;
     }
 	 
 	public boolean updateAll() {
