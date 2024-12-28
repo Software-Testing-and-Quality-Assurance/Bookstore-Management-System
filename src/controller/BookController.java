@@ -62,13 +62,13 @@ public class BookController {
 				return e;			
 		return null;
 	}
-	
-	public boolean bookFound(String isbn) {
-		if(Main.bookStock.isEmpty())
-			return false;
-        return searchBook(isbn) == null;
 
-    }
+	public boolean bookFound(String isbn) {
+		if(Main.bookStock.isEmpty() || searchBook(isbn)==null)
+			return false;
+		else
+			return true;
+	}
 	
 	public void updateAll() {
         try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Main.BOOK_FILE))) {
