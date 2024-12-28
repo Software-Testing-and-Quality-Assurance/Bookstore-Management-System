@@ -64,12 +64,10 @@ public class BookController {
 	}
 
 	public boolean bookFound(String isbn) {
-		if(Main.bookStock.isEmpty() || searchBook(isbn)==null)
-			return false;
-		else
-			return true;
+		return !Main.bookStock.isEmpty() && searchBook(isbn) != null;
 	}
-	
+
+
 	public void updateAll() {
         try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Main.BOOK_FILE))) {
             for(Book b : Main.bookStock) {

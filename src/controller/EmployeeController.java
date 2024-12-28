@@ -58,13 +58,11 @@ public class EmployeeController {
 				return e;			
 		return null;
 	}
-	
+
 	public boolean employeeFound(String username) {
-		if(Main.employeesAll.isEmpty() || searchEmployee(username) == null)
-			return false;
-		else
-        return true;
-    }
+		return !Main.employeesAll.isEmpty() && searchEmployee(username) != null;
+	}
+
 	 
 	public boolean updateAll() {
 	        try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Main.DATA_FILE))) {
