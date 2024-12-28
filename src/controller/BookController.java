@@ -17,16 +17,14 @@ public class BookController {
 				try {
 					Book book = (Book) inputStream.readObject();
 					Main.bookStock.add(book);
-					System.out.println("add one book");
+					System.out.println(book.getIsbn() + " Book Titled " + book.getTitle() + " by " + book.getAuthor()
+							+ " has " + book.getStock() + " copies " + " category: " + book.getCategory() + " " + book.getFirstPurchaseDate());
 				} catch (EOFException e) {
 					break;
 				}
 			}
-			for (Book b : Main.bookStock) {
-				System.out.println(b.getIsbn() + " Book Titled " + b.getTitle() + " by " + b.getAuthor()
-						+ " has " + b.getStock() + " copies " + " category: " + b.getCategory() + " " + b.getFirstPurchaseDate());
-			}
 			System.out.println("Books loaded from file! " + Main.bookStock.size());
+			System.out.println("#####");
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} catch (ClassNotFoundException e) {

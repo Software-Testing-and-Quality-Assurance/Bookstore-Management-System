@@ -13,16 +13,17 @@ public class EmployeeController {
 				try {
 					Employee employee = (Employee) inputStream.readObject();
 					Main.employeesAll.add(employee);
-					System.out.println("add one");
+					System.out.printf("Username: %s, Password: %s%n", employee.getUsername(), employee.getPassword());
 				} catch (EOFException e) {
 					break;
 				}
 			}
+			System.out.println("Data loaded from file! "+ Main.employeesAll.size());
+			System.out.println("#####");
 	    }  catch (EOFException ignored) {
 	    	for (Employee e: Main.employeesAll) {
 	        	System.out.println(e.toString()+"check: "+e.getCheckBooks()+" "+e.getDateTerminated());
 	        }
-	        System.out.println("Data loaded from file! "+ Main.employeesAll.size());
         } catch (IOException ex) {
 	        System.out.println(ex.getMessage());
 	    } catch (ClassNotFoundException ex) {
