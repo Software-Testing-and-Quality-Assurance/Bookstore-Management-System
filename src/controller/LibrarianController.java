@@ -12,10 +12,9 @@ public class LibrarianController {
 		
         Book book = bc.searchBook(ISBN);
         try{
-        	if (book.getStock()>=quantity) {
+        	if (tbc.addBook(tb, book, quantity)) {
         		book.setStock(book.getStock() - quantity);
         		bc.updateAll();
-        		tbc.addBook(tb, book, quantity);
         		return true;
         	}else {
         	Alert al = new Alert(AlertType.ERROR);
