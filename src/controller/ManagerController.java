@@ -7,9 +7,16 @@ import model.Author;
 import model.Book;
 
 public class ManagerController {
-	BookController bc = new BookController();
+    private BookController bc;
+
+    public ManagerController() {
+        this.bc = new BookController();
+    }
+    public ManagerController(BookController bookController) {
+        this.bc = bookController;
+         }
 	public boolean addBooks(String isbn, String title, String supplier, String category, double sellingPrice, double originalPrice, String authorName, String authorSurname, int quantity) {
-    	
+
         if (!addExist(isbn,quantity)) {
             Book newBook = new Book(isbn, title, supplier, category, sellingPrice, originalPrice, new Author(authorName, authorSurname), quantity);
             Date bought = new Date();
@@ -18,9 +25,9 @@ public class ManagerController {
         } else {
             return false;
         }
-    	
+
     }
-	
+
     public boolean addExist(String isbn, int quantity) {
     	Book existing = bc.searchBook(isbn);
     	if (existing==null)
