@@ -28,8 +28,6 @@ import model.TotalBill;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
-
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
