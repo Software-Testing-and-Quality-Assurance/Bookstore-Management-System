@@ -6,16 +6,13 @@ import model.TotalBill;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-class TotalBillControllerTest {
+class TotalBillControllerBoundaryValueTesting {
     Book b,b1,b2,b3;
     TotalBill bill;
     TotalBillController tbc;
@@ -35,7 +32,7 @@ class TotalBillControllerTest {
         when(bill.getSoldBooks()).thenReturn(m);
         int total = tbc.getTotalNrOfBooks(bill);
         assertEquals(0,total);
-        Mockito.verify(bill).getSoldBooks();
+        verify(bill).getSoldBooks();
     }
     @Test
     @DisplayName("Boundary Value Testing 2 - one book")
@@ -45,7 +42,7 @@ class TotalBillControllerTest {
         when(bill.getSoldBooks()).thenReturn(m);
         int total = tbc.getTotalNrOfBooks(bill);
         assertEquals(1,total);
-        Mockito.verify(bill).getSoldBooks();
+        verify(bill).getSoldBooks();
     }
     @Test
     @DisplayName("Boundary Value Testing 3 - multiple books, one has 0 copies sold")
@@ -58,21 +55,22 @@ class TotalBillControllerTest {
         when(bill.getSoldBooks()).thenReturn(m);
         int total = tbc.getTotalNrOfBooks(bill);
         assertEquals(13,total);
-        Mockito.verify(bill).getSoldBooks();
+        verify(bill).getSoldBooks();
     }
 
     @Test
-    @DisplayName("Boundary Value Testing 4 - a lot of books sold")
+    @DisplayName("Boundary Value Testing 4 - max number of books sold")
     void test4() {
         Map<Book, Integer> m = new HashMap<>();
-        m.put(b, Integer.MAX_VALUE);
-        m.put(b1, Integer.MAX_VALUE);
-        m.put(b2, Integer.MAX_VALUE);
-        Mockito.when(bill.getSoldBooks()).thenReturn(m);
-        int total =Integer.MAX_VALUE + Integer.MAX_VALUE + Integer.MAX_VALUE;
-        int t = tbc.getTotalNrOfBooks(bill);
-        assertEquals(total, t);
-        Mockito.verify(bill).getSoldBooks();
+        int stockBook = 1000;
+        when(b.getStock()).thenReturn(stockBook);
+        when(b1.getStock()).thenReturn(stockBook);
+        m.put(b, stockBook);
+        m.put(b1,stockBook);
+        when(bill.getSoldBooks()).thenReturn(m);
+        int total = tbc.getTotalNrOfBooks(bill);
+        assertEquals(2000,total);
+        verify(bill).getSoldBooks();
     }
     @Test
     @DisplayName("Boundary Value Testing 5 - null input")
