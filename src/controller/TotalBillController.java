@@ -56,7 +56,7 @@ public class TotalBillController {
 	public boolean addBook(TotalBill bill, Book book, Integer quantity) {
 		if (bill == null || book == null || quantity == null)
 			return false;
-		else if (quantity > book.getStock() || quantity<0)
+		else if (quantity > book.getStock() || quantity<=0)
 			return false;
 		else
 			bill.getBooks().put(book, quantity);
