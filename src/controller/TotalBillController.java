@@ -66,6 +66,9 @@ public class TotalBillController {
 
 	public int getTotalNrOfBooks(TotalBill bill) {
 		int sum=0;
+		if(bill == null){
+			return 0;
+		}
 		for(Map.Entry<Book,Integer> book: bill.getSoldBooks().entrySet()) {
 			sum+=book.getValue();
 		}

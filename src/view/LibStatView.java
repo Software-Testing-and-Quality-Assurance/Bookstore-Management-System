@@ -17,6 +17,7 @@ public class LibStatView extends BorderPane {
     private final TableView<LibStat> librarianStatistics = new TableView<>();
     private final Button goBackButton = new Button("Previous");
 
+    @SuppressWarnings("unchecked")
     public LibStatView() {
         librarianStatistics.setEditable(true);
         librarianStatistics.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -35,6 +36,7 @@ public class LibStatView extends BorderPane {
 
         TableColumn<LibStat, Double> amountPropertyColumn = new TableColumn<>("Total Amount");
         amountPropertyColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
 
         librarianStatistics.getColumns().addAll(nameColumn, surnameColumn, nrOfBillsColumn, nrOfBooksColumn, amountPropertyColumn);
 

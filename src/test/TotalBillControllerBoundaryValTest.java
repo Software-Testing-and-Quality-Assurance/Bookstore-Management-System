@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /* Keit Nika*/
-class TotalBillControllerBoundaryValueTesting {
+class TotalBillControllerBoundaryValTest {
     Book b,b1,b2,b3;
     TotalBill bill;
     TotalBillController tbc;
@@ -88,7 +88,7 @@ class TotalBillControllerBoundaryValueTesting {
     @Test
     @DisplayName("Boundary Value Testing 5 - null input")
     void test5() {
-        assertThrows(NullPointerException.class, () -> tbc.getTotalNrOfBooks(null));
+        assertEquals(0,tbc.getTotalNrOfBooks(null));
     }
 
 
