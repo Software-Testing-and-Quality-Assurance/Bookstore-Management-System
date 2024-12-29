@@ -15,7 +15,16 @@ import model.Role;
 import model.TotalBill;
 import model.Employee;
 public class AdminController {
-	public EmployeeController ec = new EmployeeController();
+
+	public final EmployeeController ec;
+
+	public AdminController(){
+		this.ec= new EmployeeController();
+	}
+
+	public AdminController(EmployeeController ec){
+		this.ec=ec;
+	}
 	
 	public boolean addEmployee(String username, String password, String name, String surname, String email, String phone, double salary, Role role, Date birthday) {
 	    try {

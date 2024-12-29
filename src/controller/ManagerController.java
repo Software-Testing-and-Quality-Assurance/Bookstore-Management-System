@@ -7,7 +7,7 @@ import model.Author;
 import model.Book;
 
 public class ManagerController {
-    private BookController bc;
+    private final BookController bc;
 
     public ManagerController() {
         this.bc = new BookController();
