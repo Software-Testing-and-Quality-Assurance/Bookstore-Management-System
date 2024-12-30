@@ -1,5 +1,4 @@
 package controller;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -7,9 +6,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.Main;
 import model.*;
-
 public class LibrarianStatController {
-	
+
+    private final Map<String, ArrayList<TotalBill>> billsPerLibrarian;
+
+	public LibrarianStatController(EmployeeController ec, TotalBillController tbc, Map<String, ArrayList<TotalBill>> billsPerLibrarian) {
+		if (ec == null || tbc == null || billsPerLibrarian == null) {
+			throw new IllegalArgumentException("Arguments cannot be null.");
+		}
+        this.billsPerLibrarian = billsPerLibrarian;
+	}
 	public ObservableList<LibStat> filterDate(Date date1, Date date2) {
 		EmployeeController ec = new EmployeeController();
 		TotalBillController tbc = new TotalBillController();
@@ -19,7 +25,7 @@ public class LibrarianStatController {
 	     double amount;
 	     ObservableList<LibStat> filter = FXCollections.observableArrayList();
 	     
-		for(Map.Entry<String, ArrayList <TotalBill>> all : Main.billsPerLibrarian.entrySet()) {
+		for(Map.Entry<String, ArrayList <TotalBill>> all : billsPerLibrarian.entrySet()) {
 			username = all.getKey();
 			nrOfBills=0;
 			nrOfBooks=0;

@@ -26,9 +26,9 @@ import static org.mockito.Mockito.*;
 
 /* Keit Nika*/
 class TotalBillControllerBoundaryValTest {
-    Book b,b1,b2,b3;
-    TotalBill bill;
-    TotalBillController tbc;
+   private  Book b,b1,b2,b3;
+   private TotalBill bill;
+   private TotalBillController tbc;
     @BeforeEach
     void setUp(){
         b = mock(Book.class);

@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-import controller.AdminController;
-import controller.BookBoughtController;
-import controller.LibrarianStatController;
+import controller.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -67,7 +65,9 @@ public class ChooseDates {
                 
                 printSelectedDates(startDatePicker.getValue(), endDatePicker.getValue());
                 if(action.equals("Bill info")) {
-                	LibrarianStatController lsc = new LibrarianStatController();
+					EmployeeController ec = new EmployeeController();
+					TotalBillController tbc = new TotalBillController();
+					LibrarianStatController lsc = new LibrarianStatController(ec, tbc, Main.billsPerLibrarian);
                     LibStatView lsv = new LibStatView();
                     lsv.getTableView().setItems(lsc.filterDate(date1, date2));
                     lsv.showScene(st);

@@ -16,8 +16,8 @@ class ManagerControllerClassEvaluationTest {
 2 - invalid test
 3 - test when book exists
 */
-    BookController bc;
-    ManagerController mc;
+    private BookController bc;
+    private ManagerController mc;
     @BeforeEach
     void setUp(){
         bc = mock(BookController.class);
@@ -51,7 +51,7 @@ class ManagerControllerClassEvaluationTest {
     void test3() {
         Book b = new Book("1234", "Sikur te isha djale", "Keiti", "Drama", 25.0, 20.0, new Author("Haki", "Stermilli"), 100);
         when(bc.searchBook("1234")).thenReturn(b);
-        doAnswer(invocation -> {
+        doAnswer( _ -> {
             b.setStock(100+b.getStock());
             return null;
         }).when(bc).restock(100,"1234");

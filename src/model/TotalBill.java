@@ -26,7 +26,11 @@ public class TotalBill implements Serializable{
 		this.orderDate = new Date();
 		soldBooks = new HashMap<Book, Integer> ();
 	}
-
+	public TotalBill(String librarianUser,Date orderDate) {
+		this.librarianUser = librarianUser;
+		this.orderDate = new Date();
+		soldBooks = new HashMap<Book, Integer> ();
+	}
 	public String getLibrarianUser() {
 		return librarianUser;
 	}
