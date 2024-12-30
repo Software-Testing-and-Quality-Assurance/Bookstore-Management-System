@@ -93,6 +93,7 @@ class TotalBillControllerBoundaryValueTest {
         int quantity = 1;
 
         when(bookMock.getStock()).thenReturn(stock);
+        //noinspection unchecked
         when(tbMock.getBooks()).thenReturn(mock(Map.class));
 
         assertTrue(tbc.addBook(tbMock, bookMock, quantity));
@@ -108,6 +109,7 @@ class TotalBillControllerBoundaryValueTest {
         int quantity = 10;
 
         when(bookMock.getStock()).thenReturn(stock);
+        //noinspection unchecked
         when(tbMock.getBooks()).thenReturn(mock(Map.class));
 
         assertTrue(tbc.addBook(tbMock, bookMock, quantity));
