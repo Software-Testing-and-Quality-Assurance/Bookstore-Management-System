@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="assertj-core-3.13.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/assertj-core-3.13.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/apiguardian-api-1.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hsqldb-2.6.0-jdk8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/byte-buddy-agent-1.11.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/byte-buddy-1.11.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-platform-console-standalone-1.11.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mockito-core-3.12.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/objenesis-3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/opentest4j-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/testfx-core-4.0.18.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/testfx-junit5-4.0.18.jar!/" />
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src" />
+    </SOURCES>
+  </library>
+</component>

@@ -170,7 +170,16 @@ public class RegisterView {
 				System.out.println("Librarian Selected: " + lib.isSelected());
 				System.out.println("Manager Selected: " + man.isSelected());
 				System.out.println("Role: " + role);
-				boolean addE = ac.addEmployee(username, password, firstName, lastName, email, phone, role==Role.LIBRARIAN?60000.0:80000.0, role, birthday);
+                boolean addE = false;
+                try { addE = ac.addEmployee(username, password, firstName, lastName, email, phone, role==Role.LIBRARIAN?60000.0:80000.0, role, birthday);
+                } catch (IllegalArgumentException y){
+                    Alert al = new Alert(AlertType.ERROR);
+                    al.setHeaderText("Invalid Entry");
+                    al.setContentText(y.getMessage());
+                    al.showAndWait();
+                    System.out.println(y.getMessage());
+                }
+
 				if (addE) {
 					Main.doneAlert();
 					firstNameField.clear();

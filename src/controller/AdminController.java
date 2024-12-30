@@ -26,41 +26,43 @@ public class AdminController {
 		this.ec=ec;
 	}
 	
-	public boolean addEmployee(String username, String password, String name, String surname, String email, String phone, double salary, Role role, Date birthday) {
-	    try {
-	        if (ec.employeeFound(username)) {
-	            throw new Exception("This username is taken");
-	        }
-	        
-	        System.out.println("in Role: " + role);
-			String x = "Values extracted: " + name + ", " + surname + ", " + username + " " + phone + " " + " " + password + " " + salary;
-			if (role==Role.LIBRARIAN ) {
-			    System.out.println(x);
-
-	        	Employee newE = new Employee(username, password, name, surname, email, Role.LIBRARIAN, phone, salary, Access.YES, Access.NO, Access.NO, Access.NO,birthday );
-	            ec.create(newE);
-	            return true;
-	        } else if (role==Role.MANAGER) {
-			    System.out.println(x);
-
-	        	Employee newE = new Employee(username, password, name, surname, email, Role.MANAGER, phone, salary,Access.NO, Access.YES, Access.YES, Access.YES,birthday);
-	            ec.create(newE);
-	            return true;
-	        }
-	    } catch (IllegalArgumentException e) {
-	        Alert al = new Alert(AlertType.ERROR);
-	        al.setHeaderText("Invalid Entry");
-	        al.setContentText(e.getMessage());
-	        al.showAndWait();
-	        System.out.println(e.getMessage());
-	    } catch (Exception e) {
-	        Alert al = new Alert(AlertType.ERROR);
-	        al.setHeaderText("Duplicate Username");
-	        al.setHeaderText(e.getMessage());
-	        al.setContentText(e.getMessage());
-	        al.showAndWait();
-	    }
-	    return false;
+	public boolean addEmployee(String username, String password, String name, String surname, String email, String phone, double salary, Role role, Date birthday) throws IllegalArgumentException{
+		if (username == null || username.isEmpty() ||
+				password == null || password.isEmpty() ||
+				name == null || name.isEmpty() ||
+				surname == null || surname.isEmpty() ||
+				email == null || email.isEmpty() ||
+				phone == null || phone.isEmpty() ||
+				role == null ||
+				birthday == null) {
+			throw new IllegalArgumentException("Don't leave empty fields!");
+		}
+		else if(password.length() < 8)
+				throw new IllegalArgumentException("Password has to have 8 or more characters!");
+		else if(password.equals(username))
+			throw new IllegalArgumentException("Password cannot equal the username.");
+		else if (!email.matches(".*@(gmail\\.com|hotmail\\.com|yahoo\\.com)"))
+			throw new IllegalArgumentException("Enter valid email address.");
+		else if (!phone.matches("3556[7-9]\\d{7}"))
+			throw new IllegalArgumentException("Enter valid phone number.");
+		else if (salary<=0)
+			throw new IllegalArgumentException("Salary has to be more than 0.");
+		else if (ec.employeeFound(username))
+			throw new IllegalArgumentException("This username is taken. Try something else.");
+		System.out.println("in Role: " + role);
+		String x = "Values extracted: " + name + ", " + surname + ", " + username + " " + phone + " " + " " + password + " " + salary;
+		if (role==Role.LIBRARIAN ) {
+			System.out.println(x);
+			Employee newE = new Employee(username, password, name, surname, email, Role.LIBRARIAN, phone, salary, Access.YES, Access.NO, Access.NO, Access.NO,birthday );
+			ec.create(newE);
+			return true;
+		} else if (role==Role.MANAGER) {
+			System.out.println(x);
+			Employee newE = new Employee(username, password, name, surname, email, Role.MANAGER, phone, salary,Access.NO, Access.YES, Access.YES, Access.YES,birthday);
+			ec.create(newE);
+			return true;
+		}
+		return false;
 	}
 	
 	public void removeEmployee(String user) {
