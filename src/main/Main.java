@@ -45,7 +45,8 @@ public class Main extends Application{
 		bs.loadBooksFromFile();
 		TotalBillController tbc = new TotalBillController();
 		tbc.loadBillsFromFile();
-		
+
+
 		LoginView lv = new LoginView();
 		s.setTitle("Welcome to BookStore");
 		s.setScene(lv.showView(s));

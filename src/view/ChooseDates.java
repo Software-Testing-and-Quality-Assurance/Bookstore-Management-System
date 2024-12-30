@@ -65,11 +65,9 @@ public class ChooseDates {
                 
                 printSelectedDates(startDatePicker.getValue(), endDatePicker.getValue());
                 if(action.equals("Bill info")) {
-					EmployeeController ec = new EmployeeController();
-					TotalBillController tbc = new TotalBillController();
-					LibrarianStatController lsc = new LibrarianStatController(ec, tbc, Main.billsPerLibrarian);
+					LibrarianStatController lsc = new LibrarianStatController();
                     LibStatView lsv = new LibStatView();
-                    lsv.getTableView().setItems(lsc.filterDate(date1, date2));
+                    lsv.getTableView().setItems(lsc.filterDate(date1, date2,Main.billsPerLibrarian));
                     lsv.showScene(st);
                 }
                 
