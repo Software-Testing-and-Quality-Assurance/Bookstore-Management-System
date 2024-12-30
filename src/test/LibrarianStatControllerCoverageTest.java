@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 class LibrarianStatControllerStatementCoverageTest {
     /*Keit Nika
-     *1. Statement Coverage - each statement is covered at least once - 100% coverage achieved
+     *1. Statement Coverage - each statement is covered at least once - 95% coverage achieved
      *2. Branch Coverage - each branch is covered at least once - 100% coverage achieved
-     *3. Condition Coverage - each condition is covered at least once
-     *4. MCDC -  100% code execution with the least amount of input tests
+     *3. Condition Coverage - each condition is covered at least once - 100% coverage achieved
+     *4. MCDC -  100% code execution with the least amount of input tests - 100% coverage achieved
      * */
     private LibrarianStatController lst;
     private Map<String, ArrayList<TotalBill>> billsPerLibrarian;
@@ -86,18 +86,18 @@ class LibrarianStatControllerStatementCoverageTest {
         // In range bill
         calendar.set(2024, Calendar.NOVEMBER, 10);
         bills.add(new TotalBill("librarianKeit", calendar.getTime()));
-
-        // Out of range bills
-        calendar.set(2024, Calendar.OCTOBER, 5);
-        bills.add(new TotalBill("librarianKeit", calendar.getTime()));
-        calendar.set(2024, Calendar.DECEMBER, 5);
-        bills.add(new TotalBill("librarianKeit", calendar.getTime()));
-
-       //Edge Cases
         calendar.set(2024, Calendar.NOVEMBER, 2);
         bills.add(new TotalBill("librarianKeit", calendar.getTime()));
         calendar.set(2024, Calendar.NOVEMBER, 29);
         bills.add(new TotalBill("librarianKeit", calendar.getTime()));
+
+        // Out of range bills
+        calendar.set(2024, Calendar.OCTOBER, 5);
+        bills.add(new TotalBill("librarianKeit", calendar.getTime()));
+
+        calendar.set(2024, Calendar.DECEMBER, 5);
+        bills.add(new TotalBill("librarianKeit", calendar.getTime()));
+
 
         System.out.println("Number of bills added: " + bills.size());
         billsPerLibrarian.put("librarianKeit", bills);
@@ -127,7 +127,18 @@ class LibrarianStatControllerStatementCoverageTest {
         ObservableList<LibStat>  result = lst.filterDate(startDate1, endDate1, billsPerLibrarian);
         assertTrue(result.isEmpty());
 
+        bills.clear();
+        calendar.set(2024, Calendar.OCTOBER, 10);
+        bills.add(new TotalBill("librarianKeit", calendar.getTime()));
+        billsPerLibrarian.put("librarianKeit",bills);
+        calendar.set(2024, Calendar.OCTOBER, 30);
+        Date startDate2 = calendar.getTime();
+        calendar.set(2024, Calendar.OCTOBER, 1);
+        Date endDate2 = calendar.getTime();
+        result = lst.filterDate(startDate2, endDate2, billsPerLibrarian);
+        assertTrue(result.isEmpty());
 
+        bills.clear();
         calendar.set(2024, Calendar.OCTOBER, 10);
         bills.add(new TotalBill("librarianKeit", calendar.getTime())); //in range
         billsPerLibrarian.put("librarianKeit",bills);
@@ -137,6 +148,8 @@ class LibrarianStatControllerStatementCoverageTest {
         Date endDate = calendar.getTime();
         result = lst.filterDate(startDate, endDate, billsPerLibrarian);
         assertEquals(1,result.getFirst().getNrOfBills());
+
+
     }
 
 }
