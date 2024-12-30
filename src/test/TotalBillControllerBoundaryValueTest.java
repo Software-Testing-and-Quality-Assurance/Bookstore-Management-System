@@ -3,7 +3,7 @@
  * * SWE 303: Software Testing & Quality Assurance * *
  * * * * * * * * * Project: Code Testing * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * * * * * * * Boundary Value Testing * * * * * * * *
+ * * * * * * * Boundary Value  Testing * * * * * * * *
  * * * * * * Test done by: Klaudia Tamburi * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */

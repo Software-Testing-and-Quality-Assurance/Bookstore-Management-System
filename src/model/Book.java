@@ -33,7 +33,18 @@ public class Book implements Serializable{
 		this.setStock(stock);
 		this.firstPurchaseDate = new Date();
 	}
-	
+
+	public Book(String isbn, String title, String supplier, String category, double sellingPrice, double purchasePrice, Author author, int stock, Date firstPurchaseDate) {
+		this.setIsbn(isbn);
+		this.setTitle(title);
+		this.setSupplier(supplier);
+		this.setCategory(category);
+		this.setSellingPrice(sellingPrice);
+		this.setPurchasePrice(purchasePrice);
+		this.setAuthor(author);
+		this.setStock(stock);
+		this.firstPurchaseDate = firstPurchaseDate;
+	}
 	
 	public String getIsbn() {
 		return isbn;

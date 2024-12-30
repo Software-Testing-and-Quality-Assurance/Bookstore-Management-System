@@ -25,7 +25,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class AdminControllerTest{
+public class AdminControllerEquivClassTest {
 
     /*
     * Test Cases for function addEmployee

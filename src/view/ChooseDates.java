@@ -76,7 +76,7 @@ public class ChooseDates {
                 else if (action.equals("Book Bought")){
                 	BookBoughtController bbc = new BookBoughtController();
                 	BookBought bookBought = new BookBought();
-        		    bookBought.getTableView().setItems(bbc.filterDate(date1, date2));
+        		    bookBought.getTableView().setItems(bbc.filterDate(date1, date2,Main.bookStock));
 
 
         		    bookBought.showView(st);
