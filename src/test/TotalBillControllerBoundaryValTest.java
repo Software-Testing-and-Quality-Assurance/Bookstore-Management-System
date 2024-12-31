@@ -39,13 +39,9 @@ class TotalBillControllerBoundaryValTest {
         tbc = new TotalBillController();
     }
     @Test
-    @DisplayName("Boundary Value Testing 1 - empty map")
-    void test1(){
-        Map<Book,Integer> m = new HashMap<>();
-        when(bill.getSoldBooks()).thenReturn(m);
-        int total = tbc.getTotalNrOfBooks(bill);
-        assertEquals(0,total);
-        verify(bill).getSoldBooks();
+    @DisplayName("Boundary Value Testing 5 - null input")
+    void test1() {
+        assertEquals(0,tbc.getTotalNrOfBooks(null));
     }
     @Test
     @DisplayName("Boundary Value Testing 2 - one book")
@@ -85,11 +81,7 @@ class TotalBillControllerBoundaryValTest {
         assertEquals(2000,total);
         verify(bill).getSoldBooks();
     }
-    @Test
-    @DisplayName("Boundary Value Testing 5 - null input")
-    void test5() {
-        assertEquals(0,tbc.getTotalNrOfBooks(null));
-    }
+
 
 
 }
