@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
-class LibrarianStatControllerStatementCoverageTest {
+class LibrarianStatControllerCoverageTest {
     /*Keit Nika
      *1. Statement Coverage - each statement is covered at least once - 95% coverage achieved
      *2. Branch Coverage - each branch is covered at least once - 100% coverage achieved
@@ -98,8 +98,6 @@ class LibrarianStatControllerStatementCoverageTest {
         calendar.set(2024, Calendar.DECEMBER, 5);
         bills.add(new TotalBill("librarianKeit", calendar.getTime()));
 
-
-        System.out.println("Number of bills added: " + bills.size());
         billsPerLibrarian.put("librarianKeit", bills);
         calendar.set(2024, Calendar.NOVEMBER, 1);
         Date startDate = calendar.getTime();
@@ -107,6 +105,17 @@ class LibrarianStatControllerStatementCoverageTest {
         Date endDate = calendar.getTime();
         ObservableList<LibStat> result = lst.filterDate(startDate, endDate, billsPerLibrarian);
         assertEquals(3, result.getFirst().getNrOfBills());
+
+        bills.clear();
+        calendar.set(2024, Calendar.OCTOBER, 10);
+        bills.add(new TotalBill("librarianKeit", calendar.getTime()));
+        billsPerLibrarian.put("librarianKeit",bills);
+        calendar.set(2024, Calendar.OCTOBER, 30);
+        Date startDate2 = calendar.getTime();
+        calendar.set(2024, Calendar.OCTOBER, 1);
+        Date endDate2 = calendar.getTime();
+        result = lst.filterDate(startDate2, endDate2, billsPerLibrarian);
+        assertTrue(result.isEmpty());
     }
     @Test
     @DisplayName("MCDC")
