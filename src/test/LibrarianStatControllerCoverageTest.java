@@ -22,14 +22,12 @@ class LibrarianStatControllerCoverageTest {
     @BeforeEach
     void setUp() {
         Main.employeesAll.clear();
-        EmployeeController ec = new EmployeeController();
         billsPerLibrarian = new HashMap<>();
         Calendar calendar = Calendar.getInstance();
         calendar.set(1990, Calendar.MAY, 25);
         Date birthDate = calendar.getTime();
         Employee e = new Employee("librarianKeit", "12345678kn", "keit", "nika", "keitn@gmail.com", Role.LIBRARIAN, "355695214014", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, birthDate);
         Main.employeesAll.add(e);
-        ec.create(e);
         lst = new LibrarianStatController();
     }
 
@@ -157,8 +155,6 @@ class LibrarianStatControllerCoverageTest {
         Date endDate = calendar.getTime();
         result = lst.filterDate(startDate, endDate, billsPerLibrarian);
         assertEquals(1,result.getFirst().getNrOfBills());
-
-
     }
 
 }
