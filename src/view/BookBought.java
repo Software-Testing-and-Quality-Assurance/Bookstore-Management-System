@@ -64,9 +64,6 @@ public class BookBought extends BorderPane{
         tableView.getColumns().addAll(isbnColumn, titleColumn, authorColumn, stockOfBook,sellingPrice, purchasePrice, firstPurchaseDate);
         tableView.setStyle("-fx-control-inner-background: #C9E8A3;");
 
-        FlowPane flowPane = new FlowPane(3, 3);
-        
-
         HBox hBox = new HBox();
         hBox.setSpacing(20);
         hBox.getChildren().addAll(goBack);
@@ -86,40 +83,8 @@ public class BookBought extends BorderPane{
         st.show();
     }
 
-    public TableColumn<Book, String> getIsbnColumn() {
-        return isbnColumn;
-    }
-    
-
-    public TableColumn<Book, String> getTitleColumn() {
-        return titleColumn;
-    }
-
-    public TableColumn<Book, Author> getAuthorColumn() {
-        return authorColumn;
-    }
-
-    public TableColumn<Book, Integer> getStockColumn() {
-        return stockOfBook;
-    }
-
-    public TableColumn<Book, Double> getSellingPriceColumn() {
-        return sellingPrice;
-    }
-
-    public TableColumn<Book, Double> getPurchasePriceColumn() {
-        return purchasePrice;
-    }
-    
-    public TableColumn<Book, Date> getPurchaseDateeColumn() {
-        return firstPurchaseDate;
-    }
-    
     public TableView<Book> getTableView() {
         return tableView;
-    }
-    public Button getGoBack() {
-        return goBack;
     }
     
 }

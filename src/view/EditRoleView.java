@@ -20,7 +20,7 @@ public class EditRoleView {
     private final AdminController adminController;
     private final Scene previousScene;
 
-    public EditRoleView(Stage parentStage, AdminController adminController, String username, Scene previousScene) {
+    public EditRoleView( AdminController adminController, String username, Scene previousScene) {
         this.adminController = adminController;
         this.previousScene = previousScene;
         Employee employee = adminController.ec.searchEmployee(username);
@@ -79,7 +79,7 @@ public class EditRoleView {
         gridPane.add(saveButton, 0, 4);
         gridPane.add(goBackButton, 1, 4);
 
-        saveButton.setOnAction(e -> handleSaveAction(username, parentStage));
+        saveButton.setOnAction(e -> handleSaveAction(username));
         goBackButton.setOnAction(e -> {
             parentStage.setScene(previousScene);
             parentStage.show();
@@ -91,7 +91,7 @@ public class EditRoleView {
         return scene;
     }
 
-    private void handleSaveAction(String username, Stage parentStage) {
+    private void handleSaveAction(String username) {
         Employee employee = adminController.ec.searchEmployee(username);
 
         if (employee != null) {

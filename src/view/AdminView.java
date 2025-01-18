@@ -270,7 +270,6 @@ public class AdminView {
 
 	    add.setOnAction(e -> {
 	        ManagerController m = new ManagerController();
-	        BookController b = new BookController();
 
 	        try {
 	            String isbn = isbnF.getText();

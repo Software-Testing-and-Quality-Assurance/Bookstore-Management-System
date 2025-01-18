@@ -16,7 +16,6 @@ import model.TotalBill;
 public class CreateBillView {
     private final LibrarianController lc;
     private final TotalBill bill;
-    boolean sameLibrarian = true;
 
     public CreateBillView(LibrarianController librarianController, TotalBill bill) {
         this.lc = librarianController;

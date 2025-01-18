@@ -70,7 +70,7 @@ public class EditEmployee {
                 Main.emptyAlert();
                 return;
             }
-            EditRoleView erv = new EditRoleView(st, ac, username, sc);
+            EditRoleView erv = new EditRoleView(ac, username, sc);
             Scene ers = erv.showView(st, username);
             st.setScene(ers);
         });

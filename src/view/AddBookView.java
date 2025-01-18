@@ -23,7 +23,6 @@ public class AddBookView {
 		private String authorName;
 		private String authorSurname;
 		private int stock;
-		private Employee employee;
 		ManagerController mc = new ManagerController();
 		BookController bc = new BookController();
 		public Scene showView(Stage st) {

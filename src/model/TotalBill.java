@@ -39,8 +39,6 @@ public class TotalBill implements Serializable{
 		return orderDate;
 	}
 
-
-
 	public double getTotalOrderAmount() {
 		double totalAmount = 0;
 		for (Map.Entry<Book,Integer> m : soldBooks.entrySet()) {

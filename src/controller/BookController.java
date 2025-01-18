@@ -32,9 +32,6 @@ public class BookController {
 		}
     }
 
-	
-	
-	
 	public boolean create(Book book) {
 	    try (FileOutputStream outputStream = new FileOutputStream(Main.BOOK_FILE, true)) {
 	        ObjectOutputStream writer;

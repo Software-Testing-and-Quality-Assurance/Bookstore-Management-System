@@ -103,50 +103,6 @@ public class EmployeeStat {
         st.setScene(scene);
     }
 
-    public TableColumn<Employee, String> getNameColumn() {
-        return nameColumn;
-    }
-
-    public TableColumn<Employee, String> getSurnameColumn() {
-        return surnameColumn;
-    }
-
-    public TableColumn<Employee, String> getUsernameColumn() {
-        return usernameColumn;
-    }
-
-    public TableColumn<Employee, String> getEmailColumn() {
-        return emailColumn;
-    }
-
-    public TableColumn<Employee, String> getPhoneColumn() {
-        return phoneColumn;
-    }
-
-    public TableColumn<Employee, Role> getRoleColumn() {
-        return roleColumn;
-    }
-
-    public TableColumn<Employee, Double> getSalaryColumn() {
-        return salaryColumn;
-    }
-
-    public TableColumn<Employee, Access> getCreateBillColumn() {
-        return createBillColumn;
-    }
-
-    public TableColumn<Employee, Access> getAddBooksColumn() {
-        return addBooksColumn;
-    }
-
-    public TableColumn<Employee, Access> getCheckBooksColumn() {
-        return checkBooksColumn;
-    }
-
-    public TableColumn<Employee, Access> getCheckLibrarianColumn() {
-        return checkLibrarianColumn;
-    }
-
     public TableView<Employee> getTableView() {
         return tableView;
     }
