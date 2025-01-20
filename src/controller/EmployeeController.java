@@ -1,4 +1,5 @@
 package controller;
+import javafx.collections.ObservableList;
 import main.Main;
 import java.io.*;
 
@@ -6,22 +7,22 @@ import model.Employee;
 
 public class EmployeeController {
 
-	public void loadUsersFromFile() {
-	    try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(Main.DATA_FILE))) {
+	public void loadUsersFromFile(File dataFile,ObservableList<Employee> employeesAll ) {
+	    try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(dataFile))) {
 
 			while (true) {
 				try {
 					Employee employee = (Employee) inputStream.readObject();
-					Main.employeesAll.add(employee);
+					employeesAll.add(employee);
 					System.out.printf("Username: %s, Password: %s%n", employee.getUsername(), employee.getPassword());
 				} catch (EOFException e) {
 					break;
 				}
 			}
-			System.out.println("Data loaded from file! "+ Main.employeesAll.size());
+			System.out.println("Data loaded from file! "+ employeesAll.size());
 			System.out.println("#####");
 	    }  catch (EOFException ignored) {
-	    	for (Employee e: Main.employeesAll) {
+	    	for (Employee e: employeesAll) {
 	        	System.out.println(e.toString()+"check: "+e.getCheckBooks()+" "+e.getDateTerminated());
 	        }
         } catch (IOException ex) {
@@ -31,21 +32,21 @@ public class EmployeeController {
 	    }
     }
 
-	public boolean create(Employee employee) {
+	public boolean create(Employee employee,File dataFile, ObservableList<Employee> employeesAll ) {
 		if (employee == null) {
 			System.out.println("Employee is null, cannot create.");
 			return false;
 		}
 
-		if (Main.employeesAll.stream().anyMatch(e -> e.getUsername().equals(employee.getUsername()))) {
+		if (employeesAll.stream().anyMatch(e -> e.getUsername().equals(employee.getUsername()))) {
 			System.out.println("Employee already exists: " + employee.getUsername());
-			System.out.println("Employee added to employees list: " + Main.employeesAll.size());
+			System.out.println("Employee added to employees list: " + employeesAll.size());
 			return false;  // Do not add the employee if already exists
 		}
 
-		try (FileOutputStream outputStream = new FileOutputStream(Main.DATA_FILE, true)) {
+		try (FileOutputStream outputStream = new FileOutputStream(dataFile, true)) {
 			ObjectOutputStream writer;
-			if (Main.DATA_FILE.length() > 0) {
+			if (dataFile.length() > 0) {
 				writer = new HeaderlessObjectOutputStream(outputStream);
 			} else {
 				writer = new ObjectOutputStream(outputStream);
@@ -53,8 +54,8 @@ public class EmployeeController {
 
 			System.out.println("Writing employee: " + employee.getUsername());
 			writer.writeObject(employee);
-			Main.employeesAll.add(employee);
-			System.out.println("Employee added to employees list: " + Main.employeesAll.size());
+			employeesAll.add(employee);
+			System.out.println("Employee added to employees list: " + employeesAll.size());
 			return true;
 		} catch (NullPointerException ex) {
 			System.out.println("NullPointerException: " + ex.getMessage());

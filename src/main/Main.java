@@ -40,7 +40,7 @@ public class Main extends Application{
 		seedData();
 		readLastAssignedId();
 		AdminController ac = new AdminController();
-		ac.ec.loadUsersFromFile();
+		ac.ec.loadUsersFromFile(Main.DATA_FILE,Main.employeesAll);
 		BookController bs = new BookController();
 		bs.loadBooksFromFile(Main.BOOK_FILE, Main.bookStock);
 		TotalBillController tbc = new TotalBillController();

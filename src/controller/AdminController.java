@@ -54,12 +54,12 @@ public class AdminController {
 		if (role==Role.LIBRARIAN ) {
 			System.out.println(x);
 			Employee newE = new Employee(username, password, name, surname, email, Role.LIBRARIAN, phone, salary, Access.YES, Access.NO, Access.NO, Access.NO,birthday );
-			ec.create(newE);
+			ec.create(newE,Main.DATA_FILE,Main.employeesAll);
 			return true;
 		} else if (role==Role.MANAGER) {
 			System.out.println(x);
 			Employee newE = new Employee(username, password, name, surname, email, Role.MANAGER, phone, salary,Access.NO, Access.YES, Access.YES, Access.YES,birthday);
-			ec.create(newE);
+			ec.create(newE,Main.DATA_FILE,Main.employeesAll);
 			return true;
 		}
 		return false;

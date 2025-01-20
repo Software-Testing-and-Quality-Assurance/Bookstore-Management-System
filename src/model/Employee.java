@@ -113,19 +113,5 @@ public class Employee extends User implements Serializable{
 	public void setStatus(String status) {
 		this.status.set(status);
 	}
-
-	@Serial
-    private void writeObject(ObjectOutputStream outputStream) throws IOException {
-        outputStream.defaultWriteObject();
-        outputStream.writeUTF(this.status.getValueSafe());
-
-    }
-
-    @Serial
-    private void readObject(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
-        inputStream.defaultReadObject();
-        this.status = new SimpleStringProperty(inputStream.readUTF());
-	
-    }
 	
 }
