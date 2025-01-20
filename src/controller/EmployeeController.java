@@ -7,30 +7,37 @@ import model.Employee;
 
 public class EmployeeController {
 
-	public void loadUsersFromFile(File dataFile,ObservableList<Employee> employeesAll ) {
-	    try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(dataFile))) {
-
+	public boolean loadUsersFromFile(File dataFile, ObservableList<Employee> employeesAll) {
+		boolean isSuccess = false;
+		try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(dataFile))) {
 			while (true) {
 				try {
 					Employee employee = (Employee) inputStream.readObject();
 					employeesAll.add(employee);
 					System.out.printf("Username: %s, Password: %s%n", employee.getUsername(), employee.getPassword());
+					isSuccess = true; // Mark success if at least one employee is added
 				} catch (EOFException e) {
 					break;
 				}
 			}
-			System.out.println("Data loaded from file! "+ employeesAll.size());
+			System.out.println("Data loaded from file! " + employeesAll.size());
 			System.out.println("#####");
-	    }  catch (EOFException ignored) {
-	    	for (Employee e: employeesAll) {
-	        	System.out.println(e.toString()+"check: "+e.getCheckBooks()+" "+e.getDateTerminated());
-	        }
-        } catch (IOException ex) {
-	        System.out.println(ex.getMessage());
-	    } catch (ClassNotFoundException ex) {
-	        System.out.println("Class not found");
-	    }
-    }
+		} catch (IOException ex) {
+			System.out.println("IOException: " + ex.getMessage());
+			return false; // Return false if an IO exception occurs
+		} catch (ClassNotFoundException ex) {
+			System.out.println("Class not found");
+			return false; // Return false if the class is not found
+		}
+
+		if (employeesAll.isEmpty()) {
+			System.out.println("No employees loaded.");
+			return false; // Return false if no employees were loaded
+		}
+
+		return isSuccess;
+	}
+
 
 	public boolean create(Employee employee,File dataFile, ObservableList<Employee> employeesAll ) {
 		if (employee == null) {
