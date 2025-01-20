@@ -20,13 +20,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.*;
+import java.nio.file.Files;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class BookReadWriteFileTest {
 
@@ -53,11 +51,31 @@ class BookReadWriteFileTest {
 
         // Create a book
         Book b = new Book("123456789", "If we were villains", "Klaudia", "Mystery", 16.0, 10.0, new Author("M.L.", "RIO"), 100);
+        Book b1 = new Book("123456789", "And then there were none", "Klaudia", "Mystery", 16.0, 10.0, new Author("Agatha", "Christie"), 100);
 
         // Check function
-        assertTrue(bc.create(b,source,bookStock));
-        assertEquals(1,bookStock.size());
-        assertEquals(b,bookStock.getFirst());
+        assertAll(
+                ()->assertTrue(bc.create(b,source,bookStock)),
+                ()->assertTrue(bc.create(b1,source,bookStock)),
+                ()->assertEquals(2,bookStock.size()),
+                ()->assertTrue(source.exists()),
+                ()->assertTrue(Files.exists(source.toPath())),
+                ()-> {
+                    ObservableList<Book> written = FXCollections.observableArrayList();
+                    try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(source))) {
+                        while (true) {
+                            try {
+                                written.add((Book) inputStream.readObject());
+                            } catch (EOFException e) {
+                                break;
+                            }
+                        }
+                    }
+                    assertEquals(bookStock.size(),written.size());
+                    assertEquals(bookStock.getFirst(), written.getFirst());
+                    assertEquals(bookStock.getLast(), written.getLast());
+                }
+        );
     }
 
     @Test
@@ -75,14 +93,19 @@ class BookReadWriteFileTest {
         }
 
         // Check function
-        assertTrue(bc.loadBooksFromFile(source,bookStock));
-        assertEquals(1,bookStock.size());
-        assertEquals(b,bookStock.getFirst());
+        assertAll(
+                ()-> assertTrue(source.exists()),
+                ()->assertTrue(Files.exists(source.toPath())),
+                ()->assertTrue(bc.loadBooksFromFile(source,bookStock)),
+                ()->assertEquals(1,bookStock.size()),
+                ()->assertEquals(b,bookStock.getFirst())
+        );
+
     }
 
     @Test
     @DisplayName("Test both functions together")
-    void test3() throws IOException {
+    void test3() {
         // Check temporary directory
         System.out.println(TempDir.getAbsolutePath());
         assertTrue(TempDir.exists());
@@ -94,9 +117,12 @@ class BookReadWriteFileTest {
         assertTrue(bc.create(b,source,bookStock));
         assertEquals(1,bookStock.size());
         assertEquals(b,bookStock.getFirst());
+        assertTrue(source.exists());
+        assertTrue(Files.exists(source.toPath()));
 
         // Clear bookStock from previous function
         bookStock.clear();
+        assertEquals(0,bookStock.size());
 
         // Check function load from file
         assertTrue(bc.loadBooksFromFile(source,bookStock));
