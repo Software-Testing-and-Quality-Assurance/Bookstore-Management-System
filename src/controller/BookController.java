@@ -1,54 +1,51 @@
 package controller;
+import javafx.collections.ObservableList;
 import main.Main;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
+import java.io.*;
 
 import model.Book;
 
 public class BookController {
 
-	public void loadBooksFromFile() {
-		try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(Main.BOOK_FILE))) {
+	public boolean loadBooksFromFile(File book_file, ObservableList<Book> bookStock) {
+		try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(book_file))) {
 			while (true) {
 				try {
 					Book book = (Book) inputStream.readObject();
-					Main.bookStock.add(book);
+					bookStock.add(book);
 					System.out.println(book.getIsbn() + " Book Titled " + book.getTitle() + " by " + book.getAuthor()
 							+ " has " + book.getStock() + " copies " + " category: " + book.getCategory() + " " + book.getFirstPurchaseDate());
 				} catch (EOFException e) {
 					break;
 				}
 			}
-			System.out.println("Books loaded from file! " + Main.bookStock.size());
+			System.out.println("Books loaded from file! " + bookStock.size());
 			System.out.println("#####");
+			return true;
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} catch (ClassNotFoundException e) {
 			System.out.println("Class not found book");
 		}
+		return false;
     }
 
-	public boolean create(Book book) {
-	    try (FileOutputStream outputStream = new FileOutputStream(Main.BOOK_FILE, true)) {
+	public boolean create(Book book, File book_file, ObservableList<Book> bookStock) {
+	    try (FileOutputStream outputStream = new FileOutputStream(book_file, true)) {
 	        ObjectOutputStream writer;
-	        if (Main.BOOK_FILE.length() > 0)
+	        if (book_file.length() > 0)
 	            writer = new HeaderlessObjectOutputStream(outputStream);
 	        else
 	            writer = new ObjectOutputStream(outputStream);
-
 	        writer.writeObject(book);
-	       Main. bookStock.add(book);
+	        bookStock.add(book);
 	        return true;
 	    } catch (NullPointerException ex) {
 	    	System.out.println(ex.getMessage());
 	    }
 	    catch (IOException ex) {
 	    	System.out.println("Cannot create book");
-	        return false;
 	    }
 		return false;
 	}

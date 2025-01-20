@@ -2,6 +2,7 @@ package test;
 
 import controller.BookController;
 import controller.ManagerController;
+import main.Main;
 import model.Author;
 import model.Book;
 import org.junit.jupiter.api.Assertions;
@@ -29,10 +30,10 @@ class ManagerControllerClassEvaluationTest {
     void test1() {
         Book b = new Book("1234", "Sikur te isha djale", "Keiti", "Drama", 25.0, 20.0, new Author("Haki", "Stermilli"), 100);
         when(bc.searchBook("1234")).thenReturn(null);
-        when(bc.create(b)).thenReturn(true);
+        when(bc.create(b, Main.BOOK_FILE, Main.bookStock)).thenReturn(true);
         boolean res = mc.addBooks("1234", "Sikur te isha djale", "Keiti", "Drama", 25.0, 20.0, "Haki", "Stermilli", 100);
         Assertions.assertTrue(res);
-        verify(bc).create(b);
+        verify(bc).create(b, Main.BOOK_FILE, Main.bookStock);
     }
     @Test
     @DisplayName("Add Book Invalid Input Test(negative value, null value, 0 quantity")

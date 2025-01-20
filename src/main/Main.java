@@ -42,7 +42,7 @@ public class Main extends Application{
 		AdminController ac = new AdminController();
 		ac.ec.loadUsersFromFile();
 		BookController bs = new BookController();
-		bs.loadBooksFromFile();
+		bs.loadBooksFromFile(Main.BOOK_FILE, Main.bookStock);
 		TotalBillController tbc = new TotalBillController();
 		tbc.loadBillsFromFile();
 

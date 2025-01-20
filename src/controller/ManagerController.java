@@ -1,5 +1,7 @@
 package controller;
 import java.util.Date;
+
+import main.Main;
 import model.Author;
 import model.Book;
 
@@ -21,7 +23,7 @@ public class ManagerController {
             Book newBook = new Book(isbn, title, supplier, category, sellingPrice, originalPrice, new Author(authorName, authorSurname), quantity);
             Date bought = new Date();
             newBook.getBoughtPerDate().put(bought, quantity);
-            return bc.create(newBook);
+            return bc.create(newBook, Main.BOOK_FILE, Main.bookStock);
         } else {
             return false;
         }
