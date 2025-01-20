@@ -12,6 +12,7 @@ package test;
 
 import controller.AdminController;
 import controller.EmployeeController;
+import main.Main;
 import model.Employee;
 import model.Role;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,12 +59,12 @@ public class AdminControllerEquivClassTest {
         Date birthday = new Date();
 
         when(ecMock.employeeFound(username)).thenReturn(false);
-        when(ecMock.create(any(Employee.class))).thenReturn(true);
+        when(ecMock.create(any(Employee.class), eq(Main.DATA_FILE), eq(Main.employeesAll))).thenReturn(true);
 
         assertTrue(ac.addEmployee(username, password, name, surname, email, phone, salary, role, birthday));
         verify(ecMock, times(1)).create(argThat(employee ->
                 employee.getRole() == Role.LIBRARIAN
-        ));
+        ), eq(Main.DATA_FILE), eq(Main.employeesAll));
     }
 
     @Test
@@ -80,12 +81,12 @@ public class AdminControllerEquivClassTest {
         Date birthday = new Date();
 
         when(ecMock.employeeFound(username)).thenReturn(false);
-        when(ecMock.create(any(Employee.class))).thenReturn(true);
+        when(ecMock.create(any(Employee.class), eq(Main.DATA_FILE), eq(Main.employeesAll))).thenReturn(true);
 
         assertTrue(ac.addEmployee(username, password, name, surname, email, phone, salary, role, birthday));
         verify(ecMock, times(1)).create(argThat(employee ->
                 employee.getRole() == Role.MANAGER
-        ));
+        ), eq(Main.DATA_FILE), eq(Main.employeesAll));
     }
 
     @ParameterizedTest
