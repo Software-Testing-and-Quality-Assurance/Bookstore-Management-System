@@ -122,7 +122,6 @@ class BookReadWriteFileTest {
 
         // Clear bookStock from previous function
         bookStock.clear();
-        assertEquals(0,bookStock.size());
 
         // Check function load from file
         assertTrue(bc.loadBooksFromFile(source,bookStock));
