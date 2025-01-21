@@ -1,8 +1,5 @@
 package model;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +17,7 @@ public class Employee extends User implements Serializable{
     private Access createBill, addBooks, checkLibrarian, checkBooks;
 	private final Date dateEmployed;
 	private Date dateTerminated;
-    private transient StringProperty status;
+    private final transient StringProperty status;
 		
     public Employee(String username, String password, String name, String surname, String email, Role role, String phone, double salary,
     		Access createBill, Access addBooks, Access checkLibrarian, Access checkBooks,Date birthDate) {
@@ -37,8 +34,7 @@ public class Employee extends User implements Serializable{
 		System.out.println(role+" "+createBill+" "+addBooks);
 		this.status = new SimpleStringProperty("Active");
 	}
-    
-   
+
 	public Role getRole() {
 		return role;
 	}
@@ -93,8 +89,7 @@ public class Employee extends User implements Serializable{
 
 	public void setBirthDate(Date birthDate) {
     }
-	
-    
+
     @Override
 	public String toString() {
 		return "Name=" + getName() + ", lastName=" + getSurname() + ", email=" + getEmail() + ", password=" + getPassword()
@@ -108,7 +103,6 @@ public class Employee extends User implements Serializable{
 	public void setDateTerminated(Date dateTerminated) {
 		this.dateTerminated = dateTerminated;
 	}
-
 
 	public void setStatus(String status) {
 		this.status.set(status);

@@ -11,6 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import main.Main;
+import model.Book;
+import model.Employee;
+import model.TotalBill;
 
 
 public class ChooseDates {
@@ -83,7 +86,7 @@ public class ChooseDates {
                 
                 else {
                 	RevenueView rv= new RevenueView();
-                    double[] revenue = (new AdminController()).revenue(date1, date2, localDate1, localDate2);
+                    double[] revenue = (new AdminController()).revenue(date1, date2, localDate1, localDate2, Main.employeesAll, Main.billsPerLibrarian, Main.bookStock);
                 	Scene s = rv.showView(st,  revenue);
                 	st.setScene(s);
                 	st.show();

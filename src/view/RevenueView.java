@@ -16,10 +16,14 @@ public class RevenueView {
 
     public Scene showView(Stage st, double[] revenue) {
         Text costText = new Text(String.valueOf(revenue[1]));
+        costText.setId("cost");
         Text incomeText = new Text(String.valueOf(revenue[0]));
+        incomeText.setId("income");
 
         Label costLabel = new Label("Total Cost:");
+        costLabel.setId("costL");
         Label incomeLabel = new Label("Total Income:");
+        incomeLabel.setId("incomeL");
 
         costLabel.setFont(Font.font("Arial", 16));
         incomeLabel.setFont(Font.font("Arial", 16));
@@ -29,7 +33,6 @@ public class RevenueView {
         incomeText.setFill(Color.BLACK);
 	    costLabel.setStyle("-fx-font-size: 16; -fx-text-fill: black;");
 	    incomeLabel.setStyle("-fx-font-size: 16; -fx-text-fill: black;");
-
 
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(20));
@@ -43,7 +46,7 @@ public class RevenueView {
         gridPane.add(incomeText, 1, 2);
 
         Button goBackButton = new Button("Previous");
-        goBackButton.setId("Previous");
+        goBackButton.setId("previous");
         goBackButton.setStyle("-fx-background-color: #52413c; -fx-text-fill: white; -fx-font-size: 14px;");
 
         VBox vbox = new VBox(20); 
@@ -57,6 +60,7 @@ public class RevenueView {
             st.setScene(Main.properView(st));
             st.show();
         });
+
         st.setHeight(600);
         st.setWidth(500);
 	    st.setResizable(false);

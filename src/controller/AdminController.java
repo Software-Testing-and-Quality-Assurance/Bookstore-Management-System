@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import main.Main;
@@ -72,12 +73,12 @@ public class AdminController {
         ec.updateAll();
 	}
 	
-	public double[] revenue(Date beginning, Date end, LocalDate localDate1, LocalDate localDate2) {
+	public double[] revenue(Date beginning, Date end, LocalDate localDate1, LocalDate localDate2, ObservableList<Employee> employeesAll, Map<String, ArrayList<TotalBill>> billsPerLibrarian, ObservableList<Book> bookStock) {
 		double[] rev = new double[2];
 		double totalIncome=0;
 		double totalCost=0;
 		
-		for(Map.Entry<String, ArrayList <TotalBill>> all : Main.billsPerLibrarian.entrySet()) {
+		for(Map.Entry<String, ArrayList <TotalBill>> all : billsPerLibrarian.entrySet()) {
 			for(TotalBill a : all.getValue()) {
 				Date ofBill = a.getOrderDate();
 				if(!end.before(ofBill) && !beginning.after(ofBill)) {
@@ -87,7 +88,7 @@ public class AdminController {
 			}
 		}
 	    
-	    for(Book one: Main.bookStock) {
+	    for(Book one: bookStock) {
 	    	for(Map.Entry<Date, Integer> purchase: one.getBoughtPerDate().entrySet()) {
 	    		if(!(end.before(purchase.getKey())) && !(beginning.after(purchase.getKey()))) {
 	    			totalCost+=purchase.getValue()*one.getPurchasePrice();
@@ -96,7 +97,7 @@ public class AdminController {
 	    	}
 	    }
 	    
-	    for(Employee em: Main.employeesAll) {
+	    for(Employee em: employeesAll) {
 	    	
 	    	if(!(end.before(em.getDateEmployed()))  &&  (em.getDateTerminated()==null || em.getDateTerminated().after(end))){
 	    		long monthsBetween = ChronoUnit.MONTHS.between(localDate1.withDayOfMonth(1), localDate2.withDayOfMonth(1));
