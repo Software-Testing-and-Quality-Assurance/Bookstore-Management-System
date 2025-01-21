@@ -9,6 +9,22 @@
     <orderEntry type="sourceFolder" forTests="false" />
 
     <orderEntry type="module-library">
+          <library name="JavaFX Libraries">
+            <CLASSES>
+              <root url="jar://$MODULE_DIR$/lib/javafx.base.jar!/" />
+              <root url="jar://$MODULE_DIR$/lib/javafx.controls.jar!/" />
+              <root url="jar://$MODULE_DIR$/lib/javafx.fxml.jar!/" />
+              <root url="jar://$MODULE_DIR$/lib/javafx.graphics.jar!/" />
+              <root url="jar://$MODULE_DIR$/lib/javafx.media.jar!/" />
+              <root url="jar://$MODULE_DIR$/lib/javafx.swing.jar!/" />
+              <root url="jar://$MODULE_DIR$/lib/javafx.web.jar!/" />
+            </CLASSES>
+            <JAVADOC />
+            <SOURCES />
+          </library>
+    </orderEntry>
+
+    <orderEntry type="module-library">
       <library name="Other Libraries">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/apiguardian-api-1.1.2.jar!/" />
@@ -27,6 +43,5 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="testfx.junit5" level="project" />
     <orderEntry type="library" name="testfx.core" level="project" />
-    <orderEntry type="library" name="javafx-swt" level="project" />
   </component>
 </module>
