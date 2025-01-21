@@ -43,6 +43,7 @@ public class RevenueView {
         gridPane.add(incomeText, 1, 2);
 
         Button goBackButton = new Button("Previous");
+        goBackButton.setId("Previous");
         goBackButton.setStyle("-fx-background-color: #52413c; -fx-text-fill: white; -fx-font-size: 14px;");
 
         VBox vbox = new VBox(20); 
