@@ -25,6 +25,7 @@ public class LibStatView extends BorderPane {
         TableColumn<LibStat, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+
         TableColumn<LibStat, String> surnameColumn = new TableColumn<>("Surname");
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
 
@@ -57,6 +58,7 @@ public class LibStatView extends BorderPane {
         st.setHeight(650);
         st.setScene(sc);
 
+        goBackButton.setId("previous");
         goBackButton.setOnAction(e -> {
             st.setScene(Main.properView(st));
             st.show();
