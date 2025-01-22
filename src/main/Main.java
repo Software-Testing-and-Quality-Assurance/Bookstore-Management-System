@@ -34,6 +34,8 @@ public class Main extends Application{
 	public static File DATA_FILE;
 	public static File BOOK_FILE;
 	public static File ALL_BILLS_FILE;
+	public static String PRINT_BILL_PATH;
+	public static File PRINT_BILL_FILE;
 
 	@Override
 	public void start(Stage s) {
@@ -41,6 +43,7 @@ public class Main extends Application{
 		DATA_FILE= new File("employees.dat");
 		BOOK_FILE= new File("books.dat");
 		ALL_BILLS_FILE= new File("allBills.dat");
+		PRINT_BILL_PATH = "printBill";
 
 		seedData();
 		readLastAssignedId();
@@ -114,6 +117,7 @@ public class Main extends Application{
 		Alert alert = new Alert(AlertType.ERROR);
 	    alert.setHeaderText("Invalid input");
 	    alert.setContentText("Please enter valid input.");
+		alert.getDialogPane().setId("custom-alert-pane");
 	    alert.showAndWait();
 	}
 	

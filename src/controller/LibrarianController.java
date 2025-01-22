@@ -19,17 +19,18 @@ public class LibrarianController {
         	}else {
         	Alert al = new Alert(AlertType.ERROR);
         	al.setHeaderText("Not enough books!");
-        	al.setContentText("There aren't enough books for this bill!");
+			al.setContentText("There aren't enough books for this bill!");
+			al.getDialogPane().setId("custom-alert-pane");
         	al.showAndWait();}
-        	
+        	return false;
         }catch (NullPointerException ex) {
         	Alert al = new Alert(AlertType.ERROR);
         	al.setHeaderText("Try again");
         	al.setContentText(ex.getMessage());
+			al.getDialogPane().setId("custom-alert-pane");
         	al.showAndWait();
-
+			return false;
         }
-        return false;
     }
 	
 	public boolean checkOutFinal(TotalBill tb) {

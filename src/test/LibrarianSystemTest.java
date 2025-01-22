@@ -10,10 +10,8 @@
 
 package test;
 
-import controller.AdminController;
-import controller.BookController;
-import controller.EmployeeController;
-import controller.TotalBillController;
+import controller.*;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.Main;
@@ -26,17 +24,23 @@ import org.junit.jupiter.api.io.TempDir;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
 import view.LoginView;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.HashMap;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class LibrarianSystemTest extends ApplicationTest {
     /*
      * System testing for app state as a Librarian
-     * Log in - Sell Books/Create Bill - Print Bill in .txt file - Log out
+     * Log in - Sell Books/Create Bill - Print Bill in .txt file - Log out 
      */
     @TempDir
     static File TempDir;
@@ -65,6 +69,8 @@ public class LibrarianSystemTest extends ApplicationTest {
         Main.BOOK_FILE = new File(TempDir, "books.dat");
         Main.id  = new File(TempDir,"last_assigned_id.txt");
         Main.ALL_BILLS_FILE = new File(TempDir, "bills.dat");
+        Main.PRINT_BILL_PATH = TempDir.toString() + File.separator + "printBill";
+        Main.billsPerLibrarian = new HashMap<>();
 
         ec = new EmployeeController();
         ac = new AdminController(ec);
@@ -80,7 +86,7 @@ public class LibrarianSystemTest extends ApplicationTest {
             System.out.println("Error writing to file: " + e.getMessage());
         }
 
-        Book b1 = new Book("123456789", "If we were villains", "Klaudia", "Mystery", 16.0, 10.0, new Author("M.L.", "RIO"), 100);
+        Book b1 = new Book("123456789", "If we were villains", "Klaudia", "Mystery", 16.0, 10.0, new Author("M.L.", "RIO"), 2);
         Book b2 = new Book("234567890", "And then there were none", "Klaudia", "Mystery", 16.0, 10.0, new Author("Agatha", "Christie"), 100);
 
         bc.create(b1, Main.BOOK_FILE, Main.bookStock);
@@ -93,39 +99,160 @@ public class LibrarianSystemTest extends ApplicationTest {
 
     @BeforeEach
     public void beforeEach() {
-        /// lookup for username password fields and submit button
         usernameField = lookup("#username_field").query();
         passwordField = lookup("#password_field").query();
         loginButton = lookup("#login_button").query();
     }
 
     @Test
-    public void createBill(){
-        sleep(500);
+    public void createBill() {
+        assertTrue(TempDir.exists());
+        assertTrue(TempDir.isDirectory());
+        assertTrue(Main.DATA_FILE.exists());
+        assertTrue(Main.BOOK_FILE.exists());
+        assertTrue(Main.id.exists());
+
         usernameField.setText("librarian");
-        sleep(500);
+        WaitForAsyncUtils.waitForFxEvents();
+
         passwordField.setText("p455w0r8");
-        sleep(500);
+        WaitForAsyncUtils.waitForFxEvents();
+
         this.clickOn(loginButton);
-        sleep(500);
+        WaitForAsyncUtils.waitForFxEvents();
 
         Button createBill = lookup("#create_bill").query();
         clickOn(createBill);
-        sleep(500);
+        WaitForAsyncUtils.waitForFxEvents();
 
-        // continue steps for creating bill
+        // No book found
         TextField isbn = lookup("#isbn_field").query();
-        isbn.setText("123456780");
-        sleep(500);
         TextField quantity = lookup("#quantity_field").query();
-        quantity.setText("2");
-        sleep(500);
-
         Button add = lookup("#add").query();
+
+        isbn.setText("123456780");
+        WaitForAsyncUtils.waitForFxEvents();
+        quantity.setText("2");
+        WaitForAsyncUtils.waitForFxEvents();
+
         clickOn(add);
-        sleep(500);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Button alert = skipAlertButton();
+        Label alertHeader = alertMessageHeader();
+        Label alertContent = alertMessageContent();
+
+        assertEquals("Try again", alertHeader.getText());
+        assertEquals("Book not found", alertContent.getText());
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn(alert);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Button next = lookup("#next").query();
+
+        clickOn(next);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        // Empty quantity
+        isbn = lookup("#isbn_field").query();
+        isbn.setText("123456789");
+        WaitForAsyncUtils.waitForFxEvents();
+
+        add = lookup("#add").query();
+        clickOn(add);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        alert = skipAlertButton();
+        alertHeader = alertMessageHeader();
+        alertContent = alertMessageContent();
+
+        assertEquals("Invalid input", alertHeader.getText());
+        assertEquals("Please enter valid input.", alertContent.getText());
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn(alert);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        next = lookup("#next").query();
+        clickOn(next);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        // Add a book with quantity > stock to bill
+        isbn = lookup("#isbn_field").query();
+        isbn.setText("123456789");
+        WaitForAsyncUtils.waitForFxEvents();
+        quantity = lookup("#quantity_field").query();
+        quantity.setText("3");
+        WaitForAsyncUtils.waitForFxEvents();
+
+        add = lookup("#add").query();
+        clickOn(add);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        alert = skipAlertButton();
+        alertHeader = alertMessageHeader();
+        alertContent = alertMessageContent();
+
+        assertEquals("Not enough books!", alertHeader.getText());
+        assertEquals("There aren't enough books for this bill!", alertContent.getText());
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn(alert);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        next = lookup("#next").query();
+        clickOn(next);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        // Create bill with 2 books
+        isbn = lookup("#isbn_field").query();
+        isbn.setText("123456789");
+        WaitForAsyncUtils.waitForFxEvents();
+        quantity = lookup("#quantity_field").query();
+        quantity.setText("1");
+        WaitForAsyncUtils.waitForFxEvents();
+
+        add = lookup("#add").query();
+        clickOn(add);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        next = lookup("#next").query();
+        clickOn(next);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        isbn = lookup("#isbn_field").query();
+        isbn.setText("234567890");
+        WaitForAsyncUtils.waitForFxEvents();
+        quantity = lookup("#quantity_field").query();
+        quantity.setText("1");
+        WaitForAsyncUtils.waitForFxEvents();
+
+        add = lookup("#add").query();
+        clickOn(add);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Button done1 = lookup("#done").query();
+        clickOn(done1);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        // Validate files and content
+        System.out.println(TempDir.getAbsolutePath());
+        assertTrue(Main.ALL_BILLS_FILE.exists());
+        assertEquals(1,Main.allBills.size());
+        assertEquals("librarian",Main.allBills.getFirst().getLibrarianUser());
+        assertTrue(Main.PRINT_BILL_FILE.exists());
+        System.out.println(Main.PRINT_BILL_FILE.getAbsolutePath());
+        String content = "";
+        try {
+            content = Files.readString(Main.PRINT_BILL_FILE.toPath());
+        } catch (IOException e) {
+            //log
+        }
+
+        // Since got error that the strings had differences (in line separator)
+        String expected = Main.allBills.getFirst().getBillContent().replaceAll("\\r\\n|\\r|\\n", "\n");
+        content = content.replaceAll("\\r\\n|\\r|\\n", "\n");
+        assertEquals(expected,content);
     }
-/*
+
     @Test
     public void logInLogOut(){
         sleep(500);
@@ -146,7 +273,7 @@ public class LibrarianSystemTest extends ApplicationTest {
     }
 
     @Test
-    public void failLogInLogOut(){
+    public void failLogIn(){
         //wrong password
         sleep(500);
         usernameField.setText("librarian");
@@ -157,7 +284,7 @@ public class LibrarianSystemTest extends ApplicationTest {
         sleep(500);
 
         Button alert = skipAlertButton();
-        Label alertHeader = alertMessage();
+        Label alertHeader = alertMessageHeader();
         assertEquals("Enter the correct username and passw", alertHeader.getText());
         sleep(500);
         clickOn(alert);
@@ -172,7 +299,7 @@ public class LibrarianSystemTest extends ApplicationTest {
         sleep(500);
 
         alert = skipAlertButton();
-        alertHeader = alertMessage();
+        alertHeader = alertMessageHeader();
         assertEquals("Enter the correct username and passw", alertHeader.getText());
         sleep(500);
         clickOn(alert);
@@ -187,7 +314,7 @@ public class LibrarianSystemTest extends ApplicationTest {
         sleep(500);
 
         alert = skipAlertButton();
-        alertHeader = alertMessage();
+        alertHeader = alertMessageHeader();
         assertEquals("Enter the correct username and passw", alertHeader.getText());
         sleep(500);
         clickOn(alert);
@@ -195,7 +322,7 @@ public class LibrarianSystemTest extends ApplicationTest {
         Button found = lookup("#login_button").query();
 
         assertEquals(loginButton, found);
-    } */
+    }
 
     private Button skipAlertButton() {
         Button okButton;
@@ -207,7 +334,7 @@ public class LibrarianSystemTest extends ApplicationTest {
         return okButton;
     }
 
-    private Label alertMessage(){
+    private Label alertMessageHeader(){
         Label alertHeader;
         alertHeader = lookup(".header-panel .label").queryAllAs(Label.class)
                 .stream()
@@ -215,5 +342,10 @@ public class LibrarianSystemTest extends ApplicationTest {
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("Alert header not found!"));
         return alertHeader;
+    }
+
+    private Label alertMessageContent() {
+        Node contentNode = lookup("#custom-alert-pane .content").query();
+        return (Label) contentNode;
     }
 }

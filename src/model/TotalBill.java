@@ -14,6 +14,7 @@ public class TotalBill implements Serializable{
 	private static final long serialVersionUID = -5906827024116395864L;
 	private final String librarianUser;
 	private final Date orderDate;
+	private String billContent;
 
 	public Map<Book, Integer> getSoldBooks() {
 		return soldBooks;
@@ -38,6 +39,10 @@ public class TotalBill implements Serializable{
 	public Date getOrderDate() {
 		return orderDate;
 	}
+
+	public void setBillContent(String s){ this.billContent=s; }
+
+	public String getBillContent(){ return this.billContent; }
 
 	public double getTotalOrderAmount() {
 		double totalAmount = 0;

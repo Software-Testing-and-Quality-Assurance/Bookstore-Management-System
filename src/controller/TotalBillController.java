@@ -79,18 +79,25 @@ public class TotalBillController {
 		return sum;
 	}
 	public void printTheBill(TotalBill tb) {
-		File PRINT_BILL_FILE= new File("printBill"+Main.billId+".txt");
-    	try(PrintWriter pw = new PrintWriter(PRINT_BILL_FILE)) {
+		Main.PRINT_BILL_FILE = new File(Main.PRINT_BILL_PATH+Main.billId+".txt");
+		String billContent="";
+    	try(PrintWriter pw = new PrintWriter(Main.PRINT_BILL_FILE)) {
     		EmployeeController ec = new EmployeeController();
             pw.println("Order by: "+ec.searchEmployee(tb.getLibrarianUser()).getName()+" "+ec.searchEmployee(tb.getLibrarianUser()).getSurname());
             pw.println("Date "+ tb.getOrderDate());
     		pw.println("TotalPrice: "+ tb.getTotalOrderAmount());
+			billContent = "Order by: "+ec.searchEmployee(tb.getLibrarianUser()).getName()+" "+ec.searchEmployee(tb.getLibrarianUser()).getSurname() + "\n";
+			billContent += "Date "+ tb.getOrderDate()+ "\n";
+			billContent += "TotalPrice: "+ tb.getTotalOrderAmount()+ "\n";
             for(Map.Entry<Book,Integer> bi: tb.getBooks().entrySet()) {
                	pw.println(bi.getKey().getTitle()+", copies: "+bi.getValue()+", price: "+(bi.getKey()).getSellingPrice()*bi.getValue());
+				billContent += bi.getKey().getTitle()+", copies: "+bi.getValue()+", price: "+(bi.getKey()).getSellingPrice()*bi.getValue()+ "\n";
             }
 		} catch (IOException ex) {
         	System.out.println(ex.getMessage());
 		}
+		tb.setBillContent(billContent);
+		System.out.println(billContent);
     }
 	
 	public void create(TotalBill totalBill) {

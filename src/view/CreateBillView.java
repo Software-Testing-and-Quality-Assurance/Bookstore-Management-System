@@ -38,8 +38,6 @@ public class CreateBillView {
         h.getChildren().addAll(goBack, ok);
         HBox.setMargin(goBack, new Insets(0, 10, 0, 0));
 
-        
-
         Label isbnL = new Label("Book isbn:");
         TextField isbnF = new TextField();
         isbnF.setId("isbn_field");
@@ -73,7 +71,6 @@ public class CreateBillView {
                 System.out.println("Invalid quantity format. Please enter a valid integer.");
             }
             st.setScene(multiCheckout(st, bill));
-
         });
 
         Scene sc = new Scene(g);
