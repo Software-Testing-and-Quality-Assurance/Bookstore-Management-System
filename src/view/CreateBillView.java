@@ -31,7 +31,9 @@ public class CreateBillView {
         g.setStyle("-fx-background-color: #6F4E37;"); 
 
         Button ok = new Button("Add");
+        ok.setId("add");
         Button goBack = new Button("Previous");
+        goBack.setId("previous");
         HBox h = new HBox();
         h.getChildren().addAll(goBack, ok);
         HBox.setMargin(goBack, new Insets(0, 10, 0, 0));
@@ -40,12 +42,14 @@ public class CreateBillView {
 
         Label isbnL = new Label("Book isbn:");
         TextField isbnF = new TextField();
+        isbnF.setId("isbn_field");
         isbnL.setStyle("-fx-text-fill: white;-fx-font-size: 14px;");
         g.add(isbnL, 0, 0);
         g.add(isbnF, 1, 0);
 
         Label quantityL = new Label("Quantity:");
         TextField quantityF = new TextField();
+        quantityF.setId("quantity_field");
         quantityL.setStyle("-fx-text-fill: white;-fx-font-size: 14px;");
         g.add(quantityL, 0, 2);
         g.add(quantityF, 1, 2);
@@ -65,7 +69,7 @@ public class CreateBillView {
                     System.out.println("OneBookBill.");
 
             } catch (NumberFormatException ex) {
-    			Main.invalidAlert(st);
+    			Main.invalidAlert();
                 System.out.println("Invalid quantity format. Please enter a valid integer.");
             }
             st.setScene(multiCheckout(st, bill));
@@ -81,8 +85,10 @@ public class CreateBillView {
 
     public Scene multiCheckout(Stage st, TotalBill tb) {
         Button next = new Button("Enter next");
+        next.setId("next");
         next.setMinWidth(80);
         Button done = new Button("Done");
+        done.setId("done");
         done.setMinWidth(80);
 
         GridPane bp = new GridPane();

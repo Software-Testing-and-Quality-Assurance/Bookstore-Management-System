@@ -53,9 +53,13 @@ public class TotalBillController {
 		}
 	}
 
-	public boolean addBook(TotalBill bill, Book book, Integer quantity) {
-		if (bill == null || book == null || quantity == null)
-			return false;
+	public boolean addBook(TotalBill bill, Book book, Integer quantity) throws NullPointerException {
+		if  (book == null)
+			throw new NullPointerException("Book not found");
+		else if (bill == null)
+			throw new NullPointerException("Empty bill");
+		else if (quantity == null)
+			throw new NullPointerException("Empty quantity");
 		else if (quantity > book.getStock() || quantity<=0)
 			return false;
 		else

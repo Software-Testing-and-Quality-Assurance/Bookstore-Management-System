@@ -24,8 +24,8 @@ public class LibrarianController {
         	
         }catch (NullPointerException ex) {
         	Alert al = new Alert(AlertType.ERROR);
-        	al.setHeaderText("No book found!");
-        	al.setContentText("This isbn doesn't belong to any existing book!");
+        	al.setHeaderText("Try again");
+        	al.setContentText(ex.getMessage());
         	al.showAndWait();
 
         }

@@ -30,13 +30,18 @@ public class Main extends Application{
 	public static Employee currentUser;
 	public static int billId;
 	
-	public static final File id = new File("last_assigned_id.txt");
-	public static final File DATA_FILE= new File("employees.dat");	
-	public static final File BOOK_FILE= new File("books.dat");
-	public static final File ALL_BILLS_FILE= new File("allBills.dat");
+	public static File id;
+	public static File DATA_FILE;
+	public static File BOOK_FILE;
+	public static File ALL_BILLS_FILE;
 
 	@Override
-	public void start(Stage s) throws Exception {
+	public void start(Stage s) {
+		id = new File("last_assigned_id.txt");
+		DATA_FILE= new File("employees.dat");
+		BOOK_FILE= new File("books.dat");
+		ALL_BILLS_FILE= new File("allBills.dat");
+
 		seedData();
 		readLastAssignedId();
 		AdminController ac = new AdminController();
@@ -105,7 +110,7 @@ public class Main extends Application{
 		pAlert.showAndWait();
 	}
 	
-	public static void invalidAlert(Stage st) {
+	public static void invalidAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 	    alert.setHeaderText("Invalid input");
 	    alert.setContentText("Please enter valid input.");
@@ -121,7 +126,7 @@ public class Main extends Application{
 			return new AdminView().showView(st);
 	}
 	
-	private static void seedData() {
+	public static void seedData() {
 		if(Main.DATA_FILE.length() == 0) {
             Employee[] employees = {
             		new Employee("admin", "p455w0r8", "Admin", "Istrator", "admin@gmail.com", Role.ADMIN, "355691212122", 100000,

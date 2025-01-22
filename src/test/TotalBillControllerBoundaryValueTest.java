@@ -58,12 +58,41 @@ class TotalBillControllerBoundaryValueTest {
     @Test
     @DisplayName("Boundary Value Testing 1 - null input")
     void test_1(){
-        assertFalse(tbc.addBook(tbMock, bookMock, null));
-        assertFalse(tbc.addBook(tbMock, null, 1));
-        assertFalse(tbc.addBook(null, bookMock, 1));
-        assertFalse(tbc.addBook(null, null, 1));
-        assertFalse(tbc.addBook(tbMock, null, null));
-        assertFalse(tbc.addBook(null, null, null));
+
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> {
+            tbc.addBook(tbMock, bookMock, null);
+        });
+        assertEquals("Empty quantity", exception.getMessage());
+
+        exception = assertThrows(NullPointerException.class, () -> {
+            tbc.addBook(tbMock, null, 1);
+        });
+        assertEquals("Book not found", exception.getMessage());
+
+        exception = assertThrows(NullPointerException.class, () -> {
+            tbc.addBook(null, bookMock, 1);
+        });
+        assertEquals("Empty bill", exception.getMessage());
+
+        exception = assertThrows(NullPointerException.class, () -> {
+            tbc.addBook(null, null, 1);
+        });
+        assertEquals("Book not found", exception.getMessage());
+
+        exception = assertThrows(NullPointerException.class, () -> {
+            tbc.addBook(tbMock, null, null);
+        });
+        assertEquals("Book not found", exception.getMessage());
+
+        exception = assertThrows(NullPointerException.class, () -> {
+            tbc.addBook(null, bookMock, null);
+        });
+        assertEquals("Empty bill", exception.getMessage());
+
+        exception = assertThrows(NullPointerException.class, () -> {
+            tbc.addBook(null, null, null);
+        });
+        assertEquals("Book not found", exception.getMessage());
     }
 
     @Test

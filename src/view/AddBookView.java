@@ -128,7 +128,7 @@ public class AddBookView {
 				    		Main.doneAlert();
 				    	}}
 		    		} catch (NumberFormatException ex) {
-		    			Main.invalidAlert(st);
+		    			Main.invalidAlert();
 		    		}
 		    	
 		    	

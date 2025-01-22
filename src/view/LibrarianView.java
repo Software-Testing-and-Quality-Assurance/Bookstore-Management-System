@@ -27,9 +27,13 @@ public class LibrarianView {
         gd.add(welcomeLabel, 0, 0, 2, 1); 
         
         Button checkOut = createButton("Create a Bill", "Checkout and create a new bill");
+        checkOut.setId("create_bill");
         Button bookInfo = createButton("Book Log", "View information about books");
+        bookInfo.setId("book_info");
         Button addBooks = createButton("Add a Book", "Add a new book to the inventory");
+        addBooks.setId("add_book");
         Button signOut = createButton("Sign Out", "Sign out from the application");
+        signOut.setId("sign_out");
 
         
         gd.add(checkOut, 0, 1);

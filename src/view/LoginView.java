@@ -41,7 +41,9 @@ public class LoginView {
         p.add(welcomeText, 0, 0, 2, 1); 
 
         Label username = new Label("Username:");
+		username.setId("username_label");
         TextField userF = new TextField();
+		userF.setId("username_field");
         username.setStyle("-fx-font-size: 14; -fx-text-fill: white; -fx-underline: true;");
         userF.setStyle("-fx-background-color: #3c3c3c; -fx-text-fill: white;");
         userF.setPadding(new Insets(5, 10, 5, 10));
@@ -49,7 +51,9 @@ public class LoginView {
         p.add(userF, 1, 1);
 
         Label passw = new Label("Password: ");
+		passw.setId("password_label");
         PasswordField passwF = new PasswordField();
+		passwF.setId("password_field");
 
         passw.setStyle("-fx-font-size: 14; -fx-text-fill: white; -fx-underline: true;");
         passwF.setStyle("-fx-background-color: #3c3c3c; -fx-text-fill: white;");
@@ -59,6 +63,7 @@ public class LoginView {
        
 
         Button login = new Button("Log in");
+		login.setId("login_button");
         HBox h = new HBox();
         h.getChildren().addAll(login);
         h.setSpacing(10);
@@ -85,7 +90,7 @@ public class LoginView {
 				else if(employee.getRole() == Role.LIBRARIAN) {
 					LibrarianView lv = new LibrarianView();
 					Main.currentUser = employee;
-					st.setScene(lv.showView(st));				
+					st.setScene(lv.showView(st));
 					}
 				else if (employee.getRole()== Role.MANAGER) {
 					
@@ -108,11 +113,6 @@ public class LoginView {
 					AdminView av = new AdminView();
 					Main.currentUser = employee;
 					st.setScene(av.showView(st));
-				}
-				else {
-					Alert pass = new Alert(Alert.AlertType.ERROR);
-					pass.setHeaderText("Invalid password");
-					pass.showAndWait();
 				}
 			} 
 			else {
