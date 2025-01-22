@@ -4,22 +4,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import main.Main;
-import model.Access;
-import model.Employee;
 import model.LibStat;
-import model.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 import view.LibStatView;
-
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
 import static org.testfx.assertions.api.Assertions.assertThat;
 
 
@@ -27,6 +19,9 @@ class LibStatViewTest extends ApplicationTest {
 /*Keit Nika
   Integration Testing
 * Testing LibStatView Class*/
+//we can test by showing properView, but since we do not care about
+//what shows after the button is clicked, but we want to know if button
+//works, we mock the event that happens when button is clicked
     Button goBackButton;
     TableView<LibStat> tableView;
     LibStatView libStatView;
@@ -47,9 +42,6 @@ class LibStatViewTest extends ApplicationTest {
     @BeforeEach
     @SuppressWarnings("unchecked")
     void setUp(){
-        //we can test by showing properView, but since we do not care about
-        //what shows after the button is clicked, but we want to know if button
-        //works, we mock the event that happens when button is clicked
        // main.Main.currentUser = cu;
         tableView = libStatView.getTableView();
         nameColumn = (TableColumn<LibStat, String>) tableView.getColumns().get(0);

@@ -21,31 +21,42 @@ public class EditEmployee {
         editEmployeeGridPane.setStyle("-fx-background-color: #614840;"); 
 
         Label credentialLabel = new Label("Enter the required information:");
+        credentialLabel.setId("cL");
         credentialLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px;"); 
         editEmployeeGridPane.add(credentialLabel, 0, 0, 2, 1);
 
         Label firstNameLabel = new Label("First Name:");
+        firstNameLabel.setId("fN");
         TextField firstNameField = new TextField();
+        firstNameField.setId("name");
         firstNameLabel.setStyle(commonStyleL);
         editEmployeeGridPane.add(firstNameLabel, 0, 2);
         editEmployeeGridPane.add(firstNameField, 1, 2);
 
         Label lastNameLabel = new Label("Last Name:");
+        lastNameLabel.setId("lN");
         TextField lastNameField = new TextField();
+        lastNameField.setId("last");
         lastNameLabel.setStyle(commonStyleL);
         editEmployeeGridPane.add(lastNameLabel, 0, 3);
         editEmployeeGridPane.add(lastNameField, 1, 3);
 
         Label usernameLabel = new Label("Username:");
+        usernameLabel.setId("user");
         TextField userField = new TextField();
+        userField.setId("u");
         usernameLabel.setStyle(commonStyleL);
         editEmployeeGridPane.add(usernameLabel, 0, 4);
         editEmployeeGridPane.add(userField, 1, 4);
 
         HBox editButtons = new HBox(10); 
         Button editRoleButton = new Button("Edit Role");
+        editRoleButton.setId("editRole");
         Button editPermissionButton = new Button("Edit Permissions");
+        editPermissionButton.setId("editPermission");
         Button goBackButton = new Button("Previous");
+
+
         goBackButton.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 13px;"); 
         editRoleButton.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 13px;"); 
         editPermissionButton.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 13px;"); 
@@ -57,6 +68,7 @@ public class EditEmployee {
         st.setWidth(700);
         st.setHeight(500);
 
+        goBackButton.setId("goBack");
         goBackButton.setOnAction(e -> {
             AdminView mv = new AdminView();
             Scene scene = mv.showView(st);
