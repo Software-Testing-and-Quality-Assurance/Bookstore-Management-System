@@ -3,7 +3,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class TotalBill implements Serializable{
@@ -13,11 +12,7 @@ public class TotalBill implements Serializable{
 	private final Date orderDate;
 	private String billContent;
 
-	public Map<Book, Integer> getSoldBooks() {
-		return soldBooks;
-	}
-
-	private transient Map<Book,Integer> soldBooks;
+	private HashMap<Book,Integer> soldBooks;
 
 	public TotalBill(String librarianUser) {
 		this.librarianUser = librarianUser;
@@ -43,7 +38,7 @@ public class TotalBill implements Serializable{
 
 	public double getTotalOrderAmount() {
 		double totalAmount = 0;
-		for (Map.Entry<Book,Integer> m : soldBooks.entrySet()) {
+		for (HashMap.Entry<Book,Integer> m : soldBooks.entrySet()) {
 			totalAmount += (m.getKey()).getSellingPrice()*m.getValue();
 		}
 		return totalAmount;
@@ -54,11 +49,11 @@ public class TotalBill implements Serializable{
 		return librarianUser+" "+getTotalOrderAmount();
 	}
 
-	public Map<Book,Integer> getBooks() {
+	public HashMap<Book,Integer> getBooks() {
 		return soldBooks;
 	}
 
-	public void setBooks(Map<Book,Integer> books) {
+	public void setBooks(HashMap<Book,Integer> books) {
 		this.soldBooks = books;
 	}
 }

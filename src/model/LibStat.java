@@ -33,4 +33,7 @@ public class LibStat {
         return nrOfBooks.get();
     }
 
+    public DoubleProperty amountProperty() {
+        return amount;
+    }
 }

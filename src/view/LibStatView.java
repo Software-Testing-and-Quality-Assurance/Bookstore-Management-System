@@ -6,9 +6,11 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
 import main.Main;
 import model.LibStat;
 
@@ -37,6 +39,7 @@ public class LibStatView extends BorderPane {
 
         TableColumn<LibStat, Double> amountPropertyColumn = new TableColumn<>("Total Amount");
         amountPropertyColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        amountPropertyColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 
 
         librarianStatistics.getColumns().addAll(nameColumn, surnameColumn, nrOfBillsColumn, nrOfBooksColumn, amountPropertyColumn);

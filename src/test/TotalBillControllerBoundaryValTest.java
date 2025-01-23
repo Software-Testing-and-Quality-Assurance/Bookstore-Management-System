@@ -20,7 +20,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -46,40 +45,40 @@ class TotalBillControllerBoundaryValTest {
     @Test
     @DisplayName("Boundary Value Testing 2 - one book")
     void test2() {
-        Map<Book,Integer> m = new HashMap<>();
+        HashMap<Book,Integer> m = new HashMap<>();
         m.put(b,1);
-        when(bill.getSoldBooks()).thenReturn(m);
+        when(bill.getBooks()).thenReturn(m);
         int total = tbc.getTotalNrOfBooks(bill);
         assertEquals(1,total);
-        verify(bill).getSoldBooks();
+        verify(bill).getBooks();
     }
     @Test
     @DisplayName("Boundary Value Testing 3 - multiple books, one has 0 copies sold")
     void test3() {
-        Map<Book,Integer> m = new HashMap<>();
+        HashMap<Book,Integer> m = new HashMap<>();
         m.put(b,10);
         m.put(b1,0);
         m.put(b2,2);
         m.put(b3,1);
-        when(bill.getSoldBooks()).thenReturn(m);
+        when(bill.getBooks()).thenReturn(m);
         int total = tbc.getTotalNrOfBooks(bill);
         assertEquals(13,total);
-        verify(bill).getSoldBooks();
+        verify(bill).getBooks();
     }
 
     @Test
     @DisplayName("Boundary Value Testing 4 - max number of books sold")
     void test4() {
-        Map<Book, Integer> m = new HashMap<>();
+        HashMap<Book, Integer> m = new HashMap<>();
         int stockBook = 1000;
         when(b.getStock()).thenReturn(stockBook);
         when(b1.getStock()).thenReturn(stockBook);
         m.put(b, stockBook);
         m.put(b1,stockBook);
-        when(bill.getSoldBooks()).thenReturn(m);
+        when(bill.getBooks()).thenReturn(m);
         int total = tbc.getTotalNrOfBooks(bill);
         assertEquals(2000,total);
-        verify(bill).getSoldBooks();
+        verify(bill).getBooks();
     }
 
 

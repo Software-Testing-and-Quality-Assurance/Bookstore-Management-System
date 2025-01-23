@@ -73,7 +73,7 @@ public class TotalBillController {
 		if(bill == null){
 			return 0;
 		}
-		for(Map.Entry<Book,Integer> book: bill.getSoldBooks().entrySet()) {
+		for(Map.Entry<Book,Integer> book: bill.getBooks().entrySet()) {
 			sum+=book.getValue();
 		}
 		return sum;

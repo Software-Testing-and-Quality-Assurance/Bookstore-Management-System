@@ -28,7 +28,8 @@ import model.TotalBill;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import java.util.Map;
+
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -123,7 +124,7 @@ class TotalBillControllerBoundaryValueTest {
 
         when(bookMock.getStock()).thenReturn(stock);
         //noinspection unchecked
-        when(tbMock.getBooks()).thenReturn(mock(Map.class));
+        when(tbMock.getBooks()).thenReturn(mock(HashMap.class));
 
         assertTrue(tbc.addBook(tbMock, bookMock, quantity));
 
@@ -139,7 +140,7 @@ class TotalBillControllerBoundaryValueTest {
 
         when(bookMock.getStock()).thenReturn(stock);
         //noinspection unchecked
-        when(tbMock.getBooks()).thenReturn(mock(Map.class));
+        when(tbMock.getBooks()).thenReturn(mock(HashMap.class));
 
         assertTrue(tbc.addBook(tbMock, bookMock, quantity));
 
