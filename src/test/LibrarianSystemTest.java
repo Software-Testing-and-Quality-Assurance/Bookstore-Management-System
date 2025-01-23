@@ -65,10 +65,10 @@ public class LibrarianSystemTest extends ApplicationTest {
 
     @BeforeAll
     public static void beforeAll(){
-        Main.DATA_FILE = new File(TempDir, "employees.dat");
-        Main.BOOK_FILE = new File(TempDir, "books.dat");
+        Main.DATA_FILE = new File(TempDir, "employee.dat");
+        Main.BOOK_FILE = new File(TempDir, "book.dat");
         Main.id  = new File(TempDir,"last_assigned_id.txt");
-        Main.ALL_BILLS_FILE = new File(TempDir, "bills.dat");
+        Main.ALL_BILLS_FILE = new File(TempDir, "bill.dat");
         Main.PRINT_BILL_PATH = TempDir.toString() + File.separator + "printBill";
         Main.billsPerLibrarian = new HashMap<>();
 
