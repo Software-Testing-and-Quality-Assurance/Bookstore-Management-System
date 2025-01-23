@@ -28,6 +28,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BookReadWriteFileTest {
 
+    /*
+    * Unit testing to see if the functions
+    * to read and write from file the books
+    * work correctly
+    * */
     @TempDir
     File TempDir;
 

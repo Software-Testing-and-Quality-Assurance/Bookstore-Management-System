@@ -11,9 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import main.Main;
-import model.Book;
-import model.Employee;
-import model.TotalBill;
 
 
 public class ChooseDates {
@@ -31,12 +28,14 @@ public class ChooseDates {
 	    startDateLabel.setStyle("-fx-text-fill: white; -fx-font-size: 13px;");
 
 	    DatePicker startDatePicker = new DatePicker();
+		startDatePicker.setId("date_picker_1");
 	    startDatePicker.setPromptText("Start Date");
 
 	    Label endDateLabel = new Label("End Date");
 	    endDateLabel.setStyle("-fx-text-fill: white; -fx-font-size: 13px;");
 
 	    DatePicker endDatePicker = new DatePicker();
+		endDatePicker.setId("date_picker_2");
 	    endDatePicker.setPromptText("End Date");
 
 	    grid.add(startDateLabel, 0, 0);
@@ -53,6 +52,7 @@ public class ChooseDates {
 	    st.show();
 	    
 	    Button pickDatesButton = new Button("Pick Dates");
+		pickDatesButton.setId("next");
         pickDatesButton.setOnAction(e -> {
         	
         	LocalDate localDate1 = startDatePicker.getValue();

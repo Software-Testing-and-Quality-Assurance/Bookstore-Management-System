@@ -27,6 +27,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RevenueUnitTest {
 
+    /*
+    * Purpose of test is to check if the function that calculates
+    * the total income for a specific duration and the total cost
+    * of the library works correctly
+    * */
+
     private AdminController ac;
     private ObservableList<Employee> employeesAll;
     private Map<String, ArrayList<TotalBill>> billsPerLibrarian;
@@ -91,6 +97,7 @@ class RevenueUnitTest {
         Instant instant2 = Instant.from(secondDate.atStartOfDay(ZoneId.systemDefault()));
         Date date2 = Date.from(instant2);
 
+        // Pass data to function
         double[] revenue = ac.revenue(date1, date2, firstDate, secondDate, employeesAll,  billsPerLibrarian, bookStock);
 
         // total income
