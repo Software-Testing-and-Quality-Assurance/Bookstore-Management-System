@@ -17,21 +17,26 @@ public class AdminView {
 
 	public Scene showView(Stage st) {	
 		Button addEmployee = new Button("Add a new Employee");
+		addEmployee.setId("add");
 		addEmployee.setMinWidth(175);
 
 		Button removeEmployee = new Button("Remove an Employee");
+		removeEmployee.setId("remove");
 		removeEmployee.setMinWidth(175);
 
 		Button editEmployee = new Button("Edit Employee data");
+		editEmployee.setId("edit");
 		editEmployee.setMinWidth(175);
 
 		Button revenue = new Button("Total cost and income data");
 		revenue.setMinWidth(175);
 
 		Button manageEmployee = new Button("Log Employee data");
+		manageEmployee.setId("manage");
 		manageEmployee.setMinWidth(175);
 
 		Button signOut = new Button("Sign Out");
+		signOut.setId("sign_out");
 		signOut.setMinWidth(175);
 
 		Button addBook = new Button("Add books");
@@ -130,7 +135,7 @@ public class AdminView {
 			cdv.showView(st, "Book Bought");
 		});
 		
-		
+		signOut.setId("signout");
 		signOut.setOnAction(e-> {
 			LoginView lv = new LoginView();
 			st.setScene(lv.showView(st));
@@ -159,26 +164,34 @@ public class AdminView {
 	    String commonStyleL = " -fx-text-fill: white; -fx-font-size: 14px;";
 
 	    Button delete = new Button("Remove");
+		delete.setId("delete_button");
 	    delete.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 14px;");
 	    delete.setMinWidth(100); // Set a fixed width for the button
 
 	    goBackButton.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 14px;");
-	    goBackButton.setMinWidth(100); 
+	    goBackButton.setMinWidth(100);
+		goBackButton.setId("goBack");
 
 	    Label firstNameL = new Label("First Name:");
+		firstNameL.setId("nameL");
 	    TextField firstNameField = new TextField();
+		firstNameField.setId("nameF");
 	    firstNameL.setStyle(commonStyleL);
 	    rem.add(firstNameL, 0, 1);
 	    rem.add(firstNameField, 1, 1);
 
 	    Label lastNameL = new Label("Last Name:");
+		lastNameL.setId("surnameL");
 	    TextField lastNameField = new TextField();
+		lastNameField.setId("surnameF");
 	    lastNameL.setStyle(commonStyleL);
 	    rem.add(lastNameL, 0, 2);
 	    rem.add(lastNameField, 1, 2);
 
 	    Label usernameL = new Label("Username:");
+		usernameL.setId("userL");
 	    TextField userField = new TextField();
+		userField.setId("usernameF");
 	    usernameL.setStyle(commonStyleL);
 	    rem.add(usernameL, 0, 3);
 	    rem.add(userField, 1, 3);

@@ -33,9 +33,22 @@ public class EmployeeStat {
     private final Button goBack = new Button("Previous");
 
     public void showView(Stage st) {
+        tableView.setId("employeeTableView");
+        nameColumn.setId("nameColumn");
+        surnameColumn.setId("surnameColumn");
+        usernameColumn.setId("usernameColumn");
+        emailColumn.setId("emailColumn");
+        phoneColumn.setId("phoneColumn");
+        roleColumn.setId("roleColumn");
+        salaryColumn.setId("salaryColumn");
+        createBillColumn.setId("createBillColumn");
+        addBooksColumn.setId("addBooksColumn");
+        checkBooksColumn.setId("checkBooksColumn");
+        checkLibrarianColumn.setId("checkLibrarianColumn");
+        statusColumn.setId("statusColumn");
         tableView.setEditable(true);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
+        tableView.setId("table");
         nameColumn.setMinWidth(100);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -78,6 +91,7 @@ public class EmployeeStat {
         
 
 
+        goBack.setId("previous");
         goBack.setStyle("-fx-background-color: grey; -fx-text-fill: white; -fx-font-size: 14px;");
 
         HBox hBox = new HBox();

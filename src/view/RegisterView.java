@@ -37,7 +37,9 @@ public class RegisterView {
 
 
         TextField firstNameField = new TextField();
+        firstNameField.setId("firstname");
         Label firstnameL = new Label("First Name:");
+        firstnameL.setId("firstNameL");
         firstNameField.setStyle(commonStyleF);
         firstnameL.setStyle(commonStyleL);
         pane.add(firstnameL, 0, 0);
@@ -45,7 +47,10 @@ public class RegisterView {
 
 
         TextField surnameField = new TextField();
+        surnameField.setId("surname");
         Label lastNameLabel = new Label("Last Name:");
+        lastNameLabel.setId("lastName");
+
         lastNameLabel.setStyle(commonStyleL);
         surnameField.setStyle(commonStyleF);
         pane.add(lastNameLabel, 0, 1);
@@ -53,7 +58,9 @@ public class RegisterView {
 
 
         TextField emailField = new TextField();
+        emailField.setId("email");
         Label emailLabel = new Label("Email:");
+        emailLabel.setId("emailL");
         emailLabel.setStyle(commonStyleL);
         emailField.setStyle(commonStyleF);
         pane.add(emailLabel, 0, 2);
@@ -61,7 +68,9 @@ public class RegisterView {
 
 
         TextField userField = new TextField();
+        userField.setId("user");
         Label usernameLabel = new Label("Username:");
+        usernameLabel.setId("userL");
         usernameLabel.setStyle(commonStyleL);
         userField.setStyle(commonStyleF);
         pane.add(usernameLabel, 0, 3);
@@ -69,7 +78,9 @@ public class RegisterView {
 
 
         PasswordField passF = new PasswordField();
+        passF.setId("pass");
         Label passwordLabel = new Label("Password:");
+        passwordLabel.setId("passL");
         passwordLabel.setStyle(commonStyleL);
         passF.setStyle(commonStyleF);
         pane.add(passwordLabel, 0, 4);
@@ -77,7 +88,9 @@ public class RegisterView {
 
 
         PasswordField vpassF = new PasswordField();
+        vpassF.setId("vpass");
         Label verifyPasswordLabel = new Label("Verify Password:");
+        verifyPasswordLabel.setId("vpassL");
         verifyPasswordLabel.setStyle(commonStyleL);
         vpassF.setStyle(commonStyleF);
         pane.add(verifyPasswordLabel, 0, 5);
@@ -86,23 +99,29 @@ public class RegisterView {
 
         ToggleGroup tgRole = new ToggleGroup();
         RadioButton lib = new RadioButton("Librarian");
+        lib.setId("lib");
         RadioButton man = new RadioButton("Manager");
+        man.setId("man");
         lib.setStyle("-fx-text-fill: white;");
         man.setStyle("-fx-text-fill: white;");
         lib.setToggleGroup(tgRole);
         man.setToggleGroup(tgRole);
 
         Label roleLabel = new Label("Role");
+        roleLabel.setId("role");
         roleLabel.setStyle(commonStyleL);
         pane.add(roleLabel, 0, 6);
 
         HBox choice = new HBox();
+        choice.setId("choice");
         choice.getChildren().addAll(lib, man);
         pane.add(choice, 1, 6);
 
 
         TextField phoneF = new TextField();
+        phoneF.setId("phone");
         Label phoneLabel = new Label("Phone");
+        phoneLabel.setId("phoneL");
         phoneLabel.setStyle(commonStyleL);
         phoneF.setStyle(commonStyleF);
         pane.add(phoneLabel, 0, 7);
@@ -110,7 +129,9 @@ public class RegisterView {
 
 
         DatePicker birthdayDatePicker = new DatePicker();
+        birthdayDatePicker.setId("birth");
         Label birthdayLabel = new Label("Birthday:");
+        birthdayLabel.setId("birthLabel");
         birthdayLabel.setStyle(commonStyleL);
         birthdayDatePicker.getEditor().setStyle(commonStyleF);
         pane.add(birthdayLabel, 0, 8);
@@ -118,11 +139,13 @@ public class RegisterView {
 
 
         Button button = new Button("Sign Up");
+        button.setId("signup");
         button.setStyle("-fx-background-color: #A3917B; -fx-text-fill: white; -fx-font-size: 14px;");
         pane.add(button, 1, 9);
 
 
         Button goBack = new Button("Previous");
+        goBack.setId("previous");
         goBack.setStyle("-fx-background-color: #A3917B; -fx-text-fill: white; -fx-font-size: 14px;");
         pane.add(goBack, 0, 9);
 
@@ -149,6 +172,20 @@ public class RegisterView {
 			 Instant instant1 = Instant.from(lD1.atStartOfDay(ZoneId.systemDefault()));
 			 Date birthday = Date.from(instant1);
 			 Role role;
+             if((!email.matches(".*@(gmail\\.com|hotmail\\.com|yahoo\\.com)"))){
+                 Alert pAlert = new Alert(AlertType.ERROR);
+                 pAlert.setHeaderText("Invalid Email");
+                 pAlert.setContentText("Invalid Email.");
+                 pAlert.showAndWait();
+                 return;
+             }
+             if(!phone.matches("3556[7-9]\\d{7}")){
+                 Alert pAlert = new Alert(AlertType.ERROR);
+                 pAlert.setHeaderText("Invalid Phone Number");
+                 pAlert.setContentText("Enter valid phone number.");
+                 pAlert.showAndWait();
+                 return;
+             }
 			if (!password.equals(verifyPassword)) {
 				    Alert pAlert = new Alert(AlertType.ERROR);
 				    pAlert.setHeaderText("Password Mismatch");

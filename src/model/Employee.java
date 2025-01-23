@@ -17,9 +17,10 @@ public class Employee extends User implements Serializable{
     private Access createBill, addBooks, checkLibrarian, checkBooks;
 	private final Date dateEmployed;
 	private Date dateTerminated;
-    private final transient StringProperty status;
-		
-    public Employee(String username, String password, String name, String surname, String email, Role role, String phone, double salary,
+
+	private final transient StringProperty status;
+
+	public Employee(String username, String password, String name, String surname, String email, Role role, String phone, double salary,
     		Access createBill, Access addBooks, Access checkLibrarian, Access checkBooks,Date birthDate) {
 		super(username, password, name, surname, email, phone);
 		this.setRole(role);
@@ -89,6 +90,10 @@ public class Employee extends User implements Serializable{
 
 	public void setBirthDate(Date birthDate) {
     }
+	public String getStatus() {
+		return status.get();
+	}
+
 
     @Override
 	public String toString() {

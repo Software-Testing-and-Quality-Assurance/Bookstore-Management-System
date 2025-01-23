@@ -2,7 +2,6 @@ package controller;
 import main.Main;
 import model.Employee;
 public class LoginController {
-	AdminController ac = new AdminController();
 	
 	
 	public Employee login(String username, String password) {
