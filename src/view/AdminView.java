@@ -32,7 +32,6 @@ public class AdminView {
 		revenue.setMinWidth(175);
 
 		Button manageEmployee = new Button("Log Employee data");
-		manageEmployee.setId("manage");
 		manageEmployee.setMinWidth(175);
 
 		Button signOut = new Button("Sign Out");
@@ -95,6 +94,7 @@ public class AdminView {
 			cdv.showView(st, "Revenue");
 			
 		});
+		manageEmployee.setId("manage");
 		manageEmployee.setOnAction(e-> {
 			
 			EmployeeStat es = new EmployeeStat();

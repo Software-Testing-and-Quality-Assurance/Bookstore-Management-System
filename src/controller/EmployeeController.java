@@ -13,6 +13,12 @@ public class EmployeeController {
 			while (true) {
 				try {
 					Employee employee = (Employee) inputStream.readObject();
+					if (employee.getDateTerminated()==null){
+
+						employee.setStatus("Active");
+					} else {
+						employee.setStatus("Fired");
+					}
 					employeesAll.add(employee);
 					System.out.printf("Username: %s, Password: %s%n", employee.getUsername(), employee.getPassword());
 					isSuccess = true; // Mark success if at least one employee is added
@@ -76,7 +82,7 @@ public class EmployeeController {
 	public Employee searchEmployee(String username) {
 		for (Employee e : Main.employeesAll)
 			if(e.getUsername().equals(username))
-				return e;			
+				return e;
 		return null;
 	}
 
@@ -84,15 +90,15 @@ public class EmployeeController {
 		return !Main.employeesAll.isEmpty() && searchEmployee(username) != null;
 	}
 
-	 
+
 	public boolean updateAll() {
-	        try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Main.DATA_FILE))) {
-	            for(Employee e : Main.employeesAll) {
-	                outputStream.writeObject(e);
-	            }
-	            return true;
-	        } catch (IOException ex) {
-	            return false;
-	        }
-	    }
+		try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Main.DATA_FILE))) {
+			for(Employee e : Main.employeesAll) {
+				outputStream.writeObject(e);
+			}
+			return true;
+		} catch (IOException ex) {
+			return false;
+	}
+	}
 }

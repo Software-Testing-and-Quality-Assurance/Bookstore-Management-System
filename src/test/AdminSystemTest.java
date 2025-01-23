@@ -17,6 +17,7 @@ import view.RegisterView;
 import java.io.File;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class AdminSystemTest extends ApplicationTest {
 
@@ -234,7 +235,7 @@ class AdminSystemTest extends ApplicationTest {
         clickOn(removeEmployee);
         WaitForAsyncUtils.waitForFxEvents();
 
-       //incorrect credentials firstly
+        //incorrect credentials firstly
         firstNameF = lookup("#nameF").query();
         firstNameF.setText("Keiti");
         WaitForAsyncUtils.waitForFxEvents();
@@ -286,6 +287,33 @@ class AdminSystemTest extends ApplicationTest {
 
     }
 
+    @Test
+    @DisplayName("Test Employee Statistics View")
+    void testEmployeeStatView() {
+        sleep(500);
+        usernameField.setText("admin");
+        WaitForAsyncUtils.waitForFxEvents();
+        passwordField.setText("p455w0r8");
+        WaitForAsyncUtils.waitForFxEvents();
+        this.clickOn(loginButton);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Button viewEmployeeStats = lookup("#manage").query();
+        clickOn(viewEmployeeStats);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        TableView<Employee> employeeTable = lookup("#table").query();
+        assertFalse(employeeTable.getItems().isEmpty());
+
+        Employee e = employeeTable.getItems().getFirst();
+        assertEquals("admin", e.getUsername());
+
+        goBack = lookup("#previous").query();
+        clickOn(goBack);
+
+    }
+
+
     private void skipAlert() {
         Button okButton;
         okButton = lookup(".button").queryAllAs(Button.class)
@@ -313,6 +341,6 @@ class AdminSystemTest extends ApplicationTest {
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("Alert header not found!"));
         return alertHeader;
-    }
+}
 
 }

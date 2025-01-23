@@ -33,22 +33,9 @@ public class EmployeeStat {
     private final Button goBack = new Button("Previous");
 
     public void showView(Stage st) {
-        tableView.setId("employeeTableView");
-        nameColumn.setId("nameColumn");
-        surnameColumn.setId("surnameColumn");
-        usernameColumn.setId("usernameColumn");
-        emailColumn.setId("emailColumn");
-        phoneColumn.setId("phoneColumn");
-        roleColumn.setId("roleColumn");
-        salaryColumn.setId("salaryColumn");
-        createBillColumn.setId("createBillColumn");
-        addBooksColumn.setId("addBooksColumn");
-        checkBooksColumn.setId("checkBooksColumn");
-        checkLibrarianColumn.setId("checkLibrarianColumn");
-        statusColumn.setId("statusColumn");
+        tableView.setId("table");
         tableView.setEditable(true);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tableView.setId("table");
         nameColumn.setMinWidth(100);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -83,12 +70,12 @@ public class EmployeeStat {
         checkLibrarianColumn.setCellValueFactory(new PropertyValueFactory<>("checkLibrarian"));
 
         statusColumn.setMinWidth(100);
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
         statusColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         //noinspection unchecked
         tableView.getColumns().addAll(nameColumn, surnameColumn, usernameColumn, emailColumn, phoneColumn, roleColumn, salaryColumn,
-        createBillColumn, addBooksColumn, checkBooksColumn, checkLibrarianColumn, statusColumn);
-        
+                createBillColumn, addBooksColumn, checkBooksColumn, checkLibrarianColumn,statusColumn);
+
 
 
         goBack.setId("previous");
@@ -118,6 +105,5 @@ public class EmployeeStat {
 
     public TableView<Employee> getTableView() {
         return tableView;
-    }
 }
-
+}
