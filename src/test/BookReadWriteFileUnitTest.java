@@ -26,7 +26,7 @@ import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BookReadWriteFileTest {
+class BookReadWriteFileUnitTest {
 
     /*
     * Unit testing to see if the functions
