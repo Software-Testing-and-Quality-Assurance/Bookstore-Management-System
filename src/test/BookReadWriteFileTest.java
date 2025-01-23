@@ -8,12 +8,12 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
 
-
 package test;
 
 import controller.BookController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import main.Main;
 import model.Author;
 import model.Book;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +43,7 @@ class BookReadWriteFileTest {
     }
 
     @Test
-    @DisplayName("Test create function - unit testing")
+    @DisplayName("Test create function (writes only 1 book to file by appending) - unit testing")
     void test1() {
         // Check temporary directory
         System.out.println(TempDir.getAbsolutePath());
@@ -127,5 +127,42 @@ class BookReadWriteFileTest {
         assertTrue(bc.loadBooksFromFile(source,bookStock));
         assertEquals(1,bookStock.size());
         assertEquals(b,bookStock.getFirst());
+    }
+
+    @Test
+    @DisplayName("Test update function (writes all books to file) - unit testing")
+    void test4() throws IOException, ClassNotFoundException {
+        // Assign the temporary file to the static array in main
+        Main.BOOK_FILE = source;
+
+        // Create a book
+        Book b = new Book("123456789", "If we were villains", "Klaudia", "Mystery", 16.0, 10.0, new Author("M.L.", "RIO"), 100);
+        Book b1 = new Book("123456789", "And then there were none", "Klaudia", "Mystery", 16.0, 10.0, new Author("Agatha", "Christie"), 100);
+
+        // Add to bookStock
+        Main.bookStock.add(b);
+        Main.bookStock.add(b1);
+
+        // Call update function to write all books to file
+        boolean check = bc.updateAll();
+
+        // Make assertions
+        assertTrue(Main.BOOK_FILE.exists());
+        assertTrue(Files.exists(Main.BOOK_FILE.toPath()));
+        assertTrue(check);
+
+        ObservableList<Book> written = FXCollections.observableArrayList();
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(source))) {
+            while (true) {
+                try {
+                    written.add((Book) inputStream.readObject());
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+        }
+        assertEquals(Main.bookStock.size(), written.size());
+        assertEquals(Main.bookStock.getFirst(), written.getFirst());
+        assertEquals(Main.bookStock.getLast(), written.getLast());
     }
 }

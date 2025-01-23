@@ -36,6 +36,22 @@ public class Employee extends User implements Serializable{
 		this.status = new SimpleStringProperty("Active");
 	}
 
+	public Employee(String username, String password, String name, String surname, String email, Role role, String phone, double salary,
+					Access createBill, Access addBooks, Access checkLibrarian, Access checkBooks,Date birthDate, Date dateEmployed) {
+		super(username, password, name, surname, email, phone);
+		this.setRole(role);
+		this.setSalary(salary);
+		this.setCreateBill(createBill);
+		this.setAddBooks(addBooks);
+		this.setCheckLibrarian(checkLibrarian);
+		this.setCheckBooks(checkBooks);
+		dateTerminated = null;
+		this.dateEmployed = dateEmployed;
+		this.setBirthDate(birthDate);
+		System.out.println(role+" "+createBill+" "+addBooks);
+		this.status = new SimpleStringProperty("Active");
+	}
+
 	public Role getRole() {
 		return role;
 	}

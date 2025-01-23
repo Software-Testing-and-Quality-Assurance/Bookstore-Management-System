@@ -52,7 +52,7 @@ class ManagerControllerClassEvaluationTest {
     void test3() {
         Book b = new Book("1234", "Sikur te isha djale", "Keiti", "Drama", 25.0, 20.0, new Author("Haki", "Stermilli"), 100);
         when(bc.searchBook("1234")).thenReturn(b);
-        doAnswer( _ -> {
+        doAnswer( a -> {
             b.setStock(100+b.getStock());
             return null;
         }).when(bc).restock(100,"1234");

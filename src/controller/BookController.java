@@ -73,14 +73,16 @@ public class BookController {
 		this.searchBook(isbn).setStock(newStock+searchBook(isbn).getStock());
 	}
 
-	public void updateAll() {
+	public boolean updateAll() {
         try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Main.BOOK_FILE))) {
             for(Book b : Main.bookStock) {
                 outputStream.writeObject(b);
             }
 		} catch (IOException ex) {
-			//log
+			System.out.println(ex.getMessage());
+			return false;
 		}
+		return true;
     }
 	
 }

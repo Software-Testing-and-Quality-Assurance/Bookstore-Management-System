@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LibrarianSystemTest extends ApplicationTest {
     /*
      * System testing for app state as a Librarian
-     * Log in - Sell Books/Create Bill - Print Bill in .txt file - Log out 
+     * Log in - Sell Books/Create Bill - Print Bill in .txt file - Log out
      */
     @TempDir
     static File TempDir;
@@ -251,6 +251,15 @@ public class LibrarianSystemTest extends ApplicationTest {
         String expected = Main.allBills.getFirst().getBillContent().replaceAll("\\r\\n|\\r|\\n", "\n");
         content = content.replaceAll("\\r\\n|\\r|\\n", "\n");
         assertEquals(expected,content);
+
+        // continue to log out
+        Button logout = lookup("#sign_out").query();
+        clickOn(logout);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Button found = (lookup("#login_button").query());
+
+        assertEquals(loginButton.getText(), found.getText());
     }
 
     @Test

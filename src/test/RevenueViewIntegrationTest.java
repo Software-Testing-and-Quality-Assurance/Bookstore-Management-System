@@ -21,7 +21,7 @@ import view.RevenueView;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RevenueViewTest extends ApplicationTest {
+class RevenueViewIntegrationTest extends ApplicationTest {
     /*
      * Testing the RevenueView to
      * see if the elements show up
