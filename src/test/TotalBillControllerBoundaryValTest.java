@@ -23,7 +23,8 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-/* Keit Nika*/
+/* Keit Nika
+* getTotalNumberOfBooks*/
 class TotalBillControllerBoundaryValTest {
    private  Book b,b1,b2,b3;
    private TotalBill bill;

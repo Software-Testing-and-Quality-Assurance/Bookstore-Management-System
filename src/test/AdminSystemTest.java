@@ -307,6 +307,9 @@ class AdminSystemTest extends ApplicationTest {
 
         Employee e = employeeTable.getItems().getFirst();
         assertEquals("admin", e.getUsername());
+        assertEquals("Admin",e.getName());
+        assertEquals("Istrator",e.getSurname());
+
 
         goBack = lookup("#previous").query();
         clickOn(goBack);
