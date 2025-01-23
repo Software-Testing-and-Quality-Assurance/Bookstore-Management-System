@@ -11,7 +11,7 @@ public class HeaderlessObjectOutputStream extends ObjectOutputStream {
 		}
 
 		@Override
-		protected void writeStreamHeader() throws IOException {
+		protected void writeStreamHeader() {
 			// do nothing, don't write the header
 		}
 		

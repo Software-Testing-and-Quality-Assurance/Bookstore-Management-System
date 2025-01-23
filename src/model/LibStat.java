@@ -33,7 +33,4 @@ public class LibStat {
         return nrOfBooks.get();
     }
 
-    public double getAmount() {
-        return amount.get();
-    }
 }

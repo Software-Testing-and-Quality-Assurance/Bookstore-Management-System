@@ -64,31 +64,4 @@ public class TotalBill implements Serializable{
 	public void setBooks(Map<Book,Integer> books) {
 		this.soldBooks = books;
 	}
-
-	@Serial
-	private void writeObject(ObjectOutputStream outputStream) throws IOException {
-		outputStream.defaultWriteObject();
-		outputStream.writeInt(soldBooks.size());
-		for(Map.Entry<Book, Integer> entry: soldBooks.entrySet()) {
-			outputStream.writeObject(entry.getKey());
-			outputStream.writeInt(entry.getValue());
-		}
-
-	}
-
-	@Serial
-	private void readObject(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
-		inputStream.defaultReadObject();
-		int size = inputStream.readInt();
-		Map<Book, Integer> bill = new HashMap<>();
-		for(int i=0; i<size;i++) {
-			Book book = (Book) inputStream.readObject();
-			Integer quant = inputStream.readInt();
-			bill.put(book,quant);
-
-		}
-		this.soldBooks = bill;
-
-	}
-
 }

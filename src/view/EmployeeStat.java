@@ -108,8 +108,7 @@ public class EmployeeStat {
         bp.setStyle("-fx-background-color: white;");
 
         tableView.setStyle("-fx-control-inner-background: #C9E8A3;");
-        
-        //C9E8A3 jeshile cute
+
         Scene scene = new Scene(bp);
         st.setWidth(1200);
         st.setHeight(650);
@@ -119,10 +118,6 @@ public class EmployeeStat {
 
     public TableView<Employee> getTableView() {
         return tableView;
-    }
-
-    public Button getGoBack() {
-        return goBack;
     }
 }
 

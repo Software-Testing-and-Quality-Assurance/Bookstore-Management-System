@@ -45,9 +45,4 @@ public class LibrarianStatController {
 
 		return filter;
 	}
-
-
-
-
-
 }
