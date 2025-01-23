@@ -2,7 +2,9 @@ package test;
 import controller.EmployeeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import main.Main;
 import model.Access;
+import model.Book;
 import model.Employee;
 import model.Role;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,12 +42,8 @@ class EmployeeControllerUnitTest {
     void test1() {
         System.out.println(tempDir.getAbsolutePath());
         assertTrue(tempDir.exists());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(1990, Calendar.MAY, 25);
-        Date birthDate = calendar.getTime();
-        Employee e = new Employee("librarianKeit", "12345678kn", "keit", "nika", "keitn@gmail.com", Role.LIBRARIAN, "355695214014", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, birthDate);
-        Employee e1 = new Employee("librarianE", "12345678ej", "elia", "noor", "elian@gmail.com", Role.LIBRARIAN, "355695214012", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, birthDate);
+        Employee e = new Employee("librarianKeit", "12345678kn", "keit", "nika", "keitn@gmail.com", Role.LIBRARIAN, "355695214014", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
+        Employee e1 = new Employee("librarianE", "12345678ej", "elia", "noor", "elian@gmail.com", Role.LIBRARIAN, "355695214012", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
         assertAll(
                 ()->assertTrue(temp.exists()),
                 () ->assertTrue(ec.create(e, temp,employeesAll)),
@@ -70,7 +68,7 @@ class EmployeeControllerUnitTest {
 
         );
 
-
+        Main.employeesAll.clear();
     }
 
     @Test
@@ -97,6 +95,7 @@ class EmployeeControllerUnitTest {
                 () ->assertEquals(e,employeesAll.getFirst()),
                 () ->assertTrue(ec.loadUsersFromFile(temp,employeesAll))
         );
+        Main.employeesAll.clear();
     }
 
     @Test
@@ -116,11 +115,38 @@ class EmployeeControllerUnitTest {
         assertTrue(ec.loadUsersFromFile(temp,employeesAll));
         assertEquals(e,employeesAll.getFirst());
         assertEquals(1,employeesAll.size());
+        Main.employeesAll.clear();
     }
     @Test
     @DisplayName("UpdateAll() - Unit Test")
-    void test4(){
+    void test4() throws FileNotFoundException {
+        Main.DATA_FILE = temp;
+        Employee e = new Employee("librarianKeit", "12345678kn", "keit", "nika", "keitn@gmail.com", Role.LIBRARIAN, "355695214014", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
+        Employee e1 = new Employee("librarianE", "12345678ej", "elia", "noor", "elian@gmail.com", Role.LIBRARIAN, "355695214012", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
 
+        Main.employeesAll.add(e);
+        Main.employeesAll.add(e1);
+        boolean checkUpdate = ec.updateAll();
+        assertTrue(Main.DATA_FILE.exists());
+        assertTrue(Files.exists(Main.DATA_FILE.toPath()));
+        assertTrue(checkUpdate);
+        ObservableList<Employee> written = FXCollections.observableArrayList();
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(temp))) {
+            while (true) {
+                try {
+                    written.add((Employee) inputStream.readObject());
+                } catch (EOFException ee) {
+                    break;
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        assertEquals(Main.employeesAll.size(), written.size());
+        assertEquals(Main.employeesAll.getFirst(), written.getFirst());
+        assertEquals(Main.employeesAll.getLast(), written.getLast());
+        Main.employeesAll.clear();
     }
-
 }
