@@ -26,39 +26,38 @@ public class BookBought extends BorderPane{
     private final TableColumn<Book, Double> purchasePrice = new TableColumn<>("Purchase Price");
     private final TableColumn<Book, Date> firstPurchaseDate = new TableColumn<>("Purchase Date");
 
-
-
     private final Button goBack = new Button("Previous:");
     
 
     public void showView(Stage st) {
+
+        goBack.setId("previous");
+
+        tableView.setId("table");
     	tableView.setEditable(true);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         isbnColumn.setMinWidth(100);
-        isbnColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("isbn"));
+        isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         isbnColumn.setSortType(TableColumn.SortType.DESCENDING);
-        
+
         titleColumn.setMinWidth(100);
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 
-        
         authorColumn.setMinWidth(100);
-        authorColumn.setCellValueFactory(new PropertyValueFactory<Book, Author>("author"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
 
-        
         stockOfBook.setMinWidth(100);
-        stockOfBook.setCellValueFactory(new PropertyValueFactory<Book, Integer>("stock"));
+        stockOfBook.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
-        
         sellingPrice.setMinWidth(100);
-        sellingPrice.setCellValueFactory(new PropertyValueFactory<Book, Double>("sellingPrice"));
-        
+        sellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
+
         purchasePrice.setMinWidth(100);
-        purchasePrice.setCellValueFactory(new PropertyValueFactory<Book, Double>("purchasePrice"));
-        
+        purchasePrice.setCellValueFactory(new PropertyValueFactory<>("purchasePrice"));
+
         firstPurchaseDate.setMinWidth(180);
-        firstPurchaseDate.setCellValueFactory(new PropertyValueFactory<Book, Date>("firstPurchaseDate"));
+        firstPurchaseDate.setCellValueFactory(new PropertyValueFactory<>("firstPurchaseDate"));
         //noinspection unchecked
         tableView.getColumns().addAll(isbnColumn, titleColumn, authorColumn, stockOfBook,sellingPrice, purchasePrice, firstPurchaseDate);
         tableView.setStyle("-fx-control-inner-background: #C9E8A3;");
@@ -78,7 +77,7 @@ public class BookBought extends BorderPane{
         st.setTitle("BookBought View");
         st.setScene(scene);
         st.setWidth(800);        
-        st.setHeight(650);
+        st.setHeight(500);
         st.show();
     }
 

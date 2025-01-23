@@ -56,7 +56,7 @@ class BookReadWriteFileTest {
 
         // Create a book
         Book b = new Book("123456789", "If we were villains", "Klaudia", "Mystery", 16.0, 10.0, new Author("M.L.", "RIO"), 100);
-        Book b1 = new Book("123456789", "And then there were none", "Klaudia", "Mystery", 16.0, 10.0, new Author("Agatha", "Christie"), 100);
+        Book b1 = new Book("123456780", "And then there were none", "Klaudia", "Mystery", 16.0, 10.0, new Author("Agatha", "Christie"), 100);
 
         // Check function
         assertAll(

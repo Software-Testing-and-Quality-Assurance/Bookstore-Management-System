@@ -91,6 +91,7 @@ public class Main extends Application{
 		Alert a = new Alert(AlertType.INFORMATION);
 		a.setContentText("You do not have access to this action!");
 		a.setHeaderText("User info");
+		a.getDialogPane().setId("custom-alert-pane");
 		a.showAndWait();
 	}
 	public static void doneAlert() {

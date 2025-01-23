@@ -52,7 +52,7 @@ public class ChooseDates {
 	    st.show();
 	    
 	    Button pickDatesButton = new Button("Pick Dates");
-		pickDatesButton.setId("next");
+		pickDatesButton.setId("pick_date");
         pickDatesButton.setOnAction(e -> {
         	
         	LocalDate localDate1 = startDatePicker.getValue();
@@ -77,7 +77,7 @@ public class ChooseDates {
                 else if (action.equals("Book Bought")){
                 	BookBoughtController bbc = new BookBoughtController();
                 	BookBought bookBought = new BookBought();
-        		    bookBought.getTableView().setItems(bbc.filterDate(date1, date2,Main.bookStock));
+        		    bookBought.getTableView().setItems(bbc.filterDate(date1, date2, Main.bookStock));
 
 
         		    bookBought.showView(st);

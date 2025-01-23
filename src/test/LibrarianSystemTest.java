@@ -19,6 +19,7 @@ import model.Author;
 import model.Book;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import javafx.scene.control.TextField;
@@ -41,6 +42,11 @@ public class LibrarianSystemTest extends ApplicationTest {
     /*
      * System testing for app state as a Librarian
      * Log in - Sell Books/Create Bill - Print Bill in .txt file - Log out
+     * Log in - Check Book info - Log out
+     * The backend also calls many functions during the way
+     * (Like write to binary and txt file the bill, checkout books etc.)
+     * so we have counted some of those functions as part of system testing
+     * and haven't done unit test on them.
      */
     @TempDir
     static File TempDir;
@@ -105,7 +111,8 @@ public class LibrarianSystemTest extends ApplicationTest {
     }
 
     @Test
-    public void createBill() {
+    @DisplayName("Log in - Create Bill - Log out")
+    public void test1() {
         assertTrue(TempDir.exists());
         assertTrue(TempDir.isDirectory());
         assertTrue(Main.DATA_FILE.exists());
@@ -263,7 +270,8 @@ public class LibrarianSystemTest extends ApplicationTest {
     }
 
     @Test
-    public void logInLogOut(){
+    @DisplayName("Log in - Log out")
+    public void test2(){
         sleep(500);
         usernameField.setText("librarian");
         sleep(500);
@@ -282,7 +290,8 @@ public class LibrarianSystemTest extends ApplicationTest {
     }
 
     @Test
-    public void failLogIn(){
+    @DisplayName("Incorrect log in credentials")
+    public void test3(){
         //wrong password
         sleep(500);
         usernameField.setText("librarian");
@@ -331,6 +340,51 @@ public class LibrarianSystemTest extends ApplicationTest {
         Button found = lookup("#login_button").query();
 
         assertEquals(loginButton, found);
+    }
+
+    @Test
+    @DisplayName("Log in - Check Book Log (No access pop up) - Log out")
+    public void test4() {
+        // Check Book Log is the book bought view tested separately as integration test.
+        // Here we are practically testing the button and the popup
+
+        assertTrue(TempDir.exists());
+        assertTrue(TempDir.isDirectory());
+        assertTrue(Main.DATA_FILE.exists());
+        assertTrue(Main.BOOK_FILE.exists());
+        assertTrue(Main.id.exists());
+
+        usernameField.setText("librarian");
+        WaitForAsyncUtils.waitForFxEvents();
+
+        passwordField.setText("p455w0r8");
+        WaitForAsyncUtils.waitForFxEvents();
+
+        this.clickOn(loginButton);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Button bookInfo = lookup("#book_info").query();
+        clickOn(bookInfo);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Button alert = skipAlertButton();
+        Label alertHeader = alertMessageHeader();
+        Label alertContent = alertMessageContent();
+
+        assertEquals("User info", alertHeader.getText());
+        assertEquals("You do not have access to this action!", alertContent.getText());
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn(alert);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        // continue to log out
+        Button logout = lookup("#sign_out").query();
+        clickOn(logout);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Button found = (lookup("#login_button").query());
+
+        assertEquals(loginButton.getText(), found.getText());
     }
 
     private Button skipAlertButton() {
