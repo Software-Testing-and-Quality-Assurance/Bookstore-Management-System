@@ -154,6 +154,7 @@ class LibrarianStatControllerCoverageTest {
         Date endDate = calendar.getTime();
         result = lst.filterDate(startDate, endDate, billsPerLibrarian);
         assertEquals(1,result.getFirst().getNrOfBills());
+        Main.employeesAll.clear();
     }
 
 }

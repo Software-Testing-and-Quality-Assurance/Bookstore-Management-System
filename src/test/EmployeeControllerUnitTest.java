@@ -49,7 +49,8 @@ class EmployeeControllerUnitTest {
         assertAll(
                 ()->assertTrue(temp.exists()),
                 () ->assertTrue(ec.create(e, temp,employeesAll)),
-                () ->assertEquals(1,employeesAll.size()),
+                () ->assertTrue(ec.create(e1, temp,employeesAll)),
+                () ->assertEquals(2,employeesAll.size()),
                 () ->{
                     ObservableList<Employee> created = FXCollections.observableArrayList();
                     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(temp))) {
@@ -79,7 +80,7 @@ class EmployeeControllerUnitTest {
         System.out.println(tempDir.getAbsolutePath());
         assertTrue(tempDir.exists());
 
-        Employee e;
+
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(temp))){
             Calendar calendar = Calendar.getInstance();
             calendar.set(1990, Calendar.MAY, 25);
@@ -115,6 +116,11 @@ class EmployeeControllerUnitTest {
         assertTrue(ec.loadUsersFromFile(temp,employeesAll));
         assertEquals(e,employeesAll.getFirst());
         assertEquals(1,employeesAll.size());
+    }
+    @Test
+    @DisplayName("UpdateAll() - Unit Test")
+    void test4(){
+
     }
 
 }

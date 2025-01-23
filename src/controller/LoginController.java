@@ -2,8 +2,6 @@ package controller;
 import main.Main;
 import model.Employee;
 public class LoginController {
-	
-	
 	public Employee login(String username, String password) {
 		for(Employee em: Main.employeesAll) {
 			
