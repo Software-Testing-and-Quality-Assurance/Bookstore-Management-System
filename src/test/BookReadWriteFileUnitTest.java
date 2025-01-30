@@ -112,6 +112,7 @@ class BookReadWriteFileUnitTest {
         BookController bookController = spy(new BookController());
 
         // Mock createFileOutputStream and createObjectOutputStream
+        //noinspection resource
         doReturn(mockFileOutputStream).when(bookController).createFileOutputStream(mockFile);
         doReturn(mockObjectOutputStreamWrapper).when(bookController).createObjectOutputStream(mockFileOutputStream);
 
@@ -179,6 +180,7 @@ class BookReadWriteFileUnitTest {
 
         // Mock createObjectInputStreamWrapper to return the mocked ObjectInputStreamWrapper
         Mockito.doReturn(mockInputStream).when(bookLoader).createObjectInputStreamWrapper(any(FileInputStream.class));
+        //noinspection resource
         Mockito.doReturn(mockFileInputStream).when(bookLoader).createFileInputStream(any(File.class));
 
         // Execute the method
