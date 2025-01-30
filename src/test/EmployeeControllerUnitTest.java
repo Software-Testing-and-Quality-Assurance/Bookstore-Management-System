@@ -1,20 +1,25 @@
 package test;
+import controller.BookController;
 import controller.EmployeeController;
+import controller.ObjectInputStreamWrapper;
+import controller.ObjectOutputStreamWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.Main;
-import model.Access;
-import model.Employee;
-import model.Role;
+import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.mockito.Mockito;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.util.Calendar;
 import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 class EmployeeControllerUnitTest {
 
@@ -22,6 +27,7 @@ class EmployeeControllerUnitTest {
     File tempDir;
 
     private File temp;
+    private File mocked;
     private Employee e;
     private ObservableList<Employee> employeesAll;
     private EmployeeController ec;
@@ -33,6 +39,7 @@ class EmployeeControllerUnitTest {
         }
         employeesAll = FXCollections.observableArrayList();
         ec = new EmployeeController();
+        mocked = mock(File.class);
     }
 
 
@@ -148,4 +155,61 @@ class EmployeeControllerUnitTest {
         assertEquals(Main.employeesAll.getLast(), written.getLast());
         Main.employeesAll.clear();
     }
+
+    //Created test cases for create and loadUsersFromFile with mocked lists
+    //so there are no external interactions
+    @Test
+    @DisplayName("create function with mocked file unit testing")
+    void test1MockFile() throws IOException {
+        Employee e = new Employee("librarianKeit", "12345678kn", "keit", "nika", "keitn@gmail.com", Role.LIBRARIAN, "355695214014", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
+        FileOutputStream mockFileOutputStream = mock(FileOutputStream.class);
+        ObjectOutputStreamWrapper mockObjectOutputStreamWrapper = mock(ObjectOutputStreamWrapper.class);
+
+        File mockFile = mock(File.class);
+        when(mockFile.length()).thenReturn(0L);
+        doNothing().when(mockObjectOutputStreamWrapper).writeObject(any(Employee.class));
+        EmployeeController ec = spy(new EmployeeController());
+
+
+        doReturn(mockFileOutputStream).when(ec).createFileOutputStream(mockFile);
+        doReturn(mockObjectOutputStreamWrapper).when(ec).createObjectOutputStream(mockFileOutputStream);
+
+        boolean res = ec.create(e, mockFile, employeesAll);
+        assertTrue(res);
+        assertEquals(1, employeesAll.size());
+        assertEquals("librarianKeit", employeesAll.getFirst().getUsername());
+        //see if it was called once
+        verify(mockObjectOutputStreamWrapper, times(1)).writeObject(e);
+        verify(mockObjectOutputStreamWrapper, times(1)).close();
+        verify(mockFileOutputStream, times(1)).close();
+    }
+    @Test
+    @DisplayName("load users from file by mocking file unit testing")
+    void test2MockFileForLoadUsers() throws Exception {
+        // mocking FileInputStream
+        FileInputStream mockFileInputStream = mock(FileInputStream.class);
+        // mocking ObjectInputStreamWrapper
+        ObjectInputStreamWrapper mockInputStream = mock(ObjectInputStreamWrapper.class);
+
+        Employee e = new Employee("librarianKeit", "12345678kn", "keit", "nika", "keitn@gmail.com", Role.LIBRARIAN, "355695214014", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
+        Employee e1 = new Employee("librarianE", "12345678ej", "elia", "noor", "elian@gmail.com", Role.LIBRARIAN, "355695214012", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
+
+        when(mockInputStream.readObject())
+                .thenReturn(e)
+                .thenReturn(e1)
+                .thenThrow(new EOFException());
+
+        doNothing().when(mockInputStream).close();
+        EmployeeController ec = Mockito.spy(new EmployeeController());
+        Mockito.doReturn(mockInputStream).when(ec).createObjectInputStreamWrapper(any(FileInputStream.class));
+        Mockito.doReturn(mockFileInputStream).when(ec).createFileInputStream(any(File.class));
+        boolean result = ec.loadUsersFromFile(mocked, employeesAll);
+        assertTrue(result);
+        assertEquals(2, employeesAll.size());
+        assertEquals("librarianKeit", employeesAll.get(0).getUsername());
+        assertEquals("librarianE", employeesAll.get(1).getUsername());
+        verify(mockInputStream, times(3)).readObject();
+        verify(mockInputStream, times(1)).close();
+    }
+
 }

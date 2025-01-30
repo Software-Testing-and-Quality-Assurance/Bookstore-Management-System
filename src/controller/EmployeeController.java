@@ -9,7 +9,7 @@ public class EmployeeController {
 
 	public boolean loadUsersFromFile(File dataFile, ObservableList<Employee> employeesAll) {
 		boolean isSuccess = false;
-		try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(dataFile))) {
+		try (ObjectInputStreamWrapper inputStream = createObjectInputStreamWrapper(createFileInputStream(dataFile))) {
 			while (true) {
 				try {
 					Employee employee = (Employee) inputStream.readObject();
@@ -44,6 +44,14 @@ public class EmployeeController {
 		return isSuccess;
 	}
 
+	public ObjectInputStreamWrapper createObjectInputStreamWrapper(FileInputStream fileInputStream) throws IOException {
+		return new ObjectInputStreamWrapper(fileInputStream);
+	}
+
+	// Code refactoring for mocking and doing unit testing
+	public FileInputStream createFileInputStream(File book_file) throws FileNotFoundException {
+		return new FileInputStream(book_file);
+	}
 
 	public boolean create(Employee employee,File dataFile, ObservableList<Employee> employeesAll ) {
 		if (employee == null) {
@@ -57,18 +65,18 @@ public class EmployeeController {
 			return false;  // Do not add the employee if already exists
 		}
 
-		try (FileOutputStream outputStream = new FileOutputStream(dataFile, true)) {
-			ObjectOutputStream writer;
-			if (dataFile.length() > 0) {
-				writer = new HeaderlessObjectOutputStream(outputStream);
-			} else {
-				writer = new ObjectOutputStream(outputStream);
-			}
+		try (FileOutputStream outputStream = createFileOutputStream(dataFile)) {
 
-			System.out.println("Writing employee: " + employee.getUsername());
-			writer.writeObject(employee);
+			if (dataFile.length() > 0) {
+				ObjectOutputStream writer = createHeaderlessObjectOutputStream(outputStream);
+				writer.writeObject(employee);
+				writer.close();
+			} else {
+				ObjectOutputStreamWrapper writer = createObjectOutputStream(outputStream);
+				writer.writeObject(employee);
+				writer.close();
+			}
 			employeesAll.add(employee);
-			System.out.println("Employee added to employees list: " + employeesAll.size());
 			return true;
 		} catch (NullPointerException ex) {
 			System.out.println("NullPointerException: " + ex.getMessage());
@@ -77,6 +85,17 @@ public class EmployeeController {
 			System.out.println("IOException: " + ex.getMessage());
 			return false;
 		}
+	}
+
+	public FileOutputStream createFileOutputStream(File book_file) throws FileNotFoundException {
+		return new FileOutputStream(book_file, true);
+	}
+	// Code refactoring for mocking and doing unit testing
+	public ObjectOutputStreamWrapper createObjectOutputStream(FileOutputStream fileOutputStream) throws IOException {
+		return new ObjectOutputStreamWrapper(fileOutputStream);
+	}
+	public ObjectOutputStream createHeaderlessObjectOutputStream(FileOutputStream fileOutputStream) throws IOException {
+		return new HeaderlessObjectOutputStream(fileOutputStream);
 	}
 
 	public Employee searchEmployee(String username) {
