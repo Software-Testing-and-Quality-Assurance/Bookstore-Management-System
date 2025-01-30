@@ -89,11 +89,13 @@ public class TotalBillController {
 			billContent = "Order by: "+ec.searchEmployee(tb.getLibrarianUser()).getName()+" "+ec.searchEmployee(tb.getLibrarianUser()).getSurname() + "\n";
 			billContent += "Date "+ tb.getOrderDate()+ "\n";
 			billContent += "TotalPrice: "+ tb.getTotalOrderAmount()+ "\n";
+            StringBuilder billContentBuilder = new StringBuilder(billContent);
             for(Map.Entry<Book,Integer> bi: tb.getBooks().entrySet()) {
                	pw.println(bi.getKey().getTitle()+", copies: "+bi.getValue()+", price: "+(bi.getKey()).getSellingPrice()*bi.getValue());
-				billContent += bi.getKey().getTitle()+", copies: "+bi.getValue()+", price: "+(bi.getKey()).getSellingPrice()*bi.getValue()+ "\n";
+				billContentBuilder.append(bi.getKey().getTitle()).append(", copies: ").append(bi.getValue()).append(", price: ").append((bi.getKey()).getSellingPrice() * bi.getValue()).append("\n");
             }
-		} catch (IOException ex) {
+            billContent = billContentBuilder.toString();
+        } catch (IOException ex) {
         	System.out.println(ex.getMessage());
 		}
 		tb.setBillContent(billContent);
