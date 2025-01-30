@@ -31,9 +31,6 @@ class TotalBillControllerUnitTest {
     private Map<String, ArrayList<TotalBill>> billsPerLibrarian;
     private ObservableList<TotalBill> allBills;
 
-    TotalBillControllerUnitTest() throws IOException {
-    }
-
     @BeforeEach
     void setUp() {
         tbc = new TotalBillController();
