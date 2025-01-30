@@ -9,7 +9,7 @@ import model.Book;
 public class BookController {
 
 	public boolean loadBooksFromFile(File book_file, ObservableList<Book> bookStock) {
-		try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(book_file))) {
+		try (ObjectInputStreamWrapper inputStream = createObjectInputStreamWrapper(createFileInputStream(book_file))) {
 			while (true) {
 				try {
 					Book book = (Book) inputStream.readObject();
@@ -21,7 +21,6 @@ public class BookController {
 				}
 			}
 			System.out.println("Books loaded from file! " + bookStock.size());
-			System.out.println("#####");
 			return true;
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -29,25 +28,52 @@ public class BookController {
 			System.out.println("Class not found book");
 		}
 		return false;
-    }
+	}
+
+	// Code refactoring for mocking and doing unit testing
+	public ObjectInputStreamWrapper createObjectInputStreamWrapper(FileInputStream fileInputStream) throws IOException {
+		return new ObjectInputStreamWrapper(fileInputStream);
+	}
+
+	// Code refactoring for mocking and doing unit testing
+	public FileInputStream createFileInputStream(File book_file) throws FileNotFoundException {
+		return new FileInputStream(book_file);
+	}
 
 	public boolean create(Book book, File book_file, ObservableList<Book> bookStock) {
-	    try (FileOutputStream outputStream = new FileOutputStream(book_file, true)) {
-	        ObjectOutputStream writer;
-	        if (book_file.length() > 0)
-	            writer = new HeaderlessObjectOutputStream(outputStream);
-	        else
-	            writer = new ObjectOutputStream(outputStream);
-	        writer.writeObject(book);
-	        bookStock.add(book);
-	        return true;
-	    } catch (NullPointerException ex) {
-	    	System.out.println(ex.getMessage());
-	    }
-	    catch (IOException ex) {
-	    	System.out.println("Cannot create book");
-	    }
+		try (FileOutputStream outputStream = createFileOutputStream(book_file)) {
+			if (book_file.length() > 0) {
+				ObjectOutputStream writer = createHeaderlessObjectOutputStream(outputStream);
+				writer.writeObject(book);
+				writer.close();
+            }
+			else {
+				ObjectOutputStreamWrapper writer = createObjectOutputStream(outputStream);
+				writer.writeObject(book);
+				writer.close();
+            }
+            bookStock.add(book);
+            return true;
+        } catch (NullPointerException ex) {
+			System.out.println(ex.getMessage());
+		} catch (IOException ex) {
+			System.out.println("Cannot create book");
+		}
 		return false;
+	}
+
+	// Code refactoring for mocking and doing unit testing
+	public FileOutputStream createFileOutputStream(File book_file) throws FileNotFoundException {
+		return new FileOutputStream(book_file, true);
+	}
+	// Code refactoring for mocking and doing unit testing
+	public ObjectOutputStreamWrapper createObjectOutputStream(FileOutputStream fileOutputStream) throws IOException {
+		return new ObjectOutputStreamWrapper(fileOutputStream);
+	}
+
+	// Code refactoring for mocking and doing unit testing
+	public ObjectOutputStream createHeaderlessObjectOutputStream(FileOutputStream fileOutputStream) throws IOException {
+		return new HeaderlessObjectOutputStream(fileOutputStream);
 	}
 
 	public Book searchBook(String isbn) {

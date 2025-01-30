@@ -267,6 +267,7 @@ public class LibrarianSystemTest extends ApplicationTest {
         Button found = (lookup("#login_button").query());
 
         assertEquals(loginButton.getText(), found.getText());
+        Main.allBills.clear();
     }
 
     @Test
