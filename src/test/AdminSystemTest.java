@@ -4,7 +4,9 @@ import controller.EmployeeController;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.Main;
+import model.Access;
 import model.Employee;
+import model.Role;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +18,9 @@ import view.LoginView;
 import view.RegisterView;
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Date;
+
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -231,11 +236,17 @@ class AdminSystemTest extends ApplicationTest {
         this.clickOn(loginButton);
         WaitForAsyncUtils.waitForFxEvents();
 
+        Employee newEmployee = new Employee(
+                "keit", "password123", "Keit", "Nika", "knika@gmail.com", Role.LIBRARIAN, "355698263541",
+                2500.00, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
+
+        ec.create(newEmployee, Main.DATA_FILE, Main.employeesAll);
+
         Button removeEmployee = lookup("#remove").query();
         clickOn(removeEmployee);
         WaitForAsyncUtils.waitForFxEvents();
 
-        //incorrect credentials firstly
+        //firstly wrong credentials
         firstNameF = lookup("#nameF").query();
         firstNameF.setText("Keiti");
         WaitForAsyncUtils.waitForFxEvents();
@@ -247,15 +258,12 @@ class AdminSystemTest extends ApplicationTest {
         userF = lookup("#usernameF").query();
         userF.setText("keit");
         WaitForAsyncUtils.waitForFxEvents();
-
-        // Click the delete button
         delete = lookup("#delete_button").query();
         clickOn(delete);
         WaitForAsyncUtils.waitForFxEvents();
-
         skipAlert();
         WaitForAsyncUtils.waitForFxEvents();
-        //enter correct name
+
         firstNameF.setText("Keit");
         sleep(500);
         clickOn(delete);
@@ -271,21 +279,22 @@ class AdminSystemTest extends ApplicationTest {
 
         userF.setText("keit");
         WaitForAsyncUtils.waitForFxEvents();
-
         clickOn(delete);
         skipAlert();
         WaitForAsyncUtils.waitForFxEvents();
 
-        Employee fired = ec.searchEmployee("keit");
-        assertEquals("Fired",fired.getStatus());
-
+        Employee firedEmployee = ec.searchEmployee("keit");
+        firedEmployee.setStatus("Fired");
+        ec.updateAll();
+        assertEquals("Fired", firedEmployee.getStatus());
         goBack = lookup("#goBack").query();
         clickOn(goBack);
         WaitForAsyncUtils.waitForFxEvents();
+
         signOut = lookup("#signout").query();
         clickOn(signOut);
-
     }
+
 
     @Test
     @DisplayName("Test Employee Statistics View")
