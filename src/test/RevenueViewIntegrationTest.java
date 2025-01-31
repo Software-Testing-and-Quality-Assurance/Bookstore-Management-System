@@ -1,3 +1,13 @@
+/*
+ * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * SWE 303: Software Testing & Quality Assurance * *
+ * * * * * * * * * Project: Code Testing * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * Integration Testing * * * * * * * * *
+ * * * * * Test done by: Klaudia Tamburi * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
 package test;
 
 import controller.AdminController;

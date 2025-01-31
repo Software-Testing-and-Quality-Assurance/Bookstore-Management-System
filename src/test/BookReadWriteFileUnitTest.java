@@ -92,26 +92,19 @@ class BookReadWriteFileUnitTest {
     @Test
     @DisplayName("Test create function (mocked using wrapper class - writes to empty file) - unit testing")
     void test1_mock() throws IOException {
-        // Prepare book object
-        Book book = new Book("123456789", "Book Title", "Author Name", "Genre", 15.0, 10.0, new Author("Author", "Last"), 100);
+        Book book = new Book("123456789", "If we were villains", "Klaudia", "Mystery", 16.0, 10.0, new Author("M.L.", "RIO"), 100);
 
-        // Mock FileOutputStream
+        // Mock FileOutputStream ObjectOutputStreamWrapper File
         FileOutputStream mockFileOutputStream = mock(FileOutputStream.class);
-
-        // Mock ObjectOutputStreamWrapper
         ObjectOutputStreamWrapper mockObjectOutputStreamWrapper = mock(ObjectOutputStreamWrapper.class);
-
-        // Mock File
         File mockFile = mock(File.class);
-        when(mockFile.length()).thenReturn(0L);  // Simulate an empty file
 
-        // Mock behavior of the writeObject method in the wrapper
+        // Mock behaviours
+        when(mockFile.length()).thenReturn(0L);
         doNothing().when(mockObjectOutputStreamWrapper).writeObject(any(Book.class));
 
-        // Mock behavior of the createObjectOutputStream method to return our mock
         BookController bookController = spy(new BookController());
 
-        // Mock createFileOutputStream and createObjectOutputStream
         //noinspection resource
         doReturn(mockFileOutputStream).when(bookController).createFileOutputStream(mockFile);
         doReturn(mockObjectOutputStreamWrapper).when(bookController).createObjectOutputStream(mockFileOutputStream);
@@ -158,27 +151,22 @@ class BookReadWriteFileUnitTest {
     @Test
     @DisplayName("Test load books from file(mocked using wrapper class) - unit testing")
     void test2_mock() throws Exception {
-        // Mock FileInputStream
+        // Mock FileInputStream ObjectInputStreamWrapper
         FileInputStream mockFileInputStream = mock(FileInputStream.class);
-
-        // Mock ObjectInputStreamWrapper
         ObjectInputStreamWrapper mockInputStream = mock(ObjectInputStreamWrapper.class);
 
-        // Mock behavior: return books, then throw EOFException
         Book b = new Book("123456789", "If We Were Villains", "Klaudia", "Mystery", 16.0, 10.0, new Author("M.L.", "RIO"), 100);
         Book b1 = new Book("123456780", "And Then There Were None", "Klaudia", "Mystery", 16.0, 10.0, new Author("Agatha", "Christie"), 100);
 
+        // Mock behaviour
         when(mockInputStream.readObject())
                 .thenReturn(b)
                 .thenReturn(b1)
-                .thenThrow(new EOFException()); // Simulate end of file
-
+                .thenThrow(new EOFException());
         doNothing().when(mockInputStream).close();
 
-        // Spy on BookController and mock `createObjectInputStreamWrapper`
         BookController bookLoader = Mockito.spy(new BookController());
 
-        // Mock createObjectInputStreamWrapper to return the mocked ObjectInputStreamWrapper
         Mockito.doReturn(mockInputStream).when(bookLoader).createObjectInputStreamWrapper(any(FileInputStream.class));
         //noinspection resource
         Mockito.doReturn(mockFileInputStream).when(bookLoader).createFileInputStream(any(File.class));

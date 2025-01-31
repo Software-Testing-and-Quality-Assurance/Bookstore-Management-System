@@ -30,10 +30,10 @@ public class ManagerView {
         welcomeLabel.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
         gd.add(welcomeLabel, 0, 0, 2, 1); 
 
-        Button addBook = createStyledButton("Add books", "Add new or existing books", "#A76B4D");
-        Button billInfo = createStyledButton("Bill info", "View billing information", "#B89A78");
-        Button bookInfo = createStyledButton("Book log", "View information about books", "#5F735F");
-        Button signOut = createStyledButton("Sign Out", "Sign out from the application", "#7C3030");
+        Button addBook = createStyledButton("Add books", "Add new or existing books", "#A76B4D", "add_book");
+        Button billInfo = createStyledButton("Bill info", "View billing information", "#B89A78", "bill_log");
+        Button bookInfo = createStyledButton("Book log", "View information about books", "#5F735F", "book_log");
+        Button signOut = createStyledButton("Sign Out", "Sign out from the application", "#7C3030", "sign out");
 
         gd.add(addBook, 0, 1);
         gd.add(billInfo, 1, 1);
@@ -92,19 +92,22 @@ public class ManagerView {
         g.add(headerLabel, 0, 0, 2, 1); 
 
         Label isbnL = new Label("Book ISBN:");
-        isbnL.setStyle("-fx-text-fill: white;"); 
+        isbnL.setStyle("-fx-text-fill: white;");
         TextField isbnF = new TextField();
         g.add(isbnL, 0, 1);
         g.add(isbnF, 1, 1);
+        isbnF.setId("isbn");
+
 
         Label stockLabel = new Label("Quantity:");
         stockLabel.setStyle("-fx-text-fill: white;"); 
         TextField stockF = new TextField();
+        stockF.setId("stock");
         g.add(stockLabel, 0, 2);
         g.add(stockF, 1, 2);
 
-        Button addNew = createStyledButton("Add new book", "Add a completely new book", "#A76B4D");
-        Button add = createStyledButton("Add existing book", "Add an existing book to the inventory", "#8E6E59");
+        Button addNew = createStyledButton("Add new book", "Add a completely new book", "#A76B4D", "new_book");
+        Button add = createStyledButton("Add existing book", "Add an existing book to the inventory", "#8E6E59", "add_stock");
 
         g.add(addNew, 0, 3);
         g.add(add, 1, 3);
@@ -159,8 +162,9 @@ public class ManagerView {
         });
     }
     
-    private Button createStyledButton(String text, String tooltipText, String backgroundColor) {
+    private Button createStyledButton(String text, String tooltipText, String backgroundColor, String id) {
         Button button = new Button(text);
+        button.setId(id);
         button.setMinWidth(100);
         button.setTooltip(new Tooltip(tooltipText));
         button.setStyle("-fx-background-color: " + backgroundColor + "; -fx-text-fill: white;");

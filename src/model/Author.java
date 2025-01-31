@@ -19,5 +19,11 @@ public class Author implements Serializable{
 		return authorName+" "+authorSurname;
 	}
 
+	public String getAuthorName() {
+		return authorName;
+	}
 
+	public String getAuthorSurname() {
+		return authorSurname;
+	}
 }
