@@ -49,8 +49,8 @@ public class EmployeeController {
 	}
 
 	// Code refactoring for mocking and doing unit testing
-	public FileInputStream createFileInputStream(File book_file) throws FileNotFoundException {
-		return new FileInputStream(book_file);
+	public FileInputStream createFileInputStream(File dataFile) throws FileNotFoundException {
+		return new FileInputStream(dataFile);
 	}
 
 	public boolean create(Employee employee,File dataFile, ObservableList<Employee> employeesAll ) {
@@ -87,8 +87,8 @@ public class EmployeeController {
 		}
 	}
 
-	public FileOutputStream createFileOutputStream(File book_file) throws FileNotFoundException {
-		return new FileOutputStream(book_file, true);
+	public FileOutputStream createFileOutputStream(File dataFile) throws FileNotFoundException {
+		return new FileOutputStream(dataFile, true);
 	}
 	// Code refactoring for mocking and doing unit testing
 	public ObjectOutputStreamWrapper createObjectOutputStream(FileOutputStream fileOutputStream) throws IOException {

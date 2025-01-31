@@ -1,30 +1,56 @@
 package test;
 
 import controller.AdminController;
+import controller.EmployeeController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import main.Main;
+import model.Access;
+import model.Employee;
+import model.Role;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.testfx.framework.junit5.Start;
+import org.testfx.util.WaitForAsyncUtils;
 import view.EditEmployee;
 import org.testfx.framework.junit5.ApplicationTest;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.testfx.assertions.api.Assertions.assertThat;
 
 class EditEmployeeIntegrationTest extends ApplicationTest {
 
-    Button goBackButton, editRoleButton, editPermissionButton;
+    @TempDir
+    File tempDir;
+    File temp;
+    Button goBackButton, editRoleButton, editPermissionButton, saveButton,goBackButtonR ,sP, pP;
+    RadioButton managerRadioButton;
+    CheckBox addBooksBox;
     GridPane editEmployeeGridPane;
     EditEmployee ee;
     AdminController ac;
-    TextField firstNameField, lastNameField, userField;
+    TextField firstNameField, lastNameField, userField, salaryField,userFieldR;
+    ObservableList<Employee> employeesAll;
+
     @Start
     public void start(Stage stage){
         ee = new EditEmployee();
         ac = new AdminController();
+        temp = new File(tempDir, "employees.dat");
+        employeesAll = FXCollections.observableArrayList();
         Scene sc = ee.showView(stage,ac);
         stage.setScene(sc);
         stage.show();
@@ -88,7 +114,6 @@ class EditEmployeeIntegrationTest extends ApplicationTest {
         sleep(500);
         assertEquals("clicked",goBackButton.getText());
 
-
     }
     @Test
     void testEmptyTextField() {
@@ -108,6 +133,107 @@ class EditEmployeeIntegrationTest extends ApplicationTest {
         clickOn(goBackButton);
         sleep(500);
         assertEquals("clicked",goBackButton.getText());
+    }
+
+    @Test
+    @DisplayName("Edit Role View")
+    void test() throws IOException {
+        Employee e = new Employee("librarianKeit", "12345678kn", "keit", "nika", "keitn@gmail.com", Role.LIBRARIAN, "355695214014", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
+        // Create a temporary file for testing
+        File tempFile = File.createTempFile("employeeTest", ".dat");
+        tempFile.deleteOnExit();
+
+        EmployeeController ec = new EmployeeController();
+
+        // Create the employee in the temporary file
+        boolean isCreated = ec.create(e, tempFile,Main.employeesAll);
+        System.out.println("Employee created: " + isCreated);
+        assertTrue(isCreated, "Employee creation failed in temporary file");
+        // Ensure the employee was added by searching it in the temporary file
+        Employee createdEmployee = ec.searchEmployee("librarianKeit");
+        assertNotNull(createdEmployee);
+        assertEquals("librarianKeit", createdEmployee.getUsername(), "Username mismatch");
+
+        firstNameField = lookup("#name").query();
+        lastNameField = lookup("#last").query();
+        userField = lookup("#u").query();
+        firstNameField.setText("keit");
+        lastNameField.setText("nika");
+        userField.setText("librarianKeit");
+        WaitForAsyncUtils.waitForFxEvents();
+
+        editRoleButton = lookup("#editRole").query();
+        clickOn(editRoleButton);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        userField.setText(ec.searchEmployee("librarianKeit").getUsername());
+        managerRadioButton = lookup("#manager").query();
+        clickOn(managerRadioButton);
+        WaitForAsyncUtils.waitForFxEvents();
+        double salary = 400.0;
+        salaryField = lookup("#salary").query();
+        salaryField.setText(String.valueOf(salary));
+        WaitForAsyncUtils.waitForFxEvents();
+
+
+        saveButton = lookup("#save").query();
+        assertThat(saveButton).hasText("Save");
+        saveButton.setOnAction(ee -> {
+            e.setRole(Role.MANAGER);
+            saveButton.setText("changed");
+        });
+        clickOn(saveButton);
+        WaitForAsyncUtils.waitForFxEvents();
+        goBackButtonR = lookup("#goBack").query();
+        assertThat(goBackButtonR).hasText("Go Back");
+        goBackButtonR.setOnAction(e1 -> goBackButton.setText("Going Back"));
+        clickOn(goBackButtonR);
+        WaitForAsyncUtils.waitForFxEvents();
+        assertEquals(Role.MANAGER, e.getRole());
+        assertEquals("Going Back", goBackButton.getText());
+    }
+
+    @Test
+    @DisplayName("Edit Permission View")
+    void testI() throws IOException {
+        Employee e1 = new Employee("librarianKeiti", "12345678kn", "keiti", "nika", "keittn@gmail.com", Role.LIBRARIAN, "355695214074", 1000.0, Access.YES, Access.NO, Access.NO, Access.NO, new Date(0));
+        File tempFile = File.createTempFile("employeeTest2", ".dat");
+        tempFile.deleteOnExit();
+        EmployeeController ec = new EmployeeController();
+        boolean isCreated = ec.create(e1, tempFile,Main.employeesAll);
+        assertTrue(isCreated);
+        Employee createdEmployee = ec.searchEmployee("librarianKeiti");
+        assertNotNull(createdEmployee);
+        assertEquals("librarianKeiti", createdEmployee.getUsername());
+
+        firstNameField = lookup("#name").query();
+        lastNameField = lookup("#last").query();
+        userField = lookup("#u").query();
+        firstNameField.setText("keiti");
+        lastNameField.setText("nika");
+        userField.setText("librarianKeiti");
+        WaitForAsyncUtils.waitForFxEvents();
+        editPermissionButton = lookup("#editPermission").query();
+        clickOn(editPermissionButton);
+        WaitForAsyncUtils.waitForFxEvents();
+        addBooksBox = lookup("#addBooks").query();
+        clickOn(addBooksBox);
+        WaitForAsyncUtils.waitForFxEvents();
+        sP = lookup("#saveP").query();
+        assertThat(sP).hasText("Save");
+        sP.setOnAction(ep ->{
+            e1.setAddBooks(Access.YES);
+            sP.setText("changed");
+        });
+        clickOn(sP);
+        WaitForAsyncUtils.waitForFxEvents();
+        pP = lookup("#previousP").query();
+        assertThat(pP).hasText("Previous");
+        pP.setOnAction(e -> pP.setText("Going Back"));
+        clickOn(pP);
+        WaitForAsyncUtils.waitForFxEvents();
+        assertEquals(Access.YES, e1.getAddBooks());
+        assertEquals("Going Back", pP.getText());
     }
 
 

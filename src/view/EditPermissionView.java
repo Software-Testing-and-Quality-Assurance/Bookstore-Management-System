@@ -21,7 +21,8 @@ public class EditPermissionView {
 
     public EditPermissionView(Stage parentStage, AdminController ac, String username, Scene previousScene) {
         this.previousScene = previousScene;
-        
+
+        addBooksBox.setId("addBooks");
         Employee employee = ac.ec.searchEmployee(username);
         if (employee != null) {
             createBillBox.setSelected(employee.getCreateBill() == Access.YES);
@@ -52,7 +53,9 @@ public class EditPermissionView {
 
 
         Button saveButton = new Button("Save");
+        saveButton.setId("saveP");
         Button goBackButton = new Button("Previous");
+        goBackButton.setId("previousP");
         goBackButton.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 14px;"); 
         saveButton.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 14px;");
         gridPane.add(saveButton, 0, 4);

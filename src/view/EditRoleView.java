@@ -20,11 +20,15 @@ public class EditRoleView {
     private final AdminController adminController;
     private final Scene previousScene;
 
-    public EditRoleView( AdminController adminController, String username, Scene previousScene) {
+    public EditRoleView(AdminController adminController, String username, Scene previousScene) {
         this.adminController = adminController;
         this.previousScene = previousScene;
         Employee employee = adminController.ec.searchEmployee(username);
 
+        usernameField.setId("user");
+        salaryField.setId("salary");
+        librarianRadioButton.setId("librarian");
+        managerRadioButton.setId("manager");
         if (employee != null) {
             usernameField.setText(username);
             salaryField.setText(String.valueOf(employee.getSalary()));
@@ -71,7 +75,9 @@ public class EditRoleView {
         gridPane.add(roleBox, 1, 3);
         
         Button saveButton = new Button("Save");
+        saveButton.setId("save");
         Button goBackButton = new Button("Go Back");
+        goBackButton.setId("goBack");
         
         saveButton.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 13px;");
         goBackButton.setStyle("-fx-background-color: #630607; -fx-text-fill: white; -fx-font-size: 13px;");

@@ -76,6 +76,7 @@ public class EditEmployee {
             st.show();
         });
 
+
         editRoleButton.setOnAction(e -> {
             String username = userField.getText();
             if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || userField.getText().isEmpty()) {

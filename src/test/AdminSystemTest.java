@@ -19,8 +19,6 @@ import view.RegisterView;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Date;
-
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -34,11 +32,11 @@ class AdminSystemTest extends ApplicationTest {
     static LoginView lv;
     static TextField usernameField;
     static TextField passwordField;
-    static  TextField firstNameField;
-    static  TextField firstNameF;
-    static  TextField surnameField;
-    static  TextField surnameF;
-    static  TextField emailField;
+    static TextField firstNameField;
+    static TextField firstNameF;
+    static TextField surnameField;
+    static TextField surnameF;
+    static TextField emailField;
     static TextField userField;
     static TextField userF;
     static PasswordField passF;
