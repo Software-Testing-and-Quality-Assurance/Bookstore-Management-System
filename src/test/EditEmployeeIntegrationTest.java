@@ -1,9 +1,6 @@
 package test;
-
 import controller.AdminController;
 import controller.EmployeeController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -18,7 +15,6 @@ import model.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
 import view.EditEmployee;
@@ -33,9 +29,6 @@ import static org.testfx.assertions.api.Assertions.assertThat;
 
 class EditEmployeeIntegrationTest extends ApplicationTest {
 
-    @TempDir
-    File tempDir;
-    File temp;
     Button goBackButton, editRoleButton, editPermissionButton, saveButton,goBackButtonR ,sP, pP;
     RadioButton managerRadioButton;
     CheckBox addBooksBox;
@@ -43,14 +36,11 @@ class EditEmployeeIntegrationTest extends ApplicationTest {
     EditEmployee ee;
     AdminController ac;
     TextField firstNameField, lastNameField, userField, salaryField,userFieldR;
-    ObservableList<Employee> employeesAll;
 
     @Start
     public void start(Stage stage){
         ee = new EditEmployee();
         ac = new AdminController();
-        temp = new File(tempDir, "employees.dat");
-        employeesAll = FXCollections.observableArrayList();
         Scene sc = ee.showView(stage,ac);
         stage.setScene(sc);
         stage.show();
